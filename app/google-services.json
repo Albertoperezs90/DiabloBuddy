@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1059262561071",
+    "project_id": "diablo-buddy",
+    "storage_bucket": "diablo-buddy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059262561071:android:7d0e9b79174dd8db0a7fda",
+        "android_client_info": {
+          "package_name": "com.aperezsi.diablobuddy.playground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059262561071-cjq157eatefo968ql6anq7pdkfg0frul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChIZJVC5YJJsAYRVo7BGogT88lsfnCEJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059262561071-cjq157eatefo968ql6anq7pdkfg0frul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
