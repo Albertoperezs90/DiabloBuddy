@@ -24,6 +24,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://plugins.gradle.org/m2/")
     }
 }
 
