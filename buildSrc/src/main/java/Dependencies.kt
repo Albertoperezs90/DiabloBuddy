@@ -8,6 +8,16 @@ sealed class Dependencies {
         }
     }
 
+    object Platform: Dependencies() {
+        fun provideFirebase(): String {
+            return PlatformDependencies.provideFirebaseBom()
+        }
+
+        fun provideFirebaseLibs(): List<String> {
+            return PlatformDependencies.provideLibs()
+        }
+    }
+
     object UnitTesting: Dependencies() {
         override fun dependencies(): List<String> {
             return TestDependencies.provideUnitTestingLibs()
@@ -21,7 +31,6 @@ sealed class Dependencies {
     }
 
     object Core: Dependencies() {
-
         override fun dependencies(): List<String> {
             return KotlinDependencies.provideLibs() + AndroidDependencies.provideLibs()
         }
@@ -31,5 +40,7 @@ sealed class Dependencies {
         }
     }
 
-    abstract fun dependencies(): List<String>
+    open fun dependencies(): List<String> {
+        return listOf()
+    }
 }
