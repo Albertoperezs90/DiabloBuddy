@@ -1,31 +1,9 @@
-import org.gradle.api.artifacts.dsl.DependencyHandler
+object AppDependencies: DependencyProvider {
 
-sealed class AppDependencies {
+    private val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
 
-    object Kotlin: AppDependencies() {
-        override fun dependencies(): List<String> {
-            return KotlinDependencies.provideLibs()
-        }
+    override fun provideLibs(): List<String> {
+        return listOf(retrofit)
     }
 
-    object Android: AppDependencies() {
-        override fun dependencies(): List<String> {
-            return AndroidDependencies.provideLibs()
-        }
-
-    }
-
-    object UnitTesting: AppDependencies() {
-        override fun dependencies(): List<String> {
-            return TestDependencies.provideUnitTestingLibs()
-        }
-    }
-
-    object AndroidTesting: AppDependencies() {
-        override fun dependencies(): List<String> {
-            return TestDependencies.provideAndroidTestingLibs()
-        }
-    }
-
-    abstract fun dependencies(): List<String>
 }

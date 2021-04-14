@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation(AppDependencies.Kotlin.dependencies() + AppDependencies.Android.dependencies())
-    testImplementation(AppDependencies.UnitTesting.dependencies())
-    androidTestImplementation(AppDependencies.AndroidTesting.dependencies())
+    implementation(project(Dependencies.Core.module()))
+    testImplementation(Dependencies.UnitTesting.dependencies())
+    androidTestImplementation(Dependencies.AndroidTesting.dependencies())
 }
