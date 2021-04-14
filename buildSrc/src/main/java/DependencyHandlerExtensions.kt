@@ -1,4 +1,5 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.project
 
 fun DependencyHandler.kapt(list: List<String>) {
     list.forEach { dependency ->
@@ -16,6 +17,14 @@ fun DependencyHandler.implementation(list: List<String>) {
     list.forEach { dependency ->
         add("implementation", dependency)
     }
+}
+
+fun DependencyHandler.implementationProject(project: String) {
+    add("implementation", project(project))
+}
+
+fun DependencyHandler.implementantionPlatform(project: String) {
+    add("implementation", platform(project))
 }
 
 fun DependencyHandler.androidTestImplementation(list: List<String>) {

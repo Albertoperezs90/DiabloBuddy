@@ -33,6 +33,11 @@ android {
         create("production") {
             dimension = AppConfig.dimension
         }
+
+        create("playground") {
+            dimension = AppConfig.dimension
+            applicationIdSuffix = ".playground"
+        }
     }
 
     compileOptions {
@@ -42,7 +47,14 @@ android {
 }
 
 dependencies {
-    implementation(project(Dependencies.Core.module()))
+    implementantionPlatform(Dependencies.Platform.provideFirebase())
+
+    implementationProject(Dependencies.Core.module())
+
+    implementation(Dependencies.Platform.provideFirebaseLibs())
+
     testImplementation(Dependencies.UnitTesting.dependencies())
     androidTestImplementation(Dependencies.AndroidTesting.dependencies())
 }
+
+apply(plugin = "com.google.gms.google-services")
