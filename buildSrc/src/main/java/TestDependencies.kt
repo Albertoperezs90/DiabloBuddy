@@ -1,8 +1,8 @@
 object TestDependencies {
 
-    private val junit = "junit:junit:${Versions.junit}"
-    private val extJUnit = "androidx.test.ext:junit:${Versions.extJunit}"
-    private val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+    private const val junit = "junit:junit:${Versions.junit}"
+    private const val extJUnit = "androidx.test.ext:junit:${Versions.extJunit}"
+    private const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
     fun provideUnitTestingLibs(): List<String> {
         return listOf(junit)
