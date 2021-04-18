@@ -27,6 +27,10 @@ fun DependencyHandler.implementantionPlatform(project: String) {
     add("implementation", platform(project))
 }
 
+fun DependencyHandler.apiPlatform(project: String) {
+    add("api", platform(project))
+}
+
 fun DependencyHandler.androidTestImplementation(list: List<String>) {
     list.forEach { dependency->
         add("androidTestImplementation", dependency)

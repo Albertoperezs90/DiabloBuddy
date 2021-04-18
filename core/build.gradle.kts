@@ -8,10 +8,11 @@ android {
 }
 
 dependencies {
+    apiPlatform(Dependencies.Platform.provideFirebase())
+
     api(Dependencies.Core.dependencies())
     api(Dependencies.Platform.provideFirebaseLibs())
 
-    implementantionPlatform(Dependencies.Platform.provideFirebase())
 
     testImplementation(Dependencies.UnitTesting.dependencies())
 }
