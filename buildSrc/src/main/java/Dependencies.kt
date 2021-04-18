@@ -1,14 +1,12 @@
-import org.gradle.api.artifacts.dsl.DependencyHandler
-
 sealed class Dependencies {
 
-    object App: Dependencies() {
+    object App : Dependencies() {
         override fun dependencies(): List<String> {
             return KotlinDependencies.provideLibs() + AndroidDependencies.provideLibs() + AppDependencies.provideLibs()
         }
     }
 
-    object Platform: Dependencies() {
+    object Platform : Dependencies() {
         fun provideFirebase(): String {
             return PlatformDependencies.provideFirebaseBom()
         }
@@ -18,19 +16,19 @@ sealed class Dependencies {
         }
     }
 
-    object UnitTesting: Dependencies() {
+    object UnitTesting : Dependencies() {
         override fun dependencies(): List<String> {
             return TestDependencies.provideUnitTestingLibs()
         }
     }
 
-    object AndroidTesting: Dependencies() {
+    object AndroidTesting : Dependencies() {
         override fun dependencies(): List<String> {
             return TestDependencies.provideAndroidTestingLibs()
         }
     }
 
-    object Core: Dependencies() {
+    object Core : Dependencies() {
         override fun dependencies(): List<String> {
             return KotlinDependencies.provideLibs() + AndroidDependencies.provideLibs()
         }

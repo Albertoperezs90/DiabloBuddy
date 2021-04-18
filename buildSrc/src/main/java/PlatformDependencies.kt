@@ -1,4 +1,4 @@
-object PlatformDependencies: DependencyProvider {
+object PlatformDependencies : DependencyProvider {
 
     private const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebase}"
 
@@ -11,8 +11,8 @@ object PlatformDependencies: DependencyProvider {
 
     override fun provideLibs(): List<String> {
         return listOf(
-            firebaseAnalytics,
-            firebaseCrashlytics
+                firebaseAnalytics,
+                firebaseCrashlytics
         )
     }
 }

@@ -1,0 +1,13 @@
+package com.aperezsi.core.logger.crash
+
+import com.aperezsi.core.logger.interfaces.CrashLogger
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+
+class CrashlyticsLogger(private val firebaseCrashlytics: FirebaseCrashlytics) :
+        CrashLogger {
+
+    override fun logCrashInfo(information: String) {
+        firebaseCrashlytics.log(information)
+    }
+
+}

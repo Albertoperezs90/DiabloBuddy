@@ -24,7 +24,7 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), AppConfig.proguardRules
+                    getDefaultProguardFile("proguard-android-optimize.txt"), AppConfig.proguardRules
             )
         }
     }
@@ -42,6 +42,11 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -51,7 +56,6 @@ android {
 dependencies {
     implementationProject(Dependencies.Core.module())
 
-    testImplementation(Dependencies.UnitTesting.dependencies())
     androidTestImplementation(Dependencies.AndroidTesting.dependencies())
 }
 

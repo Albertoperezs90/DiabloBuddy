@@ -9,7 +9,9 @@ android {
 
 dependencies {
     api(Dependencies.Core.dependencies())
+    api(Dependencies.Platform.provideFirebaseLibs())
 
     implementantionPlatform(Dependencies.Platform.provideFirebase())
-    api(Dependencies.Platform.provideFirebaseLibs())
+
+    testImplementation(Dependencies.UnitTesting.dependencies())
 }

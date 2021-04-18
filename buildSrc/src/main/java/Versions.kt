@@ -17,6 +17,8 @@ object Versions {
 
     //test
     const val junit = "4.12"
+    const val mockitoKotlin = "3.1.0"
+    const val roboelectric = "4.4"
     const val extJunit = "1.1.2"
     const val espresso = "3.3.0"
 }
