@@ -4,7 +4,7 @@ import androidx.core.os.bundleOf
 import com.aperezsi.core.logger.interfaces.TrackLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class AnalyticsLogger(private val firebaseAnalytics: FirebaseAnalytics) : TrackLogger {
+class AnalyticsLogger(private val firebaseAnalytics: FirebaseAnalytics): TrackLogger {
 
     override fun logEvent(trackEvent: TrackEvent) {
         firebaseAnalytics.logEvent(

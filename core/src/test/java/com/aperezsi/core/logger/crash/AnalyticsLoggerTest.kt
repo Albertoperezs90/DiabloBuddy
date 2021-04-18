@@ -1,17 +1,11 @@
 package com.aperezsi.core.logger.crash
 
-import android.os.Build
-import androidx.core.os.bundleOf
-import com.aperezsi.core.BuildConfig
 import com.aperezsi.core.logger.tracker.AnalyticsLogger
 import com.aperezsi.core.logger.tracker.TrackEvent
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.any
-import org.mockito.kotlin.eq
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
+import org.mockito.kotlin.*
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 

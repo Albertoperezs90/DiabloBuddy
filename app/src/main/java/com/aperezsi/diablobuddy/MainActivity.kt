@@ -10,7 +10,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity: BaseActivity() {
 
     private val crashLogger = CrashlyticsLogger(FirebaseCrashlytics.getInstance())
     private val trackLogger = AnalyticsLogger(FirebaseAnalytics.getInstance(this))
