@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -47,11 +49,7 @@ android {
 }
 
 dependencies {
-    implementantionPlatform(Dependencies.Platform.provideFirebase())
-
     implementationProject(Dependencies.Core.module())
-
-    implementation(Dependencies.Platform.provideFirebaseLibs())
 
     testImplementation(Dependencies.UnitTesting.dependencies())
     androidTestImplementation(Dependencies.AndroidTesting.dependencies())
