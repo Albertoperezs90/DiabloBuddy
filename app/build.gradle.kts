@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -40,6 +42,11 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -47,13 +54,8 @@ android {
 }
 
 dependencies {
-    implementantionPlatform(Dependencies.Platform.provideFirebase())
-
     implementationProject(Dependencies.Core.module())
 
-    implementation(Dependencies.Platform.provideFirebaseLibs())
-
-    testImplementation(Dependencies.UnitTesting.dependencies())
     androidTestImplementation(Dependencies.AndroidTesting.dependencies())
 }
 

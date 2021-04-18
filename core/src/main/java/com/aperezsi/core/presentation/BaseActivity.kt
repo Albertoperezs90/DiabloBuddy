@@ -1,4 +1,4 @@
-package com.aperezsi.core
+package com.aperezsi.core.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 
