@@ -1,5 +1,7 @@
 object Versions {
     //app level
+    const val dependencyUpdates = "1.3.0"
+    const val detekt = "1.16.0"
     const val gradle = "4.1.2"
     const val kotlin = "1.3.72"
     const val googleServices = "4.3.5"
