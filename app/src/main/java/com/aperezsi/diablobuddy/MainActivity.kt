@@ -1,16 +1,16 @@
 package com.aperezsi.diablobuddy
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.aperezsi.core.logger.Logger
 import com.aperezsi.core.logger.crash.CrashlyticsLogger
 import com.aperezsi.core.logger.tracker.AnalyticsLogger
 import com.aperezsi.core.logger.tracker.TrackEvent
-import com.aperezsi.core.presentation.BaseActivity
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val crashLogger = CrashlyticsLogger(FirebaseCrashlytics.getInstance())
     private val trackLogger = AnalyticsLogger(FirebaseAnalytics.getInstance(this))
