@@ -1,6 +1,8 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
-    id("name.remal.check-dependency-updates") version "1.3.0"
+    id("name.remal.check-dependency-updates").version(Versions.dependencyUpdates)
+    id("io.gitlab.arturbosch.detekt").version(Versions.detekt)
 }
 
 buildscript {
@@ -15,18 +17,47 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("com.google.gms:google-services:${Versions.googleServices}")
         classpath("com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}")
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 
 }
 
 allprojects {
+    apply(plugin = "io.gitlab.arturbosch.detekt")
     repositories {
         google()
         mavenCentral()
         maven(url = "https://plugins.gradle.org/m2/")
+    }
+
+    dependencies {
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-cli:${Versions.detekt}")
+    }
+}
+
+tasks.register<Detekt>("detektAll") {
+    val autoFix = project.hasProperty("detektAutoFix")
+    val projectSource = file(projectDir)
+    val configFile = files("$rootDir/config/detekt/detekt.yml")
+    val kotlinFiles = "**/*.kt"
+    val resourceFiles = "**/resources/**"
+    val buildSrc = ""
+    val buildFiles = "**/build/**"
+
+    description = "Detekt task for all modules"
+    parallel = true
+    ignoreFailures = false
+    autoCorrect = autoFix
+    buildUponDefaultConfig = true
+    setSource(projectSource)
+    config.setFrom(configFile)
+    include(kotlinFiles)
+    exclude(buildSrc, resourceFiles, buildFiles)
+    reports {
+        html.enabled = true
+        xml.enabled = false
+        txt.enabled = false
+        sarif.enabled = true
     }
 }
 

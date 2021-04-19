@@ -1,12 +1,12 @@
-sealed class Dependencies {
+sealed class DependeciesProvider {
 
-    object App: Dependencies() {
+    object App : DependeciesProvider() {
         override fun dependencies(): List<String> {
             return KotlinDependencies.provideLibs() + AndroidDependencies.provideLibs() + AppDependencies.provideLibs()
         }
     }
 
-    object Platform: Dependencies() {
+    object Platform : DependeciesProvider() {
         fun provideFirebase(): String {
             return PlatformDependencies.provideFirebaseBom()
         }
@@ -16,25 +16,27 @@ sealed class Dependencies {
         }
     }
 
-    object UnitTesting: Dependencies() {
+    object UnitTesting : DependeciesProvider() {
         override fun dependencies(): List<String> {
             return TestDependencies.provideUnitTestingLibs()
         }
     }
 
-    object AndroidTesting: Dependencies() {
+    object AndroidTesting : DependeciesProvider() {
         override fun dependencies(): List<String> {
             return TestDependencies.provideAndroidTestingLibs()
         }
     }
 
-    object Core: Dependencies() {
+    object Core : DependeciesProvider() {
+        private const val coreModule = ":core"
+
         override fun dependencies(): List<String> {
             return KotlinDependencies.provideLibs() + AndroidDependencies.provideLibs()
         }
 
         fun module(): String {
-            return ":core"
+            return coreModule
         }
     }
 

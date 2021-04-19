@@ -1,4 +1,4 @@
-object KotlinDependencies: DependencyProvider {
+object KotlinDependencies : DependencyProvider {
 
     private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
 

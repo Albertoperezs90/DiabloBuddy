@@ -1,4 +1,4 @@
-object PlatformDependencies: DependencyProvider {
+object PlatformDependencies : DependencyProvider {
 
     private const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebase}"
 
