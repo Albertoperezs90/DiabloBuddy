@@ -13,5 +13,4 @@ class Logger(private val crashLogger: CrashLogger, private val trackLogger: Trac
     fun logCrashInfo(information: String) {
         crashLogger.logCrashInfo(information)
     }
-
 }

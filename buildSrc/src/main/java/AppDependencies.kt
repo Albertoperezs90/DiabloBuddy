@@ -1,4 +1,4 @@
-object AppDependencies: DependencyProvider {
+object AppDependencies : DependencyProvider {
 
     private const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
 

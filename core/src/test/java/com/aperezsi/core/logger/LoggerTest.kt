@@ -31,5 +31,4 @@ class LoggerTest {
 
         verify(crashLogger).logCrashInfo(providedString)
     }
-
 }

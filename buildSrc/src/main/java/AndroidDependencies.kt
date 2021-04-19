@@ -1,4 +1,4 @@
-object AndroidDependencies: DependencyProvider {
+object AndroidDependencies : DependencyProvider {
 
     private const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     private const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
