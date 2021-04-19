@@ -5,5 +5,4 @@ object AppDependencies : DependencyProvider {
     override fun provideLibs(): List<String> {
         return listOf(retrofit)
     }
-
 }

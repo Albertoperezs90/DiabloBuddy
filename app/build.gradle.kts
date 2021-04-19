@@ -54,9 +54,9 @@ android {
 }
 
 dependencies {
-    implementationProject(Dependencies.Core.module())
+    implementationProject(DependeciesProvider.Core.module())
 
-    androidTestImplementation(Dependencies.AndroidTesting.dependencies())
+    androidTestImplementation(DependeciesProvider.AndroidTesting.dependencies())
 }
 
 apply(plugin = "com.google.gms.google-services")

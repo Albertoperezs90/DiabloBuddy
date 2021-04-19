@@ -13,5 +13,4 @@ object AndroidDependencies : DependencyProvider {
             material
         )
     }
-
 }

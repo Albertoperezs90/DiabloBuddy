@@ -10,5 +10,4 @@ object AppConfig {
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
     const val proguardRules = "proguard-rules.pro"
     const val dimension = "environment"
-
 }

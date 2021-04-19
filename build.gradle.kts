@@ -41,7 +41,7 @@ tasks.register<Detekt>("detektAll") {
     val configFile = files("$rootDir/config/detekt/detekt.yml")
     val kotlinFiles = "**/*.kt"
     val resourceFiles = "**/resources/**"
-    val buildSrc = "**/buildSrc/**"
+    val buildSrc = ""
     val buildFiles = "**/build/**"
 
     description = "Detekt task for all modules"
