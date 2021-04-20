@@ -55,9 +55,9 @@ tasks.register<Detekt>("detektAll") {
     exclude(buildSrc, resourceFiles, buildFiles)
     reports {
         html.enabled = true
-        xml.enabled = false
+        xml.enabled = true
         txt.enabled = false
-        sarif.enabled = true
+        sarif.enabled = false
     }
 }
 
