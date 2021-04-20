@@ -23,4 +23,5 @@ class MainActivity : AppCompatActivity() {
         logger.logEvent(TrackEvent.Search("wizard"))
         logger.logCrashInfo("Esto es un crash")
     }
+
 }
