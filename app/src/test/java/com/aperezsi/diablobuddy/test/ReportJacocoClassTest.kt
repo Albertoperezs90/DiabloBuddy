@@ -9,6 +9,6 @@ class ReportJacocoClassTest {
 
     @Test
     fun `test hola`() {
-        assertEquals("test",reportJacocoClass.hola())
+        assertEquals("test", reportJacocoClass.hola())
     }
 }
