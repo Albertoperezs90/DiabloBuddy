@@ -60,6 +60,7 @@ android {
 dependencies {
     implementationProject(DependeciesProvider.Core.module())
 
+    testImplementation(DependeciesProvider.UnitTesting.dependencies())
     androidTestImplementation(DependeciesProvider.AndroidTesting.dependencies())
 }
 
