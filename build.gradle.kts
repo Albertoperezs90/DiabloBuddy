@@ -1,5 +1,7 @@
 import io.gitlab.arturbosch.detekt.Detekt
 
+apply(from = "jacocoFull.gradle.kts")
+
 plugins {
     id("name.remal.check-dependency-updates").version(Versions.dependencyUpdates)
     id("io.gitlab.arturbosch.detekt").version(Versions.detekt)

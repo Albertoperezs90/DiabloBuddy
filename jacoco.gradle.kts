@@ -4,6 +4,7 @@ project.afterEvaluate {
     val kotlinClassesFolder = getKotlinClassesFolder() ?: return@afterEvaluate
     val jacocoExec = getJacocoExec() ?: return@afterEvaluate
     tasks.register("${project.name}JacocoTestReport",JacocoReport::class) {
+        group = "coverage report"
         dependsOn("test")
 
         if (isAndroidModule(project)) {
@@ -42,7 +43,6 @@ fun getJacocoExec(): String? {
     fileTree("$buildDir/jacoco").visit {
         if (this.file.name.endsWith("DebugUnitTest.exec")) {
             jacocoExec = this.file.path.substringAfter("$buildDir")
-            println("**$jacocoExec")
             stopVisiting()
         }
     }
