@@ -23,6 +23,8 @@ buildscript {
 
 allprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(from = "${rootProject.rootDir}/jacoco.gradle.kts")
+
     repositories {
         google()
         mavenCentral()
