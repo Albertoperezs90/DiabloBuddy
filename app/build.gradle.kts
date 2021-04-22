@@ -21,8 +21,12 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isTestCoverageEnabled = true
+        }
+
         getByName("release") {
-            isMinifyEnabled = false
+            isTestCoverageEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), AppConfig.proguardRules
             )
@@ -56,6 +60,7 @@ android {
 dependencies {
     implementationProject(DependeciesProvider.Core.module())
 
+    testImplementation(DependeciesProvider.UnitTesting.dependencies())
     androidTestImplementation(DependeciesProvider.AndroidTesting.dependencies())
 }
 
