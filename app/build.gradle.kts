@@ -26,7 +26,8 @@ android {
         }
 
         getByName("release") {
-            isTestCoverageEnabled = true
+            isTestCoverageEnabled = false
+            debuggable(false)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), AppConfig.proguardRules
             )
