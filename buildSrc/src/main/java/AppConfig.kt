@@ -1,6 +1,6 @@
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.Properties
 
 object AppConfig {
     const val compileSdk = 30
@@ -12,10 +12,6 @@ object AppConfig {
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
     const val proguardRules = "proguard-rules.pro"
     const val dimension = "environment"
-
-    init {
-        updateVersionCode()
-    }
 
     private fun readVersionName(): String {
         with(getVersionProperties()) {
