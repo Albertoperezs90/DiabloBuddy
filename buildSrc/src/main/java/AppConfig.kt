@@ -36,7 +36,7 @@ object AppConfig {
         return versionProperties
     }
 
-    private fun updateVersionCode() {
+    fun updateVersionCode() {
         val properties = getVersionProperties()
         val fos = FileOutputStream(File("config/version/version.properties"))
         properties.setProperty("versionCode", "${versionCode.inc()}")
