@@ -12,13 +12,15 @@ tasks.register("updateVersionCode", Task::class) {
     }
 }
 
-task("commitVersionProperties") {
+val commitVersionProperties by tasks.creating {
     group = "versioning"
+    val stdout = java.io.ByteArrayOutputStream()
     doLast {
         exec {
-            commandLine("cmd", "git", "add", ".")
-            commandLine("cmd", "git", "commit", "-m", "'Update versionCode [skip ci]'")
-            commandLine("cmd", "git", "push", "--force", "origin")
+            commandLine = mutableListOf("git", "commit","-a","-m", "'Update versionCode [skip ci]'")
+            standardOutput = stdout
+            println(stdout.toString().trim())
         }
     }
+
 }
