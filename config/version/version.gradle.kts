@@ -12,12 +12,13 @@ tasks.register("updateVersionCode", Task::class) {
     }
 }
 
-tasks.register("commitVersionProperties", Exec::class) {
+task("commitVersionProperties") {
     group = "versioning"
     doLast {
-        description = "Commit and push version properties file"
-        commandLine("git", "add", ".")
-        commandLine("git", "commit", "-m", "Update versionCode [skip ci]")
-        commandLine("git", "push", "origin")
+        exec {
+            commandLine("cmd", "git", "add", ".")
+            commandLine("cmd", "git", "commit", "-m", "'Update versionCode [skip ci]'")
+            commandLine("cmd", "git", "push", "--force", "origin")
+        }
     }
 }
