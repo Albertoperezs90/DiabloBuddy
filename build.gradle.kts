@@ -1,6 +1,7 @@
 import io.gitlab.arturbosch.detekt.Detekt
 
 apply(from = "jacocoFull.gradle.kts")
+apply(from = "config/version/version.gradle.kts")
 
 plugins {
     id("name.remal.check-dependency-updates").version(Versions.dependencyUpdates)
@@ -19,8 +20,8 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("com.google.gms:google-services:${Versions.googleServices}")
         classpath("com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}")
+        classpath("com.google.firebase:firebase-appdistribution-gradle:${Versions.firebaseDistribution}")
     }
-
 }
 
 allprojects {

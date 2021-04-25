@@ -6,6 +6,7 @@ object Versions {
     const val kotlin = "1.3.72"
     const val googleServices = "4.3.5"
     const val crashlyticsGradle = "2.5.2"
+    const val firebaseDistribution = "2.0.1"
 
     // firebase
     const val firebase = "26.8.0"

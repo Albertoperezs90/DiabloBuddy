@@ -4,6 +4,7 @@ plugins {
     kotlin("android.extensions")
 
     id("com.google.firebase.crashlytics")
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -26,7 +27,8 @@ android {
         }
 
         getByName("release") {
-            isTestCoverageEnabled = true
+            isTestCoverageEnabled = false
+            debuggable(false)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), AppConfig.proguardRules
             )
@@ -38,6 +40,11 @@ android {
     productFlavors {
         create("production") {
             dimension = AppConfig.dimension
+
+            firebaseAppDistribution {
+                releaseNotes="QA version to test with official API"
+                groups="internal-qa"
+            }
         }
 
         create("playground") {
