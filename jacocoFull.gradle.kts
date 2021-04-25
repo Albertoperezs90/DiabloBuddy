@@ -7,7 +7,7 @@ tasks.register("jacocoFullReport",JacocoReport::class) {
     val projectsExecutionDatas = mutableListOf<ConfigurableFileCollection>()
     subprojects.forEach { project ->
         val taskName = "${project.name}JacocoTestReport"
-        val task = project.tasks.findByName(taskName) as JacocoReport
+        val task = project.tasks.findByName(taskName) as? JacocoReport ?: return@forEach
         dependsOn(task)
         projectsSources.add(task.sourceDirectories)
         projectsClassDirectories.add(task.classDirectories)
