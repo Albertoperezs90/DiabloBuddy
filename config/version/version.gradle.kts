@@ -23,7 +23,7 @@ val commitVersionProperties by tasks.creating {
         }
         exec {
             executable("git")
-            args("commit", "-a", "-m", "Upgrade version to $versionCode and deploy QA [ci-skip]")
+            args("commit", "-a", "-m", "Upgrade version to $versionCode [ci-skip]")
         }
         exec {
             executable("git")
@@ -42,7 +42,7 @@ val commitTagQA by tasks.creating {
         }
         exec {
             executable("git")
-            args("push", "origin", "--no-verify", "QA-$versionCode")
+            args("push", "origin", "-f", "--no-verify", "QA-$versionCode")
         }
     }
 }
@@ -57,7 +57,7 @@ val commitTagProduction by tasks.creating {
         }
         exec {
             executable("git")
-            args("push", "origin", "--no-verify", "Production-$versionName")
+            args("push", "origin", "-f", "--no-verify", "Production-$versionName")
         }
     }
 }
