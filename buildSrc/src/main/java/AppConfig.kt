@@ -1,5 +1,4 @@
 import java.io.File
-import java.io.FileOutputStream
 import java.util.Properties
 
 object AppConfig {
@@ -34,13 +33,5 @@ object AppConfig {
         val versionFile = File("config/version/version.properties")
         versionProperties.load(versionFile.reader())
         return versionProperties
-    }
-
-    fun updateVersionCode() {
-        val properties = getVersionProperties()
-        val fos = FileOutputStream(File("config/version/version.properties"))
-        properties.setProperty("versionCode", "${versionCode.inc()}")
-        properties.store(fos, null)
-        fos.close()
     }
 }

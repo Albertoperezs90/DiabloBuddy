@@ -4,7 +4,7 @@
     package="com.aperezsi.diablobuddy">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <!-- GOOGLE SERVICES DEPENDENCIES ADDED THIS PERMISSION AND GOOGLE PLAY REQUEST TO DISABLE IT OR ADD IT, WE REMOVE IT FROM MANIFEST BECAUSE ACTUALLY WE DON'T USE IT -->
     <uses-permission
         android:name="android.permission.READ_PHONE_STATE"
