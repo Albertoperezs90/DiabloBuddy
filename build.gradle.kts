@@ -20,6 +20,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("com.google.gms:google-services:${Versions.googleServices}")
         classpath("com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}")
+        classpath("com.google.firebase:firebase-appdistribution-gradle:${Versions.firebaseDistribution}")
     }
 }
 

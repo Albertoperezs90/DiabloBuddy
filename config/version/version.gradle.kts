@@ -1,3 +1,5 @@
+@file:Suppress("HasPlatformType")
+
 tasks.register("updateVersionCode", Task::class) {
     group = "versioning"
     doLast {
@@ -18,6 +20,7 @@ val commitVersionProperties by tasks.creating {
     doLast {
         exec {
             commandLine = mutableListOf("git", "commit","-a","-m", "'Update versionCode [skip ci]'")
+            commandLine = mutableListOf("git", "push", "--no-verify")
             standardOutput = stdout
             println(stdout.toString().trim())
         }
