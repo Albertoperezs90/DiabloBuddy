@@ -15,14 +15,19 @@ tasks.register("updateVersionCode", Task::class) {
 }
 val commitVersionProperties by tasks.creating {
     group = "versioning"
-    val stdout = java.io.ByteArrayOutputStream()
+    val versionCode = AppConfig.versionCode
     doLast {
         exec {
-            commandLine = mutableListOf("git", "add", ".")
-            commandLine = mutableListOf("git", "commit", "-m", "'Update versionCode [skip ci]'")
-            commandLine = mutableListOf("git", "push", "--no-verify")
-            standardOutput = stdout
-            println(stdout.toString().trim())
+            executable("git")
+            args("add", "-A")
+        }
+        exec {
+            executable("git")
+            args("commit", "-a", "-m", "Upgrade version to $versionCode and deploy QA [ci-skip]")
+        }
+        exec {
+            executable("git")
+            args("tag", "-f", "$versionCode")
         }
     }
 }
