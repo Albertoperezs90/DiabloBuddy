@@ -15,8 +15,8 @@ tasks.register("updateVersionCode", Task::class) {
 }
 val commitVersionProperties by tasks.creating {
     group = "versioning"
-    val versionCode = AppConfig.versionCode
     doLast {
+        val versionCode = AppConfig.versionCode
         exec {
             executable("git")
             args("add", "-A")
@@ -34,18 +34,30 @@ val commitVersionProperties by tasks.creating {
 
 val commitTagQA by tasks.creating {
     group = "versioning"
-    val versionCode = AppConfig.versionCode
-    exec {
-        executable("git")
-        args("tag", "-f", "QA-$versionCode")
+    doLast {
+        val versionCode = AppConfig.versionCode
+        exec {
+            executable("git")
+            args("tag", "-f", "QA-$versionCode")
+        }
+        exec {
+            executable("git")
+            args("push", "origin", "--no-verify", "QA-$versionCode")
+        }
     }
 }
 
 val commitTagProduction by tasks.creating {
     group = "versioning"
-    val versionName = AppConfig.versionName
-    exec {
-        executable("git")
-        args("tag", "-f", "Production-$versionName")
+    doLast {
+        val versionName = AppConfig.versionName
+        exec {
+            executable("git")
+            args("tag", "-f", "Production-$versionName")
+        }
+        exec {
+            executable("git")
+            args("push", "origin", "--no-verify", "Production-$versionName")
+        }
     }
 }
