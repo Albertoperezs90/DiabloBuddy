@@ -13,17 +13,16 @@ tasks.register("updateVersionCode", Task::class) {
         fos.close()
     }
 }
-
 val commitVersionProperties by tasks.creating {
     group = "versioning"
     val stdout = java.io.ByteArrayOutputStream()
     doLast {
         exec {
-            commandLine = mutableListOf("git", "commit","-a","-m", "'Update versionCode [skip ci]'")
+            commandLine = mutableListOf("git", "add", ".")
+            commandLine = mutableListOf("git", "commit", "-m", "'Update versionCode [skip ci]'")
             commandLine = mutableListOf("git", "push", "--no-verify")
             standardOutput = stdout
             println(stdout.toString().trim())
         }
     }
-
 }
