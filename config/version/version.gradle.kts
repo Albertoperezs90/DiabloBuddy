@@ -27,7 +27,25 @@ val commitVersionProperties by tasks.creating {
         }
         exec {
             executable("git")
-            args("tag", "-f", "$versionCode")
+            args("push", "--no-verify")
         }
+    }
+}
+
+val commitTagQA by tasks.creating {
+    group = "versioning"
+    val versionCode = AppConfig.versionCode
+    exec {
+        executable("git")
+        args("tag", "-f", "QA-$versionCode")
+    }
+}
+
+val commitTagProduction by tasks.creating {
+    group = "versioning"
+    val versionName = AppConfig.versionName
+    exec {
+        executable("git")
+        args("tag", "-f", "Production-$versionName")
     }
 }
