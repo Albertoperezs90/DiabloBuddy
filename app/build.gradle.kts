@@ -1,10 +1,9 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    kotlin("android.extensions")
-
-    id("com.google.firebase.crashlytics")
-    id("com.google.firebase.appdistribution")
+    id(GradlePlugin.androidApplication)
+    id(GradlePlugin.kotlinAndroid)
+    id(GradlePlugin.kotlinAndroidExtensions)
+    id(GradlePlugin.crashlytics)
+    id(GradlePlugin.appDistribution)
 }
 
 android {
@@ -65,13 +64,20 @@ android {
 }
 
 dependencies {
-    apiPlatform(DependeciesProvider.Platform.provideFirebase())
+    api(Dependencies.kotlinStdLib)
+    api(Dependencies.coreKtx)
+    api(Dependencies.viewModel)
+    api(Dependencies.constraintLayout)
+    api(Dependencies.material)
+    api(platform(Dependencies.firebaseBom))
+    api(Dependencies.firebaseAnalytics)
+    api(Dependencies.firebaseCrashlytics)
 
-    api(DependeciesProvider.Core.dependencies())
-    api(DependeciesProvider.Platform.provideFirebaseLibs())
-
-    testImplementation(DependeciesProvider.UnitTesting.dependencies())
-    androidTestImplementation(DependeciesProvider.AndroidTesting.dependencies())
+    testImplementation(Dependencies.junit)
+    testImplementation(Dependencies.mockitoKotlin)
+    testImplementation(Dependencies.robolectric)
+    androidTestImplementation(Dependencies.extJUnit)
+    androidTestImplementation(Dependencies.espressoCore)
 }
 
 apply(plugin = "com.google.gms.google-services")
