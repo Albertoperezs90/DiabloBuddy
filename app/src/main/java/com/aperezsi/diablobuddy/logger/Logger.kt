@@ -1,8 +1,8 @@
-package com.aperezsi.core.logger
+package com.aperezsi.diablobuddy.logger
 
-import com.aperezsi.core.logger.interfaces.CrashLogger
-import com.aperezsi.core.logger.interfaces.TrackLogger
-import com.aperezsi.core.logger.tracker.TrackEvent
+import com.aperezsi.diablobuddy.logger.interfaces.CrashLogger
+import com.aperezsi.diablobuddy.logger.interfaces.TrackLogger
+import com.aperezsi.diablobuddy.logger.tracker.TrackEvent
 
 class Logger(private val crashLogger: CrashLogger, private val trackLogger: TrackLogger) {
 

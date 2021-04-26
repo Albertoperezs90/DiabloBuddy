@@ -1,6 +1,6 @@
-package com.aperezsi.core.logger.crash
+package com.aperezsi.diablobuddy.logger.crash
 
-import com.aperezsi.core.logger.interfaces.CrashLogger
+import com.aperezsi.diablobuddy.logger.interfaces.CrashLogger
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 class CrashlyticsLogger(private val firebaseCrashlytics: FirebaseCrashlytics) : CrashLogger {

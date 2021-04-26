@@ -1,7 +1,6 @@
-package com.aperezsi.core.logger.crash
+package com.aperezsi.diablobuddy.test.logger.crash
 
-import com.aperezsi.core.logger.tracker.AnalyticsLogger
-import com.aperezsi.core.logger.tracker.TrackEvent
+import com.aperezsi.diablobuddy.logger.tracker.AnalyticsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,11 +17,11 @@ class AnalyticsLoggerTest {
 
     private val firebaseAnalytics: FirebaseAnalytics = mock()
 
-    private val analyticsLogger = AnalyticsLogger(firebaseAnalytics)
+    private val analyticsLogger = com.aperezsi.diablobuddy.logger.tracker.AnalyticsLogger(firebaseAnalytics)
 
     @Test
     fun `logEvent should map custom events to firebase events and set parameters into bundle`() {
-        val trackEvent = TrackEvent.Search("barbarian")
+        val trackEvent = com.aperezsi.diablobuddy.logger.tracker.TrackEvent.Search("barbarian")
 
         analyticsLogger.logEvent(trackEvent)
 

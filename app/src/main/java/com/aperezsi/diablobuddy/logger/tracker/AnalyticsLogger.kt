@@ -1,7 +1,7 @@
-package com.aperezsi.core.logger.tracker
+package com.aperezsi.diablobuddy.logger.tracker
 
 import androidx.core.os.bundleOf
-import com.aperezsi.core.logger.interfaces.TrackLogger
+import com.aperezsi.diablobuddy.logger.interfaces.TrackLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class AnalyticsLogger(private val firebaseAnalytics: FirebaseAnalytics) : TrackLogger {

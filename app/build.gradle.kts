@@ -65,7 +65,10 @@ android {
 }
 
 dependencies {
-    implementationProject(DependeciesProvider.Core.module())
+    apiPlatform(DependeciesProvider.Platform.provideFirebase())
+
+    api(DependeciesProvider.Core.dependencies())
+    api(DependeciesProvider.Platform.provideFirebaseLibs())
 
     testImplementation(DependeciesProvider.UnitTesting.dependencies())
     androidTestImplementation(DependeciesProvider.AndroidTesting.dependencies())

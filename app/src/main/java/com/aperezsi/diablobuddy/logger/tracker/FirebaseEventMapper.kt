@@ -1,4 +1,4 @@
-package com.aperezsi.core.logger.tracker
+package com.aperezsi.diablobuddy.logger.tracker
 
 import com.google.firebase.analytics.FirebaseAnalytics
 
