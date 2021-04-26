@@ -41,8 +41,8 @@ android {
             dimension = AppConfig.dimension
 
             firebaseAppDistribution {
-                releaseNotes="QA version to test with official API"
-                groups="internal-qa"
+                releaseNotes = "QA version to test with official API"
+                groups = "internal-qa"
             }
         }
 

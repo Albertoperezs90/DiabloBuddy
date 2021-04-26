@@ -23,5 +23,4 @@ object Dependencies {
     const val robolectric = "org.robolectric:robolectric:4.4"
     const val extJUnit = "androidx.test.ext:junit:1.1.2"
     const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
-
 }

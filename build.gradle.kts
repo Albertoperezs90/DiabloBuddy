@@ -42,6 +42,17 @@ tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt::class) {
     val autoFix = project.hasProperty("detektAutoFix")
     val projectSource = file(projectDir)
     val configFile = files("$rootDir/config/detekt/detekt.yml")
+    val resourceFiles = "**/resources/**"
+    val buildFiles = "**/build/**"
+
+    description = "Detekt task for all modules"
+    parallel = true
+    ignoreFailures = false
+    autoCorrect = autoFix
+    buildUponDefaultConfig = true
+    setSource(projectSource)
+    config.setFrom(configFile)
+    exclude(resourceFiles, buildFiles)
 
     description = "Detekt task for all modules"
     parallel = true

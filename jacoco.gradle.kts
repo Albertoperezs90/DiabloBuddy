@@ -3,26 +3,26 @@ apply(plugin = "jacoco")
 project.afterEvaluate {
     val kotlinClassesFolder = getKotlinClassesFolder() ?: return@afterEvaluate
     val jacocoExec = getJacocoExec() ?: return@afterEvaluate
-    tasks.register("${project.name}JacocoTestReport",JacocoReport::class) {
+    tasks.register("${project.name}JacocoTestReport", JacocoReport::class) {
         group = "coverage report"
         dependsOn("test")
 
         if (isAndroidModule(project)) {
-            //dependsOn("createPlaygroundDebugCoverageReport")
+            // dependsOn("createPlaygroundDebugCoverageReport")
         }
 
         reports {
             xml.isEnabled = true
             html.isEnabled = true
         }
-        val fileFilter = listOf("**/R.class","**/R$*.class","**/BuildConfig.*","**/Manifest*.*")
+        val fileFilter = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
         val debugTree = fileTree(kotlinClassesFolder) { setExcludes(fileFilter) }
         val mainSrc = "${project.projectDir}/src/main/java"
 
         sourceDirectories.setFrom(files(mainSrc))
         classDirectories.setFrom(files(debugTree))
         executionData.setFrom(fileTree("$buildDir") {
-            setIncludes(listOf(jacocoExec,"outputs/code-coverage/connected/*coverage.ec"))
+            setIncludes(listOf(jacocoExec, "outputs/code-coverage/connected/*coverage.ec"))
         })
     }
 }
@@ -30,7 +30,7 @@ project.afterEvaluate {
 fun getKotlinClassesFolder(): String? {
     var kotlinFolder: String? = null
     fileTree("$buildDir/tmp/kotlin-classes").visit {
-        if (this.file.isDirectory && this.file.name.endsWith("debug",ignoreCase = true)) {
+        if (this.file.isDirectory && this.file.name.endsWith("debug", ignoreCase = true)) {
             kotlinFolder = this.file.path
             stopVisiting()
         }

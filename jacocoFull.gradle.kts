@@ -1,6 +1,6 @@
 apply(plugin = "jacoco")
 
-tasks.register("jacocoFullReport",JacocoReport::class) {
+tasks.register("jacocoFullReport", JacocoReport::class) {
     group = "Coverage report"
     val projectsSources = mutableListOf<ConfigurableFileCollection>()
     val projectsClassDirectories = mutableListOf<ConfigurableFileCollection>()
