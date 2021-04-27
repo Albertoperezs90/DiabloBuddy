@@ -11,7 +11,7 @@ android {
     buildToolsVersion(AppConfig.buildToolsVersion)
 
     defaultConfig {
-        applicationId = "com.aperezsi.diablobuddy"
+        applicationId = AppConfig.applicationId
         minSdkVersion(AppConfig.minSdk)
         targetSdkVersion(AppConfig.targetSdk)
         versionCode = AppConfig.versionCode
@@ -37,7 +37,7 @@ android {
     flavorDimensions(AppConfig.dimension)
 
     productFlavors {
-        create("production") {
+        create(AppConfig.Dimension.production) {
             dimension = AppConfig.dimension
 
             firebaseAppDistribution {
@@ -46,7 +46,7 @@ android {
             }
         }
 
-        create("playground") {
+        create(AppConfig.Dimension.playground) {
             dimension = AppConfig.dimension
             applicationIdSuffix = ".playground"
         }
