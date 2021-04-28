@@ -2,10 +2,11 @@ package com.aperezsi.diablobuddy.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class NavHostViewModel : ViewModel() {
+class NavHostViewModel @Inject constructor(initialCounter: Int) : ViewModel() {
 
-    val counter = MutableLiveData(0)
+    val counter = MutableLiveData(initialCounter)
 
     fun increaseCounter() {
         counter.value = counter.value?.plus(1)

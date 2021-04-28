@@ -2,6 +2,10 @@ object Dependencies {
     // Kotlin
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
 
+    // Injection
+    const val dagger = "com.google.dagger:dagger:2.35"
+    const val daggerKapt = "com.google.dagger:dagger-compiler:2.35"
+
     // Android
     const val playCore = "com.google.android.play:core:1.10.0"
     const val coreKtx = "androidx.core:core-ktx:1.3.2"
