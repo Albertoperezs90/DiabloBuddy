@@ -1,6 +1,5 @@
 package com.aperezsi.diablobuddy.test.logger.crash
 
-import com.aperezsi.diablobuddy.logger.tracker.AnalyticsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,7 +15,6 @@ import org.robolectric.annotation.Config
 class AnalyticsLoggerTest {
 
     private val firebaseAnalytics: FirebaseAnalytics = mock()
-
     private val analyticsLogger = com.aperezsi.diablobuddy.logger.tracker.AnalyticsLogger(firebaseAnalytics)
 
     @Test

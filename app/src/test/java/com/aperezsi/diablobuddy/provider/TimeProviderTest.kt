@@ -8,6 +8,7 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class TimeProviderTest {
+
     private val timeProvider = TimeProvider()
 
     @Test

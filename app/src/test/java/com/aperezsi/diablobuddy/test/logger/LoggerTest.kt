@@ -1,7 +1,5 @@
 package com.aperezsi.diablobuddy.test.logger
 
-import com.aperezsi.diablobuddy.logger.interfaces.CrashLogger
-import com.aperezsi.diablobuddy.logger.interfaces.TrackLogger
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
@@ -10,7 +8,6 @@ class LoggerTest {
 
     private val crashLogger: com.aperezsi.diablobuddy.logger.interfaces.CrashLogger = mock()
     private val trackLogger: com.aperezsi.diablobuddy.logger.interfaces.TrackLogger = mock()
-
     private val logger = com.aperezsi.diablobuddy.logger.Logger(crashLogger, trackLogger)
 
     @Test

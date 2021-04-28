@@ -9,6 +9,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 class DebouncerTest {
+
     private val callback: () -> Unit = mock()
     private val timeProvider: TimeProvider = mock()
     private val debouncer = Debouncer(callback, timeProvider)

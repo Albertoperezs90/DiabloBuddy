@@ -1,4 +1,4 @@
-package com.aperezsi.diablobuddy.base
+package com.aperezsi.diablobuddy.base.extensions
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity

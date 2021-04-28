@@ -13,6 +13,7 @@ fun View.setOnDebounceClickListener(callback: () -> Unit) {
 
 class Debouncer(private val callback: () -> Unit, private val timeProvider: TimeProvider = TimeProvider()) {
     companion object {
+
         private const val debounceInterval = 600L
     }
 
