@@ -61,12 +61,20 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    dynamicFeatures = mutableSetOf(":feature_menu")
+
+    buildFeatures.viewBinding = true
+
+    dynamicFeatures = ModuleConfig.getDynamicFeatureModules()
 }
 
 dependencies {
+    implementation(Dependencies.playCore)
+
     api(Dependencies.kotlinStdLib)
     api(Dependencies.coreKtx)
+    api(Dependencies.navigationFragment)
+    api(Dependencies.navigationUi)
+    api(Dependencies.navigationFeatureModule)
     api(Dependencies.viewModel)
     api(Dependencies.constraintLayout)
     api(Dependencies.material)
