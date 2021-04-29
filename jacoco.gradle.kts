@@ -15,7 +15,10 @@ project.afterEvaluate {
             xml.isEnabled = true
             html.isEnabled = true
         }
-        val fileFilter = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
+        val filterBuildFiles = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
+        val filterDi = listOf("**/di/**")
+        val filterBaseFiles = listOf("**/base/**")
+        val fileFilter = filterBuildFiles + filterDi + filterBaseFiles
         val debugTree = fileTree(kotlinClassesFolder) { setExcludes(fileFilter) }
         val mainSrc = "${project.projectDir}/src/main/java"
 

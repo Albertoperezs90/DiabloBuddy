@@ -266,7 +266,7 @@ formatting:
   Filename:
     active: true
   FinalNewline:
-    active: true
+    active: false
     autoCorrect: true
     insertFinalNewLine: true
   ImportOrdering:
@@ -280,7 +280,7 @@ formatting:
     continuationIndentSize: 4
   MaximumLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 240
   ModifierOrdering:
     active: true
     autoCorrect: true
@@ -334,7 +334,7 @@ formatting:
     active: false
     autoCorrect: true
   SpacingAroundColon:
-    active: true
+    active: false
     autoCorrect: true
   SpacingAroundComma:
     active: true
@@ -624,7 +624,7 @@ style:
     active: false
   MaxLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 240
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false
