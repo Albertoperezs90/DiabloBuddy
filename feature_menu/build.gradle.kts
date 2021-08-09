@@ -1,6 +1,7 @@
 plugins {
     id(GradlePlugin.androidDynamicFeature)
     id(GradlePlugin.kotlinAndroid)
+    id(GradlePlugin.kotlinKapt)
 }
 
 android {
@@ -9,7 +10,6 @@ android {
     defaultConfig {
         minSdkVersion(AppConfig.minSdk)
         targetSdkVersion(AppConfig.targetSdk)
-
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
@@ -35,6 +35,8 @@ android {
         }
     }
 
+    buildFeatures.viewBinding = true
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -47,4 +49,7 @@ android {
 
 dependencies {
     implementation(project(":app"))
+    implementation(project(":core"))
+
+    kapt(Dependencies.daggerKapt)
 }

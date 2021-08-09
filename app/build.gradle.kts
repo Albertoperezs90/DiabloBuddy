@@ -1,7 +1,6 @@
 plugins {
     id(GradlePlugin.androidApplication)
     id(GradlePlugin.kotlinAndroid)
-    id(GradlePlugin.kotlinAndroidExtensions)
     id(GradlePlugin.kotlinKapt)
     id(GradlePlugin.crashlytics)
     id(GradlePlugin.appDistribution)
@@ -17,7 +16,7 @@ android {
         targetSdkVersion(AppConfig.targetSdk)
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
-
+        multiDexEnabled = true
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
     }
 
@@ -73,20 +72,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
     implementation(Dependencies.playCore)
-
-    api(Dependencies.kotlinStdLib)
-    api(Dependencies.coreKtx)
-    api(Dependencies.dagger)
-    api(Dependencies.navigationFeatureModule)
-    api(Dependencies.navigationFragment)
-    api(Dependencies.navigationUi)
-    api(Dependencies.viewModel)
-    api(Dependencies.constraintLayout)
-    api(Dependencies.material)
-    api(platform(Dependencies.firebaseBom))
-    api(Dependencies.firebaseAnalytics)
-    api(Dependencies.firebaseCrashlytics)
 
     kapt(Dependencies.daggerKapt)
 
