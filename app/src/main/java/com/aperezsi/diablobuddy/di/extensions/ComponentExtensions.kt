@@ -1,4 +1,6 @@
 package com.aperezsi.diablobuddy.di.extensions
 
-class ComponentExtensions {
-}
+import androidx.fragment.app.Fragment
+import com.aperezsi.diablobuddy.DiabloBuddyApplication
+
+fun Fragment.coreComponent() = DiabloBuddyApplication.coreComponent(requireContext())

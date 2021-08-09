@@ -1,4 +1,4 @@
-package com.aperezsi.diablobuddy.view.base
+package com.aperezsi.core.framework.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

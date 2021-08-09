@@ -1,7 +1,7 @@
 package com.aperezsi.diablobuddy.di.view
 
+import com.aperezsi.core.framework.base.BaseActivity
 import com.aperezsi.diablobuddy.view.NavHostActivity
-import com.aperezsi.diablobuddy.view.base.BaseActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
 
@@ -12,7 +12,6 @@ interface NavHostComponent {
 
     @Subcomponent.Factory
     interface Factory {
-
         fun create(@BindsInstance activity: BaseActivity<*>): NavHostComponent
     }
 }

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.aperezsi.diablobuddy.DiabloBuddyApplication
 
-internal fun AppCompatActivity.appComponent(): AppComponent {
+fun AppCompatActivity.appComponent(): AppComponent {
     return (application as DiabloBuddyApplication).appComponent
 }
 

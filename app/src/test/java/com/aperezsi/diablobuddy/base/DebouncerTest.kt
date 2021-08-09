@@ -1,7 +1,7 @@
 package com.aperezsi.diablobuddy.base
 
 import com.aperezsi.diablobuddy.base.extensions.Debouncer
-import com.aperezsi.diablobuddy.provider.TimeProvider
+import com.aperezsi.core.provider.TimeProvider
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times

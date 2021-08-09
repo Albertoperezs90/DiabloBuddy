@@ -1,21 +1,18 @@
 package com.aperezsi.diablobuddy.di.application
 
 import android.app.Application
+import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.diablobuddy.di.view.NavHostComponent
-import com.aperezsi.diablobuddy.di.viewmodel.module.ViewModelFactoryModule
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
-@Component(modules = [ViewModelFactoryModule::class])
+@Component(dependencies = [CoreComponent::class])
 interface AppComponent {
 
-    fun navHostComponent(): NavHostComponent.Factory
+    val navHostComponentFactory: NavHostComponent.Factory
 
     @Component.Factory
     interface Factory {
-
-        fun create(@BindsInstance application: Application): AppComponent
+        fun create(coreComponent: CoreComponent, @BindsInstance application: Application): AppComponent
     }
 }

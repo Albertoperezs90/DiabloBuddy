@@ -1,4 +1,15 @@
 package com.aperezsi.feature_menu.di
 
-class CoreComponent {
+import com.aperezsi.core.di.BaseFragmentComponent
+import com.aperezsi.diablobuddy.di.application.AppComponent
+import com.aperezsi.feature_menu.MenuFragment
+import dagger.Component
+
+@Component(modules = [MenuModule::class], dependencies = [AppComponent::class])
+interface MenuComponent : BaseFragmentComponent<MenuFragment> {
+
+    @Component.Factory
+    interface Factory {
+        fun create(appComponent: AppComponent): MenuComponent
+    }
 }

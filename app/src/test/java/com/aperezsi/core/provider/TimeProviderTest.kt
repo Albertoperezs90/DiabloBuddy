@@ -1,4 +1,4 @@
-package com.aperezsi.diablobuddy.provider
+package com.aperezsi.core.provider
 
 import android.os.SystemClock
 import org.junit.Assert.assertEquals

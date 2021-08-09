@@ -1,4 +1,4 @@
-package com.aperezsi.diablobuddy.di.viewmodel
+package com.aperezsi.core.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

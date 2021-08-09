@@ -1,4 +1,7 @@
 package com.aperezsi.core.di
 
-class BaseFragmentComponent {
+import androidx.fragment.app.Fragment
+
+interface BaseFragmentComponent<F : Fragment> {
+    fun inject(fragment: F)
 }

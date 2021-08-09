@@ -1,4 +1,13 @@
 package com.aperezsi.core.di
 
-class CoreComponent {
+import dagger.Component
+
+@Component
+interface CoreComponent {
+
+    @Component.Factory
+    interface Factory {
+        fun create(): CoreComponent
+    }
+
 }

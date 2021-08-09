@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- GOOGLE SERVICES DEPENDENCIES ADDED THIS PERMISSION AND GOOGLE PLAY REQUEST TO DISABLE IT OR ADD IT, WE REMOVE IT FROM MANIFEST BECAUSE ACTUALLY WE DON'T USE IT -->
+    <!-- GOOGLE SERVICES DEPENDENCIES ADDED THIS PERMISSION AND ON THER OTHER WAY GOOGLE PLAY REQUEST TO DISABLE IT OR ADD IT, WE REMOVE IT FROM MANIFEST BECAUSE ACTUALLY WE DON'T USE IT -->
     <uses-permission
         android:name="android.permission.READ_PHONE_STATE"
         tools:node="remove" />
@@ -21,7 +21,6 @@
         <activity android:name=".view.NavHostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
