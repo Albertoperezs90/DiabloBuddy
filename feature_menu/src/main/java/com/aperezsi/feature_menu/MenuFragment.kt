@@ -1,5 +1,6 @@
 package com.aperezsi.feature_menu
 
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.aperezsi.core.framework.base.BaseFragment
 import com.aperezsi.diablobuddy.di.application.appComponent
@@ -14,7 +15,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun initialize() {
         DaggerMenuComponent.factory().create(appComponent()).inject(this)
-        viewModel.counter.observe(this, {
+        viewModel.counter.observe(this, Observer{
             binding.text.text = it.toString()
         })
 
