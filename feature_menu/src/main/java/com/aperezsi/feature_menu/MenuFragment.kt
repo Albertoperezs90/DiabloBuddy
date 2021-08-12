@@ -7,7 +7,7 @@ import com.aperezsi.diablobuddy.di.application.appComponent
 import com.aperezsi.feature_menu.databinding.FragmentMenuBinding
 import com.aperezsi.feature_menu.di.DaggerMenuComponent
 
-class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
+class MenuFragment: BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override val viewModel: MenuViewModel by lazy { ViewModelProvider(this).get(MenuViewModel::class.java) }
 
@@ -15,7 +15,7 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun initialize() {
         DaggerMenuComponent.factory().create(appComponent()).inject(this)
-        viewModel.counter.observe(this, Observer{
+        viewModel.counter.observe(this, Observer {
             binding.text.text = it.toString()
         })
 

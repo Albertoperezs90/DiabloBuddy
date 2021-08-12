@@ -9,5 +9,4 @@ interface CoreComponent {
     interface Factory {
         fun create(): CoreComponent
     }
-
 }

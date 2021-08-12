@@ -9,5 +9,4 @@ abstract class ViewModelFactoryModule {
 
     @Binds
     abstract fun bindViewModelFactory(viewModelProviderFactory: ViewModelProviderFactory): ViewModelProvider.Factory
-
 }

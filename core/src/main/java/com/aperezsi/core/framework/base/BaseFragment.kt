@@ -19,7 +19,7 @@ abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment(), HasDe
     protected lateinit var binding: V
         private set
 
-    abstract protected val viewModel: VM
+    protected abstract val viewModel: VM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = inflate()
