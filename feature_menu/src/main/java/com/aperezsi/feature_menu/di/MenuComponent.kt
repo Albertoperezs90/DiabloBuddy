@@ -1,8 +1,8 @@
 package com.aperezsi.feature_menu.di
 
-import com.aperezsi.core.di.BaseFragmentComponent
+import com.aperezsi.core.di.view.BaseFragmentComponent
 import com.aperezsi.diablobuddy.di.application.AppComponent
-import com.aperezsi.feature_menu.MenuFragment
+import com.aperezsi.feature_menu.presentation.MenuFragment
 import dagger.Component
 
 @Component(modules = [MenuModule::class], dependencies = [AppComponent::class])

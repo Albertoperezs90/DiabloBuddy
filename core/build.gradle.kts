@@ -41,4 +41,8 @@ dependencies {
     api(Dependencies.firebaseCrashlytics)
 
     kapt(Dependencies.daggerKapt)
+
+    testImplementation(Dependencies.junit)
+    testImplementation(Dependencies.mockitoKotlin)
+    testImplementation(Dependencies.robolectric)
 }

@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
-abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment(), HasDefaultViewModelProviderFactory {
+abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,13 +27,9 @@ abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment(), HasDe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initialize()
-    }
-
-    override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
-        return viewModelFactory
+        setUpView()
     }
 
     abstract fun inflate(): V
-    abstract fun initialize()
+    abstract fun setUpView()
 }
