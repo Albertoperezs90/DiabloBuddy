@@ -38,5 +38,4 @@ class DebouncerClickTest {
 
         verify(callback, times(2)).invoke()
     }
-
 }

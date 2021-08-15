@@ -12,5 +12,4 @@ class CoordinatorLogger @Inject constructor(private val loggers: Set<Logger>) : 
     override fun error(tag: String, message: String, throwable: Throwable) {
         loggers.forEach { it.error(tag, message, throwable) }
     }
-
 }

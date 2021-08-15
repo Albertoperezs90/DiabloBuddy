@@ -13,5 +13,4 @@ class CrashlyticsLogger(private val firebaseCrashlytics: FirebaseCrashlytics) : 
         firebaseCrashlytics.log("ERROR: $message")
         firebaseCrashlytics.recordException(throwable)
     }
-
 }

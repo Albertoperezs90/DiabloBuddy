@@ -14,5 +14,4 @@ class TrackerModule {
     fun provideEventTracker(application: Application): EventTracker {
         return AnalyticsTracker(FirebaseAnalytics.getInstance(application))
     }
-
 }

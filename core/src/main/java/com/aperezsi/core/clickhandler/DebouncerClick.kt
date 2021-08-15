@@ -12,5 +12,4 @@ class DebouncerClick(private val callback: () -> Unit, private val timeProvider:
             callback()
         }
     }
-
 }

@@ -5,7 +5,6 @@ import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.core.di.DaggerCoreComponent
 import com.aperezsi.diablobuddy.di.application.AppComponent
 import com.aperezsi.diablobuddy.di.application.DaggerAppComponent
-import com.aperezsi.diablobuddy.di.logger.LoggerModule
 
 class DiabloBuddyApplication : Application() {
 
