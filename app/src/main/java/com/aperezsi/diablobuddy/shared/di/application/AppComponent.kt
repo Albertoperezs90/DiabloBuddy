@@ -26,7 +26,6 @@ interface AppComponent {
     val logger: Logger
     val eventTracker: EventTracker
 
-
     @get:Named("api")
     val retrofit: Retrofit
 

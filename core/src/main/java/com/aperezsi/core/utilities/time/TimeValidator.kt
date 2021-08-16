@@ -16,5 +16,4 @@ class TimeValidator @Inject constructor() {
     fun isTimeShorterThan(time: Int, minutes: Int = MINUTES_5): Boolean {
         return time < minutes
     }
-
 }

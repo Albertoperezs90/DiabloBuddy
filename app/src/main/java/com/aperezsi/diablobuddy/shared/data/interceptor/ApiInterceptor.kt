@@ -25,5 +25,4 @@ class ApiInterceptor @Inject constructor(private val sessionPreferences: Session
 
         return Request.Builder().url(currentUrl).build()
     }
-
 }

@@ -15,5 +15,4 @@ class SessionModule {
     fun provideSharedSessionPreferences(application: Application): SharedPreferences {
         return application.getSharedPreferences("session", Context.MODE_PRIVATE)
     }
-
 }

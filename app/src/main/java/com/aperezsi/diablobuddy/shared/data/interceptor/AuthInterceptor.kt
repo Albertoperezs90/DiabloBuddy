@@ -15,5 +15,4 @@ class AuthInterceptor(private val username: String, private val password: String
         val authenticatedRequest = request.newBuilder().header("Authorization", buildCredentials()).build()
         return chain.proceed(authenticatedRequest)
     }
-
 }

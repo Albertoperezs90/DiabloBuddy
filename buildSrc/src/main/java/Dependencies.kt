@@ -11,15 +11,15 @@ object Dependencies {
     private const val lifecyleVersion = "2.3.1"
     const val playCore = "com.google.android.play:core:1.10.0"
     const val coreKtx = "androidx.core:core-ktx:1.3.2"
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecyleVersion}"
-    const val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:${lifecyleVersion}"
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecyleVersion"
+    const val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecyleVersion"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val material = "com.google.android.material:material:1.3.0"
 
     // Language
     private const val moshiVersion = "1.12.0"
-    const val moshi = "com.squareup.moshi:moshi:${moshiVersion}"
-    const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${moshiVersion}"
+    const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
+    const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     // Navigation
     private const val navigationVersion = "2.3.5"

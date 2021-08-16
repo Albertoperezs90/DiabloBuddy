@@ -6,5 +6,4 @@ import javax.inject.Inject
 class GetCurrentSeason @Inject constructor(private val leaderboardRepository: LeaderboardRepository) {
 
     operator fun invoke() = leaderboardRepository.getSeasonIndex()
-
 }

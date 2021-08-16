@@ -11,5 +11,4 @@ class LeaderboardRepository @Inject constructor(private val leaderboardApi: Lead
         val response = leaderboardApi.getSeasonIndex()
         emit(response.currentSeason)
     }.flowOn(Dispatchers.IO)
-
 }
