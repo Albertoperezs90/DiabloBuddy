@@ -1,16 +1,11 @@
 package com.aperezsi.feature_menu.presentation
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.aperezsi.feature_menu.data.LeaderboardRepository
-import kotlinx.coroutines.launch
+import androidx.lifecycle.asLiveData
+import com.aperezsi.core.framework.base.BaseViewModel
+import com.aperezsi.feature_menu.domain.GetCurrentSeason
 import javax.inject.Inject
 
-class MenuViewModel @Inject constructor(private val leaderboardRepository: LeaderboardRepository) : ViewModel() {
+class MenuViewModel @Inject constructor(private val getCurrentSeason: GetCurrentSeason): BaseViewModel() {
 
-    fun initialize() {
-        viewModelScope.launch {
-            leaderboardRepository.getSeasonIndex()
-        }
-    }
+    val currentSeason = getCurrentSeason().asLiveData()
 }

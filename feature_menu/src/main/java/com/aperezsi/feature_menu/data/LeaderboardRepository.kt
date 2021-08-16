@@ -1,11 +1,15 @@
 package com.aperezsi.feature_menu.data
 
-import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class LeaderboardRepository @Inject constructor(private val sessionPreferences: SessionPreferences, private val leaderboardApi: LeaderboardApi) {
+class LeaderboardRepository @Inject constructor(private val leaderboardApi: LeaderboardApi) {
 
-    suspend fun getSeasonIndex() {
-        val response = leaderboardApi.getSeasonIndex(sessionPreferences.getAccessToken())
-    }
+    fun getSeasonIndex() = flow {
+        val response = leaderboardApi.getSeasonIndex()
+        emit(response.currentSeason)
+    }.flowOn(Dispatchers.IO)
+
 }

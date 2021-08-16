@@ -1,6 +1,6 @@
 package com.aperezsi.diablobuddy.container.data
 
-import com.aperezsi.core.date.TimeProvider
+import com.aperezsi.core.utilities.time.TimeProvider
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import javax.inject.Inject
 

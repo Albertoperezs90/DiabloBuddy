@@ -1,8 +1,8 @@
 package com.aperezsi.diablobuddy.shared.tracker
 
 import android.os.Bundle
-import com.aperezsi.core.tracker.EventTracker
-import com.aperezsi.core.tracker.MetricEvent
+import com.aperezsi.core.interfaces.tracker.EventTracker
+import com.aperezsi.core.interfaces.tracker.MetricEvent
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class AnalyticsTracker(private val firebaseAnalytics: FirebaseAnalytics) : EventTracker {

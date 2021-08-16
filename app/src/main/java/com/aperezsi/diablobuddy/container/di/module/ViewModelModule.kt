@@ -1,8 +1,8 @@
 package com.aperezsi.diablobuddy.container.di.module
 
 import androidx.lifecycle.ViewModel
-import com.aperezsi.core.di.presentation.ViewModelFactoryModule
-import com.aperezsi.core.di.presentation.ViewModelKey
+import com.aperezsi.core.di.presentation.viewmodel.ViewModelFactoryModule
+import com.aperezsi.core.di.presentation.viewmodel.ViewModelKey
 import com.aperezsi.diablobuddy.container.presentation.ContainerViewModel
 import dagger.Binds
 import dagger.Module

@@ -1,6 +1,6 @@
-package com.aperezsi.core.clickhandler
+package com.aperezsi.core.utilities.clickhandler
 
-import com.aperezsi.core.date.TimeProvider
+import com.aperezsi.core.utilities.time.TimeProvider
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times

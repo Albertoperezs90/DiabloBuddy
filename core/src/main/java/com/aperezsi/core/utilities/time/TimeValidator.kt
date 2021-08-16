@@ -1,4 +1,4 @@
-package com.aperezsi.core.date
+package com.aperezsi.core.utilities.time
 
 import javax.inject.Inject
 

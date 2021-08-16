@@ -1,8 +1,8 @@
 package com.aperezsi.diablobuddy.shared.storage
 
 import android.content.SharedPreferences
-import com.aperezsi.core.date.TimeProvider
-import com.aperezsi.core.date.TimeValidator
+import com.aperezsi.core.utilities.time.TimeProvider
+import com.aperezsi.core.utilities.time.TimeValidator
 import javax.inject.Inject
 
 class SessionPreferences @Inject constructor(

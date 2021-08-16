@@ -1,8 +1,8 @@
 package com.aperezsi.feature_menu.di
 
 import androidx.lifecycle.ViewModel
-import com.aperezsi.core.di.presentation.ViewModelFactoryModule
-import com.aperezsi.core.di.presentation.ViewModelKey
+import com.aperezsi.core.di.presentation.viewmodel.ViewModelFactoryModule
+import com.aperezsi.core.di.presentation.viewmodel.ViewModelKey
 import com.aperezsi.feature_menu.presentation.MenuViewModel
 import dagger.Binds
 import dagger.Module

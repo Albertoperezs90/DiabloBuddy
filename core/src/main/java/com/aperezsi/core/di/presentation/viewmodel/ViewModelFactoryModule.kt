@@ -1,4 +1,4 @@
-package com.aperezsi.core.di.presentation
+package com.aperezsi.core.di.presentation.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds

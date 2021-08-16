@@ -1,6 +1,6 @@
 package com.aperezsi.diablobuddy.shared.logger
 
-import com.aperezsi.core.logger.Logger
+import com.aperezsi.core.interfaces.logger.Logger
 import javax.inject.Inject
 
 class CoordinatorLogger @Inject constructor(private val loggers: Set<Logger>) : Logger {

@@ -1,7 +1,7 @@
 package com.aperezsi.diablobuddy.shared.di.tracker
 
 import android.app.Application
-import com.aperezsi.core.tracker.EventTracker
+import com.aperezsi.core.interfaces.tracker.EventTracker
 import com.aperezsi.diablobuddy.shared.tracker.AnalyticsTracker
 import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module

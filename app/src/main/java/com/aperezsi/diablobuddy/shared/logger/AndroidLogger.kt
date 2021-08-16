@@ -1,7 +1,7 @@
 package com.aperezsi.diablobuddy.shared.logger
 
 import android.util.Log
-import com.aperezsi.core.logger.Logger
+import com.aperezsi.core.interfaces.logger.Logger
 
 class AndroidLogger : Logger {
 

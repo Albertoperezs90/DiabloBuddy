@@ -3,10 +3,12 @@ package com.aperezsi.diablobuddy.shared.di.data
 import com.aperezsi.diablobuddy.BuildConfig
 import com.aperezsi.diablobuddy.shared.data.converter.ConverterFactoryProvider
 import com.aperezsi.diablobuddy.shared.data.converter.MoshiProvider
+import com.aperezsi.diablobuddy.shared.data.interceptor.ApiInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.AuthInterceptor
-import com.aperezsi.diablobuddy.shared.data.interceptor.AuthInterceptorImpl
+import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Named
@@ -14,8 +16,8 @@ import javax.inject.Named
 @Module
 class HttpModule {
 
-    @Provides
     @Named("region")
+    @Provides
     fun provideRegion(): String {
         return "eu"
     }
@@ -25,24 +27,41 @@ class HttpModule {
         return MoshiProvider()
     }
 
+    @Named("auth")
     @Provides
-    fun provideAuthInterceptor(): AuthInterceptor {
-        return AuthInterceptorImpl(BuildConfig.CLIENT_USERNAME, BuildConfig.CLIENT_PASSWORD)
+    fun provideAuthInterceptor(): Interceptor {
+        return AuthInterceptor(BuildConfig.CLIENT_USERNAME, BuildConfig.CLIENT_PASSWORD)
     }
 
+    @Named("api")
     @Provides
-    fun provideAuthClient(authInterceptor: AuthInterceptor): OkHttpClient {
+    fun provideApiInterceptor(sessionPreferences: SessionPreferences): Interceptor {
+        return ApiInterceptor(sessionPreferences)
+    }
+
+    @Named("authClient")
+    @Provides
+    fun provideAuthClient(@Named("auth") authInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(authInterceptor).build()
     }
-    
+
+    @Named("apiClient")
+    @Provides
+    fun provideApiClient(@Named("api") apiInterceptor: Interceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(apiInterceptor).build()
+    }
+
+    @Named("api")
     @Provides
     fun provideRetrofit(
         @Named("region") region: String,
-        converterFactoryProvider: ConverterFactoryProvider
+        converterFactoryProvider: ConverterFactoryProvider,
+        @Named("apiClient") apiClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(converterFactoryProvider.build())
             .baseUrl("https://${region}${BuildConfig.BASE_API_URL}")
+            .client(apiClient)
             .build()
     }
 
@@ -51,7 +70,7 @@ class HttpModule {
     fun provideBattleNetRetrofit(
         @Named("region") region: String,
         converterFactoryProvider: ConverterFactoryProvider,
-        authClient: OkHttpClient
+        @Named("authClient") authClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(converterFactoryProvider.build())

@@ -1,4 +1,4 @@
-package com.aperezsi.core.tracker
+package com.aperezsi.core.interfaces.tracker
 
 interface EventTracker {
     fun trackEvent(event: MetricEvent)

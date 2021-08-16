@@ -1,6 +1,6 @@
 package com.aperezsi.feature_menu.di
 
-import com.aperezsi.core.di.presentation.BaseFragmentComponent
+import com.aperezsi.core.di.presentation.view.BaseFragmentComponent
 import com.aperezsi.diablobuddy.shared.di.application.AppComponent
 import com.aperezsi.feature_menu.presentation.MenuFragment
 import dagger.Component

@@ -4,13 +4,9 @@ import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.Response
 
-interface AuthInterceptor : Interceptor {
-    fun buildCredentials(): String
-}
+class AuthInterceptor(private val username: String, private val password: String): Interceptor {
 
-class AuthInterceptorImpl(private val username: String, private val password: String) : AuthInterceptor {
-
-    override fun buildCredentials(): String {
+    private fun buildCredentials(): String {
         return Credentials.basic(username, password)
     }
 

@@ -1,4 +1,4 @@
-package com.aperezsi.core.date
+package com.aperezsi.core.utilities.time
 
 import android.os.SystemClock
 import java.util.*

@@ -1,4 +1,4 @@
-package com.aperezsi.core.logger
+package com.aperezsi.core.interfaces.logger
 
 interface Logger {
 

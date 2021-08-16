@@ -1,6 +1,6 @@
 package com.aperezsi.diablobuddy.shared.di.logger
 
-import com.aperezsi.core.logger.Logger
+import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.diablobuddy.shared.logger.AndroidLogger
 import com.aperezsi.diablobuddy.shared.logger.CoordinatorLogger
 import com.aperezsi.diablobuddy.shared.logger.CrashlyticsLogger

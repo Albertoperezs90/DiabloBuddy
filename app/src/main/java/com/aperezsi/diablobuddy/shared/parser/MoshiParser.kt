@@ -1,6 +1,6 @@
 package com.aperezsi.diablobuddy.shared.parser
 
-import com.aperezsi.core.parser.JsonParser
+import com.aperezsi.core.interfaces.parser.JsonParser
 import com.squareup.moshi.Moshi
 import kotlin.reflect.KClass
 

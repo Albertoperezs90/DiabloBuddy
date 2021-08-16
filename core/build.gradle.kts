@@ -35,6 +35,7 @@ dependencies {
     api(Dependencies.navigationFragment)
     api(Dependencies.navigationUi)
     api(Dependencies.viewModel)
+    api(Dependencies.lifecycleLivedata)
     api(Dependencies.constraintLayout)
     api(Dependencies.material)
     api(platform(Dependencies.firebaseBom))
