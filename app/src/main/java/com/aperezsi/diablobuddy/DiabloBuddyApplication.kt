@@ -3,8 +3,8 @@ package com.aperezsi.diablobuddy
 import android.app.Application
 import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.core.di.DaggerCoreComponent
-import com.aperezsi.diablobuddy.di.application.AppComponent
-import com.aperezsi.diablobuddy.di.application.DaggerAppComponent
+import com.aperezsi.diablobuddy.shared.di.application.AppComponent
+import com.aperezsi.diablobuddy.shared.di.application.DaggerAppComponent
 
 class DiabloBuddyApplication : Application() {
 
@@ -29,7 +29,7 @@ class DiabloBuddyApplication : Application() {
 
     private fun buildCoreComponent(): CoreComponent {
         if (_coreComponent == null) {
-            _coreComponent = DaggerCoreComponent.factory().create()
+            _coreComponent = DaggerCoreComponent.factory().create(this)
         }
         return _coreComponent!!
     }

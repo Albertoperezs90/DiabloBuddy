@@ -28,6 +28,7 @@ android {
 
 dependencies {
     api(Dependencies.kotlinStdLib)
+    api(Dependencies.kotlinReflect)
     api(Dependencies.coreKtx)
     api(Dependencies.dagger)
     api(Dependencies.navigationFeatureModule)

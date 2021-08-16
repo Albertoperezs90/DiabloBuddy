@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="season_menu">Season %1$s</string>
+    <string name="skills">Habilidades</string>
+    <string name="gear">Equipo</string>
+    <string name="feature_menu_title">Menú</string>
+    <string name="menu_title">Diablo Buddy</string>
+</resources>

@@ -51,5 +51,6 @@ dependencies {
     implementation(project(":app"))
     implementation(project(":core"))
 
+    kapt(Dependencies.moshiCodegen)
     kapt(Dependencies.daggerKapt)
 }

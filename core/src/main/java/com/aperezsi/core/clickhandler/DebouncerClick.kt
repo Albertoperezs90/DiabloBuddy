@@ -1,6 +1,6 @@
 package com.aperezsi.core.clickhandler
 
-import com.aperezsi.core.provider.TimeProvider
+import com.aperezsi.core.date.TimeProvider
 
 class DebouncerClick(private val callback: () -> Unit, private val timeProvider: TimeProvider) {
 

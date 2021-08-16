@@ -18,6 +18,8 @@ android {
         versionName = AppConfig.versionName
         multiDexEnabled = true
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        buildConfigField("String", "BASE_BATTLENET_URL", "\".battle.net\"")
+        buildConfigField("String", "BASE_API_URL", "\".api.blizzard.com\"")
     }
 
     buildTypes {
@@ -39,6 +41,8 @@ android {
     productFlavors {
         create(AppConfig.Dimension.production) {
             dimension = AppConfig.dimension
+            buildConfigField("String", "CLIENT_USERNAME", System.getenv("CLIENT_USERNAME").orEmpty())
+            buildConfigField("String", "CLIENT_PASSWORD", System.getenv("CLIENT_PASSWORD").orEmpty())
 
             firebaseAppDistribution {
                 releaseNotes = "QA version to test with official API"
@@ -49,6 +53,13 @@ android {
         create(AppConfig.Dimension.playground) {
             dimension = AppConfig.dimension
             applicationIdSuffix = ".playground"
+            buildConfigField("String", "CLIENT_USERNAME", "\"e37c42d4634f494f86b04bf237b16bc0\"")
+            buildConfigField("String", "CLIENT_PASSWORD", "\"fKCcwtLotZvxw8zVOVuGH8Inl3hsPSGc\"")
+
+            firebaseAppDistribution {
+                releaseNotes = "QA version to test with official API"
+                groups = "internal-qa"
+            }
         }
     }
 
@@ -72,9 +83,14 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(ModuleConfig.core))
     implementation(Dependencies.playCore)
 
+    api(Dependencies.retrofit)
+    api(Dependencies.moshi)
+    api(Dependencies.moshiConverter)
+
+    kapt(Dependencies.moshiCodegen)
     kapt(Dependencies.daggerKapt)
 
     testImplementation(Dependencies.junit)

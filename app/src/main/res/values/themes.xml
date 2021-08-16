@@ -1,16 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.DiabloBuddy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+<resources>
+
+    <style name="Theme.DiabloBuddy" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/charcoal</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorPrimary">@color/charcoal</item> <!-- TODO Check this duality -->
+        <item name="android:colorAccent">@color/sandstone</item> <!-- TODO Check this duality -->
+        <item name="colorPrimaryDark">@color/charcoal</item>
+        <item name="colorPrimary">@color/charcoal</item> <!-- TODO Check this duality -->
+        <item name="colorAccent">@color/sandstone</item> <!-- TODO Check this duality -->
+    </style>
+
+    <style name="AppThemeDefault" parent="Theme.DiabloBuddy">
+        <item name="appTitleText">@style/appTitleText_default</item>
+        <item name="subtitleText">@style/subtitleText_default</item>
     </style>
 </resources>
