@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlin.math.absoluteValue
 
 class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0): FrameLayout(context, attributeSet, defStyleRes) {
 
@@ -88,13 +89,21 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
         val fixMainButtonY = mainButtonY + (mainButtonHeight / 2)
         return when (currentAngle) {
             0           -> fixMainButtonY - mainButtonHeight
-            in 1..89    -> fixMainButtonY - (currentAngle * mainButtonHeight / 90)
+            in 1..44    -> fixMainButtonY - ((currentAngle * mainButtonHeight / 90) - mainButtonHeight).absoluteValue
+            45          -> fixMainButtonY - (mainButtonHeight / 2)
+            in 46..89   -> fixMainButtonY - (currentAngle * mainButtonHeight / 90) - mainButtonHeight
             90          -> fixMainButtonY
-            in 91..179  -> fixMainButtonY + (currentAngle * mainButtonHeight / 180)
+            in 91..134  -> fixMainButtonY + (currentAngle * mainButtonHeight / 180)
+            135         -> fixMainButtonY + (mainButtonHeight / 2)
+            in 136..179 -> fixMainButtonY + (currentAngle * mainButtonHeight / 180)
             180         -> fixMainButtonY + mainButtonHeight
-            in 181..269 -> fixMainButtonY + (currentAngle * mainButtonHeight / 270)
+            in 181..224 -> fixMainButtonY + (((currentAngle - 180) * mainButtonHeight / 270) - mainButtonHeight).absoluteValue
+            225         -> fixMainButtonY + (mainButtonHeight / 2)
+            in 226..269 -> fixMainButtonY + ((currentAngle - 180) * mainButtonHeight / 90)
             270         -> fixMainButtonY
-            in 271..360 -> fixMainButtonY - (currentAngle * mainButtonHeight / 360)
+            in 271..314 -> fixMainButtonY + ((currentAngle - 270) * mainButtonHeight / 360)
+            315         -> fixMainButtonY + (mainButtonHeight / 2)
+            in 271..359 -> fixMainButtonY + ((currentAngle * mainButtonHeight / 360) - mainButtonHeight).absoluteValue
             else        -> fixMainButtonY
         }
     }
