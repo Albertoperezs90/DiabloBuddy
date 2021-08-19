@@ -5,7 +5,7 @@ import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.interfaces.tracker.EventTracker
 import com.aperezsi.diablobuddy.container.di.ContainerComponent
-import com.aperezsi.diablobuddy.shared.di.data.HttpModule
+import com.aperezsi.diablobuddy.shared.di.data.NetworkModule
 import com.aperezsi.diablobuddy.shared.di.logger.LoggerModule
 import com.aperezsi.diablobuddy.shared.di.tracker.TrackerModule
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
@@ -15,7 +15,7 @@ import retrofit2.Retrofit
 import javax.inject.Named
 
 @Component(
-    modules = [AppModule::class, HttpModule::class, LoggerModule::class, TrackerModule::class],
+    modules = [AppModule::class, NetworkModule::class, LoggerModule::class, TrackerModule::class],
     dependencies = [CoreComponent::class]
 )
 interface AppComponent {

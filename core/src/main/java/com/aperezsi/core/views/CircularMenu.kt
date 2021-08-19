@@ -2,15 +2,26 @@ package com.aperezsi.core.views
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlin.math.cos
+import kotlin.math.sin
 
 class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0) : FrameLayout(context, attributeSet, defStyleRes) {
 
     private var rootHasBeenRendered = false
     private var mainButtonHasBeenRendered = false
-    private var menuButtonsHasBeenRendered = false
-    private var buttons = 3
+    private var menuButtonsHaveBeenRendered = false
+
+    private lateinit var mainButton: FloatingActionButton
+    private var menuItems: List<String> = emptyList()
+    private var menuButtons: MutableList<FloatingActionButton> = mutableListOf()
+
+    private var mainButtonHeight = 0
+    private var mainButtonWidth = 0
+    private var mainButtonX = 0f
+    private var mainButtonY = 0f
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -20,13 +31,17 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
         }
     }
 
+    fun setMenu(items: List<String>) {
+        menuItems = items
+        if (menuButtonsHaveBeenRendered) {
+            resetDraw()
+        }
+    }
+
     private fun configureCentralButton() {
-        val mainButton = FloatingActionButton(context)
+        mainButton = FloatingActionButton(context)
         mainButton.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        var mainButtonHeight = 0
-        var mainButtonWidth = 0
-        var mainButtonX = 0f
-        var mainButtonY = 0f
+        mainButton.visibility = INVISIBLE
 
         mainButton.viewTreeObserver.addOnGlobalLayoutListener {
             if (!mainButtonHasBeenRendered) {
@@ -42,80 +57,99 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
                 mainButton.layoutParams = newLayoutParams
                 mainButton.x = mainButtonX
                 mainButton.y = mainButtonY
-            } else if (!menuButtonsHasBeenRendered) {
-                menuButtonsHasBeenRendered = true
-                configureMenu(mainButtonWidth, mainButtonHeight, mainButtonX, mainButtonY)
+            } else if (!menuButtonsHaveBeenRendered) {
+                menuButtonsHaveBeenRendered = true
+                drawMenu()
             }
         }
 
         addView(mainButton)
     }
 
-    private fun configureMenu(mainButtonWidth: Int, mainButtonHeight: Int, mainButtonX: Float, mainButtonY: Float) {
-        val axisCoords = getAxisCoords(mainButtonWidth, mainButtonHeight, mainButtonX, mainButtonY)
-        axisCoords.forEach { axisCoord ->
-            var menuButtonHasBeenRendered = false
-            val menuButton = FloatingActionButton(context)
-            menuButton.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+    private fun resetDraw() {
+        rootHasBeenRendered = false
+        mainButtonHasBeenRendered = false
+        menuButtonsHaveBeenRendered = false
+        menuButtons.clear()
+        removeAllViews()
+    }
 
-            menuButton.viewTreeObserver.addOnGlobalLayoutListener {
-                if (!menuButtonHasBeenRendered) {
-                    menuButtonHasBeenRendered = true
-                    val menuButtonY = if (axisCoord.radius in 91..269) {
-                        axisCoord.y
-                    } else {
-                        (axisCoord.y - menuButton.height / 2)
-                    }
+    private fun drawMenu() {
+        if (menuItems.isEmpty()) return
 
-                    menuButton.x = (axisCoord.x - menuButton.width / 2)
-                    menuButton.y = menuButtonY
-                }
+        val angleStep = 360 / menuItems.size
+        var angle = 0
+        menuItems.forEach {
+            val axisCoord = calculateAxis(angle, mainButtonHeight, mainButtonX, mainButtonY)
+            angle += angleStep
+            drawMenuItem(it, axisCoord)
+        }
+
+        animateButtons()
+    }
+
+    private fun drawMenuItem(it: String, axisCoord: AxisCoords) {
+        var menuButtonHasBeenRendered = false
+        val menuButton = FloatingActionButton(context)
+        menuButton.visibility = INVISIBLE
+        menuButton.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+
+        menuButton.viewTreeObserver.addOnGlobalLayoutListener {
+            if (!menuButtonHasBeenRendered) {
+                menuButtonHasBeenRendered = true
+                menuButton.x = axisCoord.x
+                menuButton.y = axisCoord.y
             }
+        }
+        menuButtons.add(menuButton)
+        addView(menuButton)
+    }
 
-            addView(menuButton)
+    private fun calculateAxis(angle: Int, radius: Int, centerX: Float, centerY: Float): AxisCoords {
+        val fixedCenterX = centerX + (radius / 4)
+        val fixedCenterY = centerY + (radius / 4)
+        val x = (radius * sin(Math.PI * 2 * angle / 360)).toFloat() + fixedCenterX
+        val y = (radius * -cos(Math.PI * 2 * angle / 360)).toFloat() + fixedCenterY
+        return AxisCoords(x, y, angle)
+    }
+
+    private fun animateButtons() {
+        resetAnimationValues()
+        val mainButtonAnimator = mainButton.animate()
+        mainButtonAnimator.apply {
+            alpha(1f)
+            scaleX(1f)
+            scaleY(1f)
+            interpolator = AccelerateDecelerateInterpolator()
+            duration = 200
+        }
+
+        val menuButtonsAnimator = menuButtons.map { it.animate() }
+        menuButtonsAnimator.forEachIndexed { index, animator ->
+            animator.alpha(1f)
+            animator.scaleX(1f)
+            animator.scaleY(1f)
+            animator.interpolator = AccelerateDecelerateInterpolator()
+            animator.duration = 300 + (index * 150L)
+        }
+
+        mainButton.visibility = VISIBLE
+        mainButtonAnimator.start()
+        menuButtonsAnimator.forEachIndexed { index, animator ->
+            menuButtons[index].visibility = VISIBLE
+            animator.start()
         }
     }
 
-    private fun getAxisCoords(mainButtonWidth: Int, mainButtonHeight: Int, mainButtonX: Float, mainButtonY: Float): Array<AxisCoords> {
-        val angle = 360
-        val angleStep = angle / buttons
-        var currentAngleStep = 0
-        val axisCoords = mutableListOf<AxisCoords>()
-        for (i in 0 until buttons) {
-            axisCoords.add(AxisCoords(temporalXAxis(currentAngleStep, mainButtonWidth, mainButtonX), temporalYAxis(currentAngleStep, mainButtonHeight, mainButtonY), currentAngleStep))
-            currentAngleStep += angleStep
-        }
-        return axisCoords.toTypedArray()
-    }
+    private fun resetAnimationValues() {
+        mainButton.alpha = 0.3f
+        mainButton.scaleX = 0.7f
+        mainButton.scaleY = 0.7f
 
-    private fun temporalYAxis(currentAngle: Int, mainButtonHeight: Int, mainButtonY: Float): Float {
-        val halfMainButtonHeight = mainButtonHeight / 2 // 300
-        val fixMainButtonY = mainButtonY + halfMainButtonHeight // 1000
-        val heightDiff = fixMainButtonY - mainButtonHeight // 400
-        return when (currentAngle) {
-            0           -> (heightDiff * 1.1).toFloat()  //  300
-            in 1..90    -> (fixMainButtonY - mainButtonHeight) + (currentAngle * mainButtonHeight / 90) // 401-1000
-            in 91..179  -> fixMainButtonY + ((currentAngle - 90) * mainButtonHeight / 90) // 1001-1300
-            180         -> (fixMainButtonY / 1.2).toFloat() + ((currentAngle - 90) * mainButtonHeight / 90) // 1001-1300
-            in 181..270 -> (fixMainButtonY + mainButtonHeight) - ((currentAngle - 180) * mainButtonHeight / 90) // 1300-1000
-            in 271..360 -> fixMainButtonY - ((currentAngle - 270) * mainButtonHeight / 90) // 999-700
-            else        -> fixMainButtonY
-        }
-    }
-
-    private fun temporalXAxis(currentAngle: Int, mainButtonWidth: Int, mainButtonX: Float): Float {
-        val halfMainButtonWidth = mainButtonWidth / 2 // 300
-        val fixMainButtonX = mainButtonX + halfMainButtonWidth // 500
-        val widthDiff = fixMainButtonX - mainButtonWidth // 200
-        return when (currentAngle) {
-            0           -> fixMainButtonX // 500
-            in 1..89    -> fixMainButtonX + (currentAngle * mainButtonWidth / 90) // 500-300
-            90          -> (fixMainButtonX / 1.1).toFloat() + (currentAngle * mainButtonWidth / 90) // 500-300
-            in 91..180  -> (fixMainButtonX + mainButtonWidth) - ((currentAngle - 90) * mainButtonWidth / 90) // 799-500
-            in 181..269 -> fixMainButtonX - ((currentAngle - 180) * mainButtonWidth / 90) // 799-500
-            270         -> (fixMainButtonX * 1.1).toFloat() - ((currentAngle - 180) * mainButtonWidth / 90) // 799-500
-            in 271..360 -> widthDiff + ((currentAngle - 270) * mainButtonWidth / 90) // 201-500
-            else        -> fixMainButtonX
+        menuButtons.forEach {
+            it.alpha = 0.3f
+            it.scaleX = 0.3f
+            it.scaleY = 0.3f
         }
     }
 

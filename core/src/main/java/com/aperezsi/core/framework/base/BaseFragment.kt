@@ -28,8 +28,10 @@ abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView()
+        initialize()
     }
 
     abstract fun inflate(): V
     abstract fun setUpView()
+    abstract fun initialize()
 }
