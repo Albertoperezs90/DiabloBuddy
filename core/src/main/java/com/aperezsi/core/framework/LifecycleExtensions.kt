@@ -1,18 +1,21 @@
 package com.aperezsi.core.framework
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.aperezsi.core.framework.base.BaseActivity
 import com.aperezsi.core.framework.base.BaseFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
-fun <T> Fragment.observe(liveData: LiveData<T>, lambda: (T) -> Unit) {
-    liveData.observe(viewLifecycleOwner, Observer<T> {
-        lambda(it!!)
-    })
+fun <T> Fragment.collect(flow: StateFlow<T>, lambda: (T) -> Unit) {
+    lifecycleScope.launch(Dispatchers.Main) {
+        flow.collect { lambda(it) }
+    }
 }
 
 fun <T : ViewModel> BaseActivity<*, *>.provideViewModel(viewModel: KClass<T>): T {

@@ -14,7 +14,7 @@ import retrofit2.Retrofit
 import javax.inject.Named
 
 @Module
-class HttpModule {
+class NetworkModule {
 
     @Named("region")
     @Provides

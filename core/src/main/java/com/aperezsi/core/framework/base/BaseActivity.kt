@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import javax.inject.Inject
 
-abstract class BaseActivity<V: ViewBinding, VM: ViewModel>: AppCompatActivity() {
+abstract class BaseActivity<V : ViewBinding, VM : ViewModel> : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -22,8 +22,10 @@ abstract class BaseActivity<V: ViewBinding, VM: ViewModel>: AppCompatActivity() 
         binding = inflate()
         setContentView(binding.root)
         setUpView()
+        initialize()
     }
 
     abstract fun inflate(): V
     abstract fun setUpView()
+    abstract fun initialize()
 }
