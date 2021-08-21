@@ -5,10 +5,10 @@ import android.util.AttributeSet
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlin.math.cos
-import kotlin.math.sin
 
 class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0) : FrameLayout(context, attributeSet, defStyleRes) {
+
+    private val circleCoordsHandler = CircleCoordsHandler()
 
     private var rootHasBeenRendered = false
     private var mainButtonHasBeenRendered = false
@@ -16,12 +16,14 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
 
     private lateinit var mainButton: FloatingActionButton
     private var menuItems: List<String> = emptyList()
-    private var menuButtons: MutableList<FloatingActionButton> = mutableListOf()
+    private var menuButtons: MutableList<CircularItem> = mutableListOf()
 
     private var mainButtonHeight = 0
     private var mainButtonWidth = 0
     private var mainButtonX = 0f
     private var mainButtonY = 0f
+
+    private val initialVisibility = if (isInEditMode) VISIBLE else INVISIBLE
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -41,7 +43,7 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
     private fun configureCentralButton() {
         mainButton = FloatingActionButton(context)
         mainButton.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        mainButton.visibility = INVISIBLE
+        mainButton.visibility = initialVisibility
 
         mainButton.viewTreeObserver.addOnGlobalLayoutListener {
             if (!mainButtonHasBeenRendered) {
@@ -80,7 +82,7 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
         val angleStep = 360 / menuItems.size
         var angle = 0
         menuItems.forEach {
-            val axisCoord = calculateAxis(angle, mainButtonHeight, mainButtonX, mainButtonY)
+            val axisCoord = circleCoordsHandler.calculateAxis(angle, mainButtonHeight, mainButtonX, mainButtonY)
             angle += angleStep
             drawMenuItem(it, axisCoord)
         }
@@ -90,27 +92,18 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
 
     private fun drawMenuItem(it: String, axisCoord: AxisCoords) {
         var menuButtonHasBeenRendered = false
-        val menuButton = FloatingActionButton(context)
-        menuButton.visibility = INVISIBLE
-        menuButton.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+        val menuButton = CircularItem(context)
+        menuButton.visibility = initialVisibility
+        menuButton.setText(it)
 
         menuButton.viewTreeObserver.addOnGlobalLayoutListener {
             if (!menuButtonHasBeenRendered) {
                 menuButtonHasBeenRendered = true
-                menuButton.x = axisCoord.x
-                menuButton.y = axisCoord.y
+                menuButton.configureCoords(axisCoord)
             }
         }
         menuButtons.add(menuButton)
         addView(menuButton)
-    }
-
-    private fun calculateAxis(angle: Int, radius: Int, centerX: Float, centerY: Float): AxisCoords {
-        val fixedCenterX = centerX + (radius / 4)
-        val fixedCenterY = centerY + (radius / 4)
-        val x = (radius * sin(Math.PI * 2 * angle / 360)).toFloat() + fixedCenterX
-        val y = (radius * -cos(Math.PI * 2 * angle / 360)).toFloat() + fixedCenterY
-        return AxisCoords(x, y, angle)
     }
 
     private fun animateButtons() {
@@ -130,7 +123,7 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
             animator.scaleX(1f)
             animator.scaleY(1f)
             animator.interpolator = AccelerateDecelerateInterpolator()
-            animator.duration = 300 + (index * 150L)
+            animator.duration = 300 + (index * 700L)
         }
 
         mainButton.visibility = VISIBLE
@@ -152,6 +145,4 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
             it.scaleY = 0.3f
         }
     }
-
-    private data class AxisCoords(val x: Float, val y: Float, val radius: Int)
 }

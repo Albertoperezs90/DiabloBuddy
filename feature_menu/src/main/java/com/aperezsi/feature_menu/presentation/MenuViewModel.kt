@@ -19,6 +19,6 @@ class MenuViewModel @Inject constructor(private val getCurrentSeason: GetCurrent
         viewModelScope.launch(Dispatchers.IO) {
             getCurrentSeason().collect { currentSeason.value = it }
         }
-        menuItems.value = listOf("", "", "", "", "")
+        menuItems.value = listOf("1", "2", "3", "1", "2", "3", "1", "2", "3", "1", "2", "3")
     }
 }
