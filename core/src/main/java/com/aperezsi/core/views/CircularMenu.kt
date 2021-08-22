@@ -41,7 +41,7 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
     }
 
     private fun configureMenuItems(centralButton: CircularMainItem, items: List<CircularItemConfig>) {
-        var angle = 320
+        var angle = 315 // start at 320 degrees
         val angleStep = (360 / items.size)
         items.forEach {
             drawMenuItem(it, angle, centralButton)
