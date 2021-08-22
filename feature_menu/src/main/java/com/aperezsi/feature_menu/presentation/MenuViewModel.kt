@@ -25,6 +25,7 @@ class MenuViewModel @Inject constructor(private val getCurrentSeason: GetCurrent
         menuConfig.value = CircularMenuConfig(R.drawable.ic_central_icon, listOf(
             CircularItemConfig(R.drawable.ic_central_icon, "Habilidades"),
             CircularItemConfig(R.drawable.ic_central_icon, "Equipo"),
+            CircularItemConfig(R.drawable.ic_central_icon, "Artesania"),
             CircularItemConfig(R.drawable.ic_central_icon, "Seguidores")
         ))
     }
