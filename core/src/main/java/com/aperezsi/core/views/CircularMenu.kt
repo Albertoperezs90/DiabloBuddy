@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintSet.END
 import androidx.constraintlayout.widget.ConstraintSet.START
 import androidx.constraintlayout.widget.ConstraintSet.TOP
 
+@Suppress("MagicNumber")
 class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0) : ConstraintLayout(context, attributeSet, defStyleRes) {
 
     private var menuButtonsHaveBeenRendered = false

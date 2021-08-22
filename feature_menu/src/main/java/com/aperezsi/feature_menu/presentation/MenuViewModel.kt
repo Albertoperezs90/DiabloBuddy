@@ -17,7 +17,6 @@ class MenuViewModel @Inject constructor(private val getCurrentSeason: GetCurrent
     val currentSeason = MutableStateFlow(0)
     val menuConfig: MutableStateFlow<CircularMenuConfig?> = MutableStateFlow(null)
 
-
     fun initialize() {
         viewModelScope.launch(Dispatchers.IO) {
             getCurrentSeason().collect { currentSeason.value = it }

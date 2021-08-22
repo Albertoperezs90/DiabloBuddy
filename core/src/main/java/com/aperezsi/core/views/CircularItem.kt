@@ -15,7 +15,6 @@ class CircularItem @JvmOverloads constructor(context: Context, attributeSet: Att
         binding.image.setImageResource(circularItemConfig.image)
         binding.title.text = circularItemConfig.text
     }
-
 }
 
 data class CircularItemConfig(@DrawableRes val image: Int, val text: String)
