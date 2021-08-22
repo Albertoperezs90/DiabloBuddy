@@ -2,6 +2,9 @@ package com.aperezsi.feature_menu.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.aperezsi.core.framework.base.BaseViewModel
+import com.aperezsi.core.views.CircularItemConfig
+import com.aperezsi.core.views.CircularMenuConfig
+import com.aperezsi.feature_menu.R
 import com.aperezsi.feature_menu.domain.GetCurrentSeason
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,13 +15,17 @@ import javax.inject.Inject
 class MenuViewModel @Inject constructor(private val getCurrentSeason: GetCurrentSeason) : BaseViewModel() {
 
     val currentSeason = MutableStateFlow(0)
-    val menuItems = MutableStateFlow(emptyList<String>())
+    val menuConfig: MutableStateFlow<CircularMenuConfig?> = MutableStateFlow(null)
 
 
     fun initialize() {
         viewModelScope.launch(Dispatchers.IO) {
             getCurrentSeason().collect { currentSeason.value = it }
         }
-        menuItems.value = listOf("1", "2", "3", "1", "2", "3", "1", "2", "3", "1", "2", "3")
+        menuConfig.value = CircularMenuConfig(R.drawable.ic_central_icon, listOf(
+            CircularItemConfig(R.drawable.ic_central_icon, "Habilidades"),
+            CircularItemConfig(R.drawable.ic_central_icon, "Equipo"),
+            CircularItemConfig(R.drawable.ic_central_icon, "Seguidores")
+        ))
     }
 }

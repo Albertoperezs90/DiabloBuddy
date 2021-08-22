@@ -3,6 +3,7 @@ package com.aperezsi.core.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.aperezsi.core.databinding.CircularItemViewBinding
 
@@ -10,13 +11,11 @@ class CircularItem @JvmOverloads constructor(context: Context, attributeSet: Att
 
     private val binding: CircularItemViewBinding = CircularItemViewBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun configureCoords(axisCoords: AxisCoords) {
-        x = axisCoords.x
-        y = axisCoords.y
-    }
-
-    fun setText(text: String) {
-        binding.title.text = text
+    fun setConfig(circularItemConfig: CircularItemConfig) {
+        binding.image.setImageResource(circularItemConfig.image)
+        binding.title.text = circularItemConfig.text
     }
 
 }
+
+data class CircularItemConfig(@DrawableRes val image: Int, val text: String)

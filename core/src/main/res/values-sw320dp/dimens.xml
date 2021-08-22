@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="circular_main_item_size">140dp</dimen>
+    <dimen name="circular_item_size">88dp</dimen>
+    <dimen name="circular_image_size">30dp</dimen>
+</resources>

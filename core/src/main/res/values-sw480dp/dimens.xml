@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="circular_main_item_size">200dp</dimen>
+    <dimen name="circular_item_size">130dp</dimen>
+    <dimen name="circular_image_size">55dp</dimen>
+
+    <!-- TEXT SIZES -->
+    <dimen name="size_14">20sp</dimen>
+    <dimen name="size_16">24sp</dimen>
+    <dimen name="size_38">52sp</dimen>
+</resources>

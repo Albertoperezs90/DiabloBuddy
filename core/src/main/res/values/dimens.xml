@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- MARGIN SIZES -->
     <dimen name="margin_tiny">2dp</dimen>
     <dimen name="margin_small">4dp</dimen>
     <dimen name="margin_small_plus">8dp</dimen>
@@ -7,4 +8,16 @@
     <dimen name="margin_medium_plus">24dp</dimen>
     <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_large_plus">64dp</dimen>
+
+    <dimen name="circular_main_item_size">140dp</dimen>
+    <dimen name="circular_item_size">90dp</dimen>
+    <dimen name="circular_image_size">40dp</dimen>
+
+    <!-- TEXT SIZES -->
+    <dimen name="size_8">8sp</dimen>
+    <dimen name="size_10">10sp</dimen>
+    <dimen name="size_12">12sp</dimen>
+    <dimen name="size_14">14sp</dimen>
+    <dimen name="size_16">16sp</dimen>
+    <dimen name="size_38">38sp</dimen>
 </resources>
