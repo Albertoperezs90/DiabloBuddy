@@ -7,7 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.aperezsi.core.databinding.CircularItemViewBinding
 
-class CircularItem @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleAttrs: Int = 0) : ConstraintLayout(context, attributeSet, defStyleAttrs) {
+class CircularItem @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleAttrs: Int = 0): ConstraintLayout(context, attributeSet, defStyleAttrs) {
 
     private val binding: CircularItemViewBinding = CircularItemViewBinding.inflate(LayoutInflater.from(context), this, true)
 
@@ -18,3 +18,4 @@ class CircularItem @JvmOverloads constructor(context: Context, attributeSet: Att
 }
 
 data class CircularItemConfig(@DrawableRes val image: Int, val text: String)
+data class CircularItemAnimationConfig(val angle: Float, val radius: Int)

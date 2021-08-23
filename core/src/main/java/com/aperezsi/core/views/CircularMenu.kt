@@ -1,9 +1,11 @@
 package com.aperezsi.core.views
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -11,13 +13,15 @@ import androidx.constraintlayout.widget.ConstraintSet.BOTTOM
 import androidx.constraintlayout.widget.ConstraintSet.END
 import androidx.constraintlayout.widget.ConstraintSet.START
 import androidx.constraintlayout.widget.ConstraintSet.TOP
+import androidx.core.animation.doOnStart
 
 @Suppress("MagicNumber")
-class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0) : ConstraintLayout(context, attributeSet, defStyleRes) {
+class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0): ConstraintLayout(context, attributeSet, defStyleRes) {
 
     private var menuButtonsHaveBeenRendered = false
     private lateinit var centralButton: CircularMainItem
     private lateinit var menuButtons: List<CircularItem>
+    private lateinit var menuButtonAnimations: MutableList<CircularItemAnimationConfig>
 
     fun setMenu(config: CircularMenuConfig) {
         centralButton = configureCentralButton(config)
@@ -49,9 +53,11 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
     private fun configureMenuItems(centralButton: CircularMainItem, items: List<CircularItemConfig>) {
         var angle = 315 // start at 320 degrees
         val angleStep = (360 / items.size)
+        menuButtonAnimations = mutableListOf()
         menuButtons = items.map {
             val menuItem = drawMenuItem(it, angle, centralButton)
             if (!isInEditMode) menuItem.visibility = INVISIBLE
+            menuButtonAnimations.add(CircularItemAnimationConfig(angle.toFloat(), (centralButton.width * 0.9).toInt()))
             angle += angleStep
             menuItem
         }
@@ -59,11 +65,12 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
         var buttonsRendered = 0
         menuButtons.forEach { _ ->
             viewTreeObserver.addOnGlobalLayoutListener {
-            buttonsRendered++
-            if (buttonsRendered == menuButtons.size) {
-                animateButtons()
+                buttonsRendered++
+                if (buttonsRendered == menuButtons.size) {
+                    animateButtons()
+                }
             }
-        } }
+        }
     }
 
     private fun drawMenuItem(config: CircularItemConfig, angle: Int, centralButton: CircularMainItem): CircularItem {
@@ -88,16 +95,36 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
             duration = 200
         }
 
-        val menuButtonsAnimation = menuButtons.mapIndexed { index, circularItem -> circularItem.animate().apply {
-            this.x(originalMenuAxis[index].first)
-            this.y(originalMenuAxis[index].second)
-            this.alpha(1f)
+        val firstMenuButton = menuButtons.first().animate().apply {
+            this.x(originalMenuAxis[0].first)
+            this.y(originalMenuAxis[0].second)
             interpolator = DecelerateInterpolator()
-            duration = 300 + (index * 300L)
-        } }
+            alpha(1f)
+            duration = 300
+        }
+
+        val menuAnimations = menuButtons.drop(1).mapIndexed { index, circularItem ->
+            val animatorValue = ValueAnimator.ofInt(menuButtonAnimations[index].angle.toInt(), menuButtonAnimations[index + 1].angle.toInt())
+            animatorValue.addUpdateListener {
+                val value = it.animatedValue as Int
+                val layoutParams = circularItem.layoutParams as LayoutParams
+                layoutParams.circleAngle = value.toFloat()
+                circularItem.layoutParams = layoutParams
+            }
+
+            animatorValue.doOnStart {
+                circularItem.visibility = VISIBLE
+            }
+
+            animatorValue.duration = 200
+            animatorValue.interpolator = LinearInterpolator()
+            animatorValue.startDelay = 300 + (index * 170L)
+            animatorValue
+        }
 
         centralButtonAnimation.start()
-        menuButtonsAnimation.forEach { it.start() }
+        firstMenuButton.start()
+        menuAnimations.forEach { it.start() }
     }
 
     private fun resetAnimationValues() {
@@ -108,11 +135,18 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
         centralButton.scaleY = 0.8f
         centralButton.visibility = VISIBLE
 
-        menuButtons.forEach {
-            it.alpha = 0f
-            it.x = centerX.toFloat()
-            it.y = centerY.toFloat()
-            it.visibility = VISIBLE
+        menuButtons.forEachIndexed { index, circularItem ->
+            if (index == 0) {
+                circularItem.alpha = 0f
+                circularItem.x = centerX.toFloat()
+                circularItem.y = centerY.toFloat()
+                circularItem.visibility = VISIBLE
+            } else {
+                val layoutParams = circularItem.layoutParams as LayoutParams
+                layoutParams.circleAngle = menuButtonAnimations[index - 1].angle
+                circularItem.layoutParams = layoutParams
+                circularItem.visibility = INVISIBLE
+            }
         }
     }
 }
