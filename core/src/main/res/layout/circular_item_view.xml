@@ -19,7 +19,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle_red_black_gradient"
+        android:background="@drawable/circle_sandstone_black_gradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,6 @@
         android:id="@+id/image"
         android:layout_width="@dimen/circular_image_size"
         android:layout_height="@dimen/circular_image_size"
-        android:scaleType="centerCrop"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
         app:layout_constraintTop_toBottomOf="@id/topGuideline" />
