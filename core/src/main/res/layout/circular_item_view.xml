@@ -38,7 +38,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="?regularText"
+        android:theme="?prominentRegularText"
         app:layout_constraintBottom_toTopOf="@id/bottomGuideline"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
@@ -51,28 +51,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/margin_small_plus" />
+        app:layout_constraintGuide_begin="@dimen/margin_1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/endGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/margin_small_plus" />
+        app:layout_constraintGuide_end="@dimen/margin_1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/topGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/margin_medium" />
+        app:layout_constraintGuide_begin="@dimen/margin_2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottomGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="@dimen/margin_small_plus" />
+        app:layout_constraintGuide_end="@dimen/margin_3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

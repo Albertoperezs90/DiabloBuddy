@@ -2,5 +2,6 @@
 <resources>
     <attr name="appTitleText" format="reference" />
     <attr name="subtitleText" format="reference" />
+    <attr name="prominentRegularText" format="reference" />
     <attr name="regularText" format="reference" />
 </resources>
