@@ -1,4 +1,4 @@
-package com.aperezsi.diablobuddy.container.data.response
+package com.aperezsi.diablobuddy.module.container.data.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

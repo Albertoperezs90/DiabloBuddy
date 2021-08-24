@@ -1,4 +1,4 @@
-package com.aperezsi.diablobuddy.container.data
+package com.aperezsi.diablobuddy.module.container.data
 
 import com.aperezsi.core.utilities.time.TimeProvider
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences

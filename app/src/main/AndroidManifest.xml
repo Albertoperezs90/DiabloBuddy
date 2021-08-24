@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DiabloBuddy">
         <activity
-            android:name="com.aperezsi.diablobuddy.container.presentation.ContainerActivity"
+            android:name=".module.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/AppThemeDefault">
             <intent-filter>

@@ -4,7 +4,7 @@ import android.app.Application
 import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.interfaces.tracker.EventTracker
-import com.aperezsi.diablobuddy.container.di.ContainerComponent
+import com.aperezsi.diablobuddy.module.di.AppModuleComponent
 import com.aperezsi.diablobuddy.shared.di.data.NetworkModule
 import com.aperezsi.diablobuddy.shared.di.logger.LoggerModule
 import com.aperezsi.diablobuddy.shared.di.tracker.TrackerModule
@@ -20,7 +20,7 @@ import javax.inject.Named
 )
 interface AppComponent {
 
-    val containerComponentFactory: ContainerComponent.Factory
+    val appModuleComponent: AppModuleComponent.Factory
 
     val sessionPreferences: SessionPreferences
     val logger: Logger
@@ -31,6 +31,7 @@ interface AppComponent {
 
     @Component.Factory
     interface Factory {
+
         fun create(coreComponent: CoreComponent, @BindsInstance application: Application): AppComponent
     }
 }

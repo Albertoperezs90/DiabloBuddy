@@ -1,11 +1,11 @@
-package com.aperezsi.diablobuddy.container.presentation
+package com.aperezsi.diablobuddy.module.container.presentation
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.aperezsi.core.framework.base.BaseActivity
 import com.aperezsi.core.framework.provideViewModel
 import com.aperezsi.diablobuddy.R
-import com.aperezsi.diablobuddy.container.inject
+import com.aperezsi.diablobuddy.module.di.inject
 import com.aperezsi.diablobuddy.databinding.ActivityContainerBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

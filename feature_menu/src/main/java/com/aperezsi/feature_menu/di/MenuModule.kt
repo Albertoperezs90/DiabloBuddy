@@ -8,7 +8,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
-@Module(includes = [ViewModelFactoryModule::class, DataModule::class])
+@Module(includes = [ViewModelFactoryModule::class])
 abstract class MenuModule {
 
     @Binds

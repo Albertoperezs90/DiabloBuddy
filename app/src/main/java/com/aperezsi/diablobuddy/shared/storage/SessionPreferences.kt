@@ -12,9 +12,11 @@ class SessionPreferences @Inject constructor(
 ) {
 
     companion object {
+
         private const val ACCESS_TOKEN = "ACCESS_TOKEN"
         private const val ACCESS_TOKEN_EXPIRES = "ACCESS_TOKEN_EXPIRES"
         private const val LAST_TIME_AUTHENTICATED = "LAST_TIME_AUTHENTICATED"
+        private const val SEASON_INDEX = "SEASON_INDEX"
     }
 
     fun storeAccessToken(accessToken: String) {
@@ -38,5 +40,13 @@ class SessionPreferences @Inject constructor(
         val timePassed = currentTime - lastTimeAuthenticated
 
         return timeValidator.isTimeShorterThan((tokenExpiresMax - timePassed).toInt(), minutes)
+    }
+
+    fun setSeasonIndex(index: Int) {
+        sharedPreferences.edit().putInt(SEASON_INDEX, index).apply()
+    }
+
+    fun getSeasonIndex(): Int {
+        return sharedPreferences.getInt(SEASON_INDEX, 0)
     }
 }

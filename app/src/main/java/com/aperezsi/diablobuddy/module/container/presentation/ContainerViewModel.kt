@@ -1,9 +1,9 @@
-package com.aperezsi.diablobuddy.container.presentation
+package com.aperezsi.diablobuddy.module.container.presentation
 
 import androidx.lifecycle.viewModelScope
 import com.aperezsi.core.framework.base.BaseViewModel
 import com.aperezsi.core.utilities.time.TimeValidator
-import com.aperezsi.diablobuddy.container.data.AuthRepository
+import com.aperezsi.diablobuddy.module.container.data.AuthRepository
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
