@@ -41,8 +41,8 @@ android {
     productFlavors {
         create(AppConfig.Dimension.production) {
             dimension = AppConfig.dimension
-            buildConfigField("String", "CLIENT_USERNAME", System.getenv("CLIENT_USERNAME").orEmpty())
-            buildConfigField("String", "CLIENT_PASSWORD", System.getenv("CLIENT_PASSWORD").orEmpty())
+            buildConfigField("String", "CLIENT_USERNAME", "\"${System.getenv("CLIENT_USERNAME")}\"")
+            buildConfigField("String", "CLIENT_PASSWORD", "\"${System.getenv("CLIENT_PASSWORD")}\"")
 
             firebaseAppDistribution {
                 releaseNotes = "QA version to test with official API"
