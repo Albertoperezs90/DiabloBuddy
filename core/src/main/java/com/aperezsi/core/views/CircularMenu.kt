@@ -1,148 +1,154 @@
 package com.aperezsi.core.views
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.widget.FrameLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
+import androidx.annotation.DrawableRes
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.ConstraintSet.BOTTOM
+import androidx.constraintlayout.widget.ConstraintSet.END
+import androidx.constraintlayout.widget.ConstraintSet.START
+import androidx.constraintlayout.widget.ConstraintSet.TOP
+import androidx.core.animation.doOnStart
 
-class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0) : FrameLayout(context, attributeSet, defStyleRes) {
+@Suppress("MagicNumber")
+class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null, defStyleRes: Int = 0): ConstraintLayout(context, attributeSet, defStyleRes) {
 
-    private val circleCoordsHandler = CircleCoordsHandler()
-
-    private var rootHasBeenRendered = false
-    private var mainButtonHasBeenRendered = false
     private var menuButtonsHaveBeenRendered = false
+    private lateinit var centralButton: CircularMainItem
+    private lateinit var menuButtons: List<CircularItem>
+    private lateinit var menuButtonAnimations: MutableList<CircularItemAnimationConfig>
 
-    private lateinit var mainButton: FloatingActionButton
-    private var menuItems: List<String> = emptyList()
-    private var menuButtons: MutableList<CircularItem> = mutableListOf()
-
-    private var mainButtonHeight = 0
-    private var mainButtonWidth = 0
-    private var mainButtonX = 0f
-    private var mainButtonY = 0f
-
-    private val initialVisibility = if (isInEditMode) VISIBLE else INVISIBLE
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        if (!rootHasBeenRendered) {
-            rootHasBeenRendered = true
-            configureCentralButton()
-        }
-    }
-
-    fun setMenu(items: List<String>) {
-        menuItems = items
-        if (menuButtonsHaveBeenRendered) {
-            resetDraw()
-        }
-    }
-
-    private fun configureCentralButton() {
-        mainButton = FloatingActionButton(context)
-        mainButton.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        mainButton.visibility = initialVisibility
-
-        mainButton.viewTreeObserver.addOnGlobalLayoutListener {
-            if (!mainButtonHasBeenRendered) {
-                mainButtonHasBeenRendered = true
-                mainButtonHeight = mainButton.height * 2
-                mainButtonWidth = mainButton.width * 2
-                mainButtonX = (measuredWidth / 2 - mainButton.width).toFloat()
-                mainButtonY = (measuredHeight / 2 - mainButton.height).toFloat()
-                val newLayoutParams = mainButton.layoutParams.apply {
-                    height = mainButtonHeight
-                    width = mainButtonWidth
-                }
-                mainButton.layoutParams = newLayoutParams
-                mainButton.x = mainButtonX
-                mainButton.y = mainButtonY
-            } else if (!menuButtonsHaveBeenRendered) {
+    fun setMenu(config: CircularMenuConfig) {
+        centralButton = configureCentralButton(config)
+        if (!isInEditMode) centralButton.visibility = INVISIBLE
+        centralButton.viewTreeObserver.addOnGlobalLayoutListener {
+            if (!menuButtonsHaveBeenRendered) {
                 menuButtonsHaveBeenRendered = true
-                drawMenu()
+                configureMenuItems(centralButton, config.circularItems)
             }
         }
-
-        addView(mainButton)
     }
 
-    private fun resetDraw() {
-        rootHasBeenRendered = false
-        mainButtonHasBeenRendered = false
-        menuButtonsHaveBeenRendered = false
-        menuButtons.clear()
-        removeAllViews()
+    private fun configureCentralButton(config: CircularMenuConfig): CircularMainItem {
+        val centralMenuItem = CircularMainItem(context)
+        centralMenuItem.setImage(config)
+        centralMenuItem.id = generateViewId()
+        centralMenuItem.elevation = 9f
+        addView(centralMenuItem)
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(this)
+        constraintSet.connect(centralMenuItem.id, TOP, id, TOP)
+        constraintSet.connect(centralMenuItem.id, START, id, START)
+        constraintSet.connect(centralMenuItem.id, END, id, END)
+        constraintSet.connect(centralMenuItem.id, BOTTOM, id, BOTTOM)
+        constraintSet.applyTo(this)
+        return centralMenuItem
     }
 
-    private fun drawMenu() {
-        if (menuItems.isEmpty()) return
-
-        val angleStep = 360 / menuItems.size
-        var angle = 0
-        menuItems.forEach {
-            val axisCoord = circleCoordsHandler.calculateAxis(angle, mainButtonHeight, mainButtonX, mainButtonY)
+    private fun configureMenuItems(centralButton: CircularMainItem, items: List<CircularItemConfig>) {
+        var angle = 315 // start at 320 degrees
+        val angleStep = (360 / items.size)
+        menuButtonAnimations = mutableListOf()
+        menuButtons = items.map {
+            val menuItem = drawMenuItem(it, angle, centralButton)
+            if (!isInEditMode) menuItem.visibility = INVISIBLE
+            menuButtonAnimations.add(CircularItemAnimationConfig(angle.toFloat(), (centralButton.width * 0.9).toInt()))
             angle += angleStep
-            drawMenuItem(it, axisCoord)
+            menuItem
         }
 
-        animateButtons()
-    }
-
-    private fun drawMenuItem(it: String, axisCoord: AxisCoords) {
-        var menuButtonHasBeenRendered = false
-        val menuButton = CircularItem(context)
-        menuButton.visibility = initialVisibility
-        menuButton.setText(it)
-
-        menuButton.viewTreeObserver.addOnGlobalLayoutListener {
-            if (!menuButtonHasBeenRendered) {
-                menuButtonHasBeenRendered = true
-                menuButton.configureCoords(axisCoord)
+        var buttonsRendered = 0
+        menuButtons.forEach { _ ->
+            viewTreeObserver.addOnGlobalLayoutListener {
+                buttonsRendered++
+                if (buttonsRendered == menuButtons.size) {
+                    animateButtons()
+                }
             }
         }
-        menuButtons.add(menuButton)
-        addView(menuButton)
+    }
+
+    private fun drawMenuItem(config: CircularItemConfig, angle: Int, centralButton: CircularMainItem): CircularItem {
+        val menuItem = CircularItem(context)
+        menuItem.id = generateViewId()
+        menuItem.setConfig(config)
+        addView(menuItem)
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(this)
+        constraintSet.constrainCircle(menuItem.id, centralButton.id, (centralButton.width * 0.9).toInt(), angle.toFloat())
+        constraintSet.applyTo(this)
+        return menuItem
     }
 
     private fun animateButtons() {
+        val originalMenuAxis = menuButtons.map { it.x to it.y }
         resetAnimationValues()
-        val mainButtonAnimator = mainButton.animate()
-        mainButtonAnimator.apply {
-            alpha(1f)
+        val centralButtonAnimation = centralButton.animate().apply {
             scaleX(1f)
             scaleY(1f)
             interpolator = AccelerateDecelerateInterpolator()
             duration = 200
         }
 
-        val menuButtonsAnimator = menuButtons.map { it.animate() }
-        menuButtonsAnimator.forEachIndexed { index, animator ->
-            animator.alpha(1f)
-            animator.scaleX(1f)
-            animator.scaleY(1f)
-            animator.interpolator = AccelerateDecelerateInterpolator()
-            animator.duration = 300 + (index * 700L)
+        val firstMenuButton = menuButtons.first().animate().apply {
+            this.x(originalMenuAxis[0].first)
+            this.y(originalMenuAxis[0].second)
+            interpolator = DecelerateInterpolator()
+            alpha(1f)
+            duration = 300
         }
 
-        mainButton.visibility = VISIBLE
-        mainButtonAnimator.start()
-        menuButtonsAnimator.forEachIndexed { index, animator ->
-            menuButtons[index].visibility = VISIBLE
-            animator.start()
+        val menuAnimations = menuButtons.drop(1).mapIndexed { index, circularItem ->
+            val animatorValue = ValueAnimator.ofInt(menuButtonAnimations[index].angle.toInt(), menuButtonAnimations[index + 1].angle.toInt())
+            animatorValue.addUpdateListener {
+                val value = it.animatedValue as Int
+                val layoutParams = circularItem.layoutParams as LayoutParams
+                layoutParams.circleAngle = value.toFloat()
+                circularItem.layoutParams = layoutParams
+            }
+
+            animatorValue.doOnStart {
+                circularItem.visibility = VISIBLE
+            }
+
+            animatorValue.duration = 200
+            animatorValue.interpolator = LinearInterpolator()
+            animatorValue.startDelay = 300 + (index * 170L)
+            animatorValue
         }
+
+        centralButtonAnimation.start()
+        firstMenuButton.start()
+        menuAnimations.forEach { it.start() }
     }
 
     private fun resetAnimationValues() {
-        mainButton.alpha = 0.3f
-        mainButton.scaleX = 0.7f
-        mainButton.scaleY = 0.7f
+        val centerX = (width / 2) - (menuButtons.first().width / 2)
+        val centerY = height / 2 - (menuButtons.first().height / 2)
 
-        menuButtons.forEach {
-            it.alpha = 0.3f
-            it.scaleX = 0.3f
-            it.scaleY = 0.3f
+        centralButton.scaleX = 0.8f
+        centralButton.scaleY = 0.8f
+        centralButton.visibility = VISIBLE
+
+        menuButtons.forEachIndexed { index, circularItem ->
+            if (index == 0) {
+                circularItem.alpha = 0f
+                circularItem.x = centerX.toFloat()
+                circularItem.y = centerY.toFloat()
+                circularItem.visibility = VISIBLE
+            } else {
+                val layoutParams = circularItem.layoutParams as LayoutParams
+                layoutParams.circleAngle = menuButtonAnimations[index - 1].angle
+                circularItem.layoutParams = layoutParams
+                circularItem.visibility = INVISIBLE
+            }
         }
     }
 }
+
+data class CircularMenuConfig(@DrawableRes val centralButton: Int, val circularItems: List<CircularItemConfig>)

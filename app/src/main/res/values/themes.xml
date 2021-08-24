@@ -13,5 +13,7 @@
     <style name="AppThemeDefault" parent="Theme.DiabloBuddy">
         <item name="appTitleText">@style/appTitleText_default</item>
         <item name="subtitleText">@style/subtitleText_default</item>
+        <item name="prominentRegularText">@style/prominentRegularText_default</item>
+        <item name="regularText">@style/regularText_default</item>
     </style>
 </resources>

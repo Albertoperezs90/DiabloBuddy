@@ -2,15 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium_plus"
-        android:layout_marginTop="@dimen/margin_medium_plus"
-        android:layout_marginEnd="@dimen/margin_medium_plus"
+        android:layout_marginStart="@dimen/margin_2.5"
+        android:layout_marginTop="@dimen/margin_2.5"
+        android:layout_marginEnd="@dimen/margin_2.5"
         android:text="@string/menu_title"
         android:theme="?appTitleText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,11 +33,34 @@
         android:id="@+id/seasonTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_2"
+        android:layout_marginBottom="@dimen/margin_2"
         android:text="@string/season_menu"
         android:theme="?subtitleText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/regionCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_2"
+        android:layout_marginBottom="@dimen/margin_1"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="@dimen/region_flag_corner_radius"
+        app:contentPadding="@dimen/margin_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/margin_0.25">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/region_flag_size"
+            android:layout_height="@dimen/region_flag_size"
+            android:src="@drawable/ic_flag_euro" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

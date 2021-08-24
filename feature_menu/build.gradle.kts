@@ -16,9 +16,6 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), AppConfig.proguardRules
-            )
         }
     }
 
@@ -48,8 +45,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":app"))
-    implementation(project(":core"))
+    implementation(project(ModuleConfig.app))
+    implementation(project(ModuleConfig.core))
 
     kapt(Dependencies.moshiCodegen)
     kapt(Dependencies.daggerKapt)

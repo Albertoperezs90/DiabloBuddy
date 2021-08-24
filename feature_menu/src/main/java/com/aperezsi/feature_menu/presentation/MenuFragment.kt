@@ -18,8 +18,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
         collect(viewModel.currentSeason) {
             binding.seasonTextView.text = getString(R.string.season_menu, it.toString())
         }
-        collect(viewModel.menuItems) {
-            binding.circularMenu.setMenu(it)
+        collect(viewModel.menuConfig) {
+            if (it != null) binding.circularMenu.setMenu(it)
         }
     }
 
