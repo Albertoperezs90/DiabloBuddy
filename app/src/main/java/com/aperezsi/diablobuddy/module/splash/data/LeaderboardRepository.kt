@@ -6,5 +6,4 @@ import javax.inject.Inject
 class LeaderboardRepository @Inject constructor(private val leaderboardApi: LeaderboardApi) {
 
     suspend fun getSeasonIndex() = leaderboardApi.getSeasonIndex().currentSeason
-
 }
