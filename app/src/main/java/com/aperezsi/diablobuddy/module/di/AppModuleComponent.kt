@@ -3,10 +3,11 @@ package com.aperezsi.diablobuddy.module.di
 import com.aperezsi.core.framework.base.BaseActivity
 import com.aperezsi.diablobuddy.module.container.presentation.ContainerActivity
 import com.aperezsi.diablobuddy.module.splash.presentation.SplashActivity
+import com.aperezsi.diablobuddy.shared.di.navigator.NavigatorModule
 import dagger.BindsInstance
 import dagger.Subcomponent
 
-@Subcomponent(modules = [ViewModelModule::class, ApiModule::class])
+@Subcomponent(modules = [ViewModelModule::class, ApiModule::class, NavigatorModule::class])
 interface AppModuleComponent {
 
     fun inject(splashActivity: SplashActivity)

@@ -6,6 +6,7 @@ import okhttp3.Response
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
+@Suppress("VariableNaming")
 class LoggingInterceptor @Inject constructor(private val logger: Logger): Interceptor {
 
     private val NETWORK_CALL = "NETWORK_CALL"

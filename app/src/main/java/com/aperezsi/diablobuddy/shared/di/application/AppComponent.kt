@@ -5,8 +5,8 @@ import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.interfaces.tracker.EventTracker
 import com.aperezsi.diablobuddy.module.di.AppModuleComponent
-import com.aperezsi.diablobuddy.shared.di.network.NetworkModule
 import com.aperezsi.diablobuddy.shared.di.logger.LoggerModule
+import com.aperezsi.diablobuddy.shared.di.network.NetworkModule
 import com.aperezsi.diablobuddy.shared.di.tracker.TrackerModule
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import dagger.BindsInstance

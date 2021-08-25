@@ -2,30 +2,39 @@ package com.aperezsi.diablobuddy.module.splash.presentation
 
 import com.aperezsi.core.framework.base.BaseViewModel
 import com.aperezsi.core.interfaces.logger.Logger
-import com.aperezsi.core.utilities.coroutines.then
+import com.aperezsi.core.utilities.coroutines.onSuccessCompletion
+import com.aperezsi.core.utilities.time.TimeValidator
+import com.aperezsi.diablobuddy.module.container.presentation.ContainerActivity
 import com.aperezsi.diablobuddy.module.splash.domain.DoLoginUseCase
 import com.aperezsi.diablobuddy.module.splash.domain.GetCurrentSeasonUseCase
 import com.aperezsi.diablobuddy.module.splash.presentation.state.SplashEvent
 import com.aperezsi.diablobuddy.module.splash.presentation.state.SplashViewState
+import com.aperezsi.diablobuddy.shared.navigator.Navigator
+import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(
     logger: Logger,
+    private val sessionPreferences: SessionPreferences,
+    private val navigator: Navigator,
     private val doLoginUseCase: DoLoginUseCase,
     private val getCurrentSeasonUseCase: GetCurrentSeasonUseCase
 ): BaseViewModel<SplashViewState, SplashEvent>(logger) {
 
     override fun onEvent(event: SplashEvent) {
         when (event) {
-            is SplashEvent.Initialize -> launchUseCases()
+            is SplashEvent.Initialize -> setUpAppConfig()
         }
     }
 
-    private fun launchUseCases() {
+    private fun setUpAppConfig() {
         launchWithHandler {
-            doLoginUseCase()
-                .then { getCurrentSeasonUseCase() }
-                .then { updateViewState(SplashViewState.Navigate) }
+            if (sessionPreferences.tokenExpiresOnLessThan(TimeValidator.MINUTES_5)) {
+                doLoginUseCase().onSuccessCompletion { getCurrentSeasonUseCase() }.collect { navigator.navigate(ContainerActivity::class.java, true) }
+            } else {
+                getCurrentSeasonUseCase().collect { navigator.navigate(ContainerActivity::class.java, true) }
+            }
         }
     }
 }

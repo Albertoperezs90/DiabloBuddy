@@ -6,10 +6,11 @@ import com.aperezsi.feature_menu.presentation.MenuFragment
 import dagger.Component
 
 @Component(modules = [MenuModule::class], dependencies = [AppComponent::class])
-interface MenuComponent : BaseFragmentComponent<MenuFragment> {
+interface MenuComponent: BaseFragmentComponent<MenuFragment> {
 
     @Component.Factory
     interface Factory {
+
         fun create(appComponent: AppComponent): MenuComponent
     }
 }

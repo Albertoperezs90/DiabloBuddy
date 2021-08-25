@@ -1,22 +1,25 @@
 package com.aperezsi.diablobuddy.module.splash.domain
 
-import com.aperezsi.core.usecase.UseCase
 import com.aperezsi.core.utilities.coroutines.DispatcherProvider
 import com.aperezsi.core.utilities.time.TimeProvider
 import com.aperezsi.diablobuddy.module.splash.data.repository.AuthRepository
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DoLoginUseCase @Inject constructor(
     private val authRepository: AuthRepository,
     private val sessionPreferences: SessionPreferences,
     private val timeProvider: TimeProvider
-): UseCase<Unit, Unit>() {
+) {
 
-    override suspend fun invoke(params: Unit?) = withContext(DispatcherProvider.io()) {
-        val response = authRepository.authenticate()
-        sessionPreferences.storeAccessToken(response.accessToken)
-        sessionPreferences.storeAccessTokenExpires(response.expiresIn, timeProvider.getSeconds(timeProvider.getCurrentTime()))
-    }
+    suspend fun invoke(): Flow<Unit> =
+        authRepository.authenticate()
+            .flowOn(DispatcherProvider.io())
+            .map { loginData ->
+                sessionPreferences.storeAccessToken(loginData.accessToken)
+                sessionPreferences.storeAccessTokenExpires(loginData.expiresIn, timeProvider.getSeconds(timeProvider.getCurrentTime()))
+            }
 }
