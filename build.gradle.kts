@@ -69,6 +69,21 @@ tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt::class) {
     }
 }
 
+tasks.register("detektBaselineAll", io.gitlab.arturbosch.detekt.DetektCreateBaselineTask::class) {
+    val projectSource = file(projectDir)
+    val configFile = files("$rootDir/config/detekt/detekt.yml")
+    val baselineFile = file("$rootDir/config/detekt/baseline.xml")
+
+    description = "Overrides current baseline file"
+    ignoreFailures.set(true)
+    parallel.set(true)
+    setSource(projectSource)
+    config.setFrom(configFile)
+    baseline.set(baselineFile)
+
+    include("**/*.kt")
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

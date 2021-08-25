@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ChainWrapping:com.aperezsi.diablobuddy.container.data.response.OauthResponseJsonAdapter.kt:43</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:59</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:61</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:63</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:65</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:67</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:69</ID>
+    <ID>ChainWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:84</ID>
+    <ID>ComplexMethod:OauthResponseJsonAdapter.kt$OauthResponseJsonAdapter$public override fun fromJson(reader: JsonReader): OauthResponse</ID>
+    <ID>ComplexMethod:SeasonIndexResponseJsonAdapter.kt$SeasonIndexResponseJsonAdapter$public override fun fromJson(reader: JsonReader): SeasonIndexResponse</ID>
+    <ID>MagicNumber:HrefApiJsonAdapter.kt$HrefApiJsonAdapter$29</ID>
+    <ID>MagicNumber:OauthResponseJsonAdapter.kt$OauthResponseJsonAdapter$3</ID>
+    <ID>MagicNumber:OauthResponseJsonAdapter.kt$OauthResponseJsonAdapter$35</ID>
+    <ID>MagicNumber:SeasonIndexResponseJsonAdapter.kt$SeasonIndexResponseJsonAdapter$3</ID>
+    <ID>MagicNumber:SeasonIndexResponseJsonAdapter.kt$SeasonIndexResponseJsonAdapter$4</ID>
+    <ID>MagicNumber:SeasonIndexResponseJsonAdapter.kt$SeasonIndexResponseJsonAdapter$41</ID>
+    <ID>MagicNumber:SeasonIndexResponseJsonAdapter.kt$SeasonIndexResponseJsonAdapter$5</ID>
+    <ID>MagicNumber:SeasonIndexResponseJsonAdapter.kt$SeasonIndexResponseJsonAdapter$6</ID>
+    <ID>MagicNumber:SelfUrlApiJsonAdapter.kt$SelfUrlApiJsonAdapter$32</ID>
+    <ID>NoUnitReturn:com.aperezsi.diablobuddy.container.data.response.OauthResponseJsonAdapter.kt:67</ID>
+    <ID>NoUnitReturn:com.aperezsi.feature_menu.data.model.HrefApiJsonAdapter.kt:51</ID>
+    <ID>NoUnitReturn:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:95</ID>
+    <ID>NoUnitReturn:com.aperezsi.feature_menu.data.model.SelfUrlApiJsonAdapter.kt:51</ID>
+    <ID>ParameterListWrapping:com.aperezsi.diablobuddy.container.data.response.OauthResponseJsonAdapter.kt:22</ID>
+    <ID>ParameterListWrapping:com.aperezsi.feature_menu.data.model.HrefApiJsonAdapter.kt:21</ID>
+    <ID>ParameterListWrapping:com.aperezsi.feature_menu.data.model.SeasonIndexResponseJsonAdapter.kt:24</ID>
+    <ID>ParameterListWrapping:com.aperezsi.feature_menu.data.model.SelfUrlApiJsonAdapter.kt:21</ID>
+    <ID>RethrowCaughtException:ErrorInterceptor.kt$ErrorInterceptor$throw networkException</ID>
+    <ID>UnnecessaryAbstractClass:UseCase.kt$UseCase&lt;PARAMS, RETURN&gt;</ID>
+    <ID>VariableNaming:LoggingInterceptor.kt$LoggingInterceptor$private val NETWORK_CALL = "NETWORK_CALL"</ID>
+  </CurrentIssues>
+</SmellBaseline>
