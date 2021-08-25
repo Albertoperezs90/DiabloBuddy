@@ -1,10 +1,13 @@
-package com.aperezsi.diablobuddy.shared.di.data
+package com.aperezsi.diablobuddy.shared.di.network
 
+import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.diablobuddy.BuildConfig
 import com.aperezsi.diablobuddy.shared.data.converter.ConverterFactoryProvider
 import com.aperezsi.diablobuddy.shared.data.converter.MoshiProvider
 import com.aperezsi.diablobuddy.shared.data.interceptor.ApiInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.AuthInterceptor
+import com.aperezsi.diablobuddy.shared.data.interceptor.ErrorInterceptor
+import com.aperezsi.diablobuddy.shared.data.interceptor.LoggingInterceptor
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import dagger.Module
 import dagger.Provides
@@ -27,6 +30,18 @@ class NetworkModule {
         return MoshiProvider()
     }
 
+    @Named("logging")
+    @Provides
+    fun provideLoggerInterceptor(logger: Logger): Interceptor {
+        return LoggingInterceptor(logger)
+    }
+
+    @Named("error")
+    @Provides
+    fun provideErrorInterceptor(): Interceptor {
+        return ErrorInterceptor()
+    }
+
     @Named("auth")
     @Provides
     fun provideAuthInterceptor(): Interceptor {
@@ -41,14 +56,14 @@ class NetworkModule {
 
     @Named("authClient")
     @Provides
-    fun provideAuthClient(@Named("auth") authInterceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(authInterceptor).build()
+    fun provideAuthClient(@Named("auth") authInterceptor: Interceptor, @Named("logging") loggingInterceptor: Interceptor, @Named("error") errorInterceptor: Interceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(authInterceptor).addInterceptor(loggingInterceptor).addInterceptor(errorInterceptor).build()
     }
 
     @Named("apiClient")
     @Provides
-    fun provideApiClient(@Named("api") apiInterceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(apiInterceptor).build()
+    fun provideApiClient(@Named("api") apiInterceptor: Interceptor, @Named("logging") loggingInterceptor: Interceptor, @Named("error") errorInterceptor: Interceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(apiInterceptor).addInterceptor(loggingInterceptor).addInterceptor(errorInterceptor).build()
     }
 
     @Named("api")

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.aperezsi.core.di.presentation.viewmodel.ViewModelFactoryModule
 import com.aperezsi.core.di.presentation.viewmodel.ViewModelKey
 import com.aperezsi.diablobuddy.module.container.presentation.ContainerViewModel
-import com.aperezsi.diablobuddy.module.splash.SplashViewModel
+import com.aperezsi.diablobuddy.module.splash.presentation.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

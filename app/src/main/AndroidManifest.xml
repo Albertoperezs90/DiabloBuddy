@@ -19,14 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DiabloBuddy">
         <activity
-            android:name=".module.splash.SplashActivity"
+            android:name=".module.splash.presentation.SplashActivity"
             android:exported="true"
-            android:theme="@style/AppThemeDefault">
+            android:theme="@style/SplashThemeDefault">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".module.container.presentation.ContainerActivity"
+            android:theme="@style/AppThemeDefault" />
     </application>
 
 </manifest>

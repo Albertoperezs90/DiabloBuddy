@@ -1,6 +1,6 @@
 package com.aperezsi.feature_menu.di
 
-import com.aperezsi.feature_menu.data.LeaderboardApi
+import com.aperezsi.diablobuddy.module.splash.data.api.LeaderboardApi
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

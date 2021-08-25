@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.aperezsi.core.state.Renderable
+import com.aperezsi.core.state.ViewState
+import com.aperezsi.core.utilities.coroutines.DispatcherProvider
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragment<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewState>: Fragment(), Renderable<VS> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,7 +33,14 @@ abstract class BaseFragment<V : ViewBinding, VM : ViewModel> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView()
+        initializeViewState()
         initialize()
+    }
+
+    private fun initializeViewState() {
+        lifecycleScope.launch(DispatcherProvider.main()) {
+            viewModel.viewState.collect { render(it) }
+        }
     }
 
     abstract fun inflate(): V

@@ -1,6 +1,6 @@
-package com.aperezsi.diablobuddy.module.container.data
+package com.aperezsi.diablobuddy.module.splash.data.api
 
-import com.aperezsi.diablobuddy.module.container.data.response.OauthResponse
+import com.aperezsi.diablobuddy.module.splash.data.model.OauthResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

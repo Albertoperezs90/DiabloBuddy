@@ -1,11 +1,13 @@
 object Dependencies {
     // Kotlin
-    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
-    const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:1.3.72"
+    private const val kotlinVersion = "1.5.21"
+    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    const val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 
     // Injection
-    const val dagger = "com.google.dagger:dagger:2.35"
-    const val daggerKapt = "com.google.dagger:dagger-compiler:2.35"
+    private const val daggerVersion = "2.35"
+    const val dagger = "com.google.dagger:dagger:${daggerVersion}"
+    const val daggerKapt = "com.google.dagger:dagger-compiler:${daggerVersion}"
 
     // Android
     private const val lifecyleVersion = "2.3.1"
@@ -16,7 +18,7 @@ object Dependencies {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val material = "com.google.android.material:material:1.3.0"
 
-    // Language
+    // Parser
     private const val moshiVersion = "1.12.0"
     const val moshi = "com.squareup.moshi:moshi:$moshiVersion"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
@@ -38,7 +40,6 @@ object Dependencies {
     const val firebaseCrashlytics = "com.google.firebase:firebase-crashlytics-ktx"
 
     // Testing
-
     const val junit = "junit:junit:4.12"
     const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:3.1.0"
     const val robolectric = "org.robolectric:robolectric:4.4"

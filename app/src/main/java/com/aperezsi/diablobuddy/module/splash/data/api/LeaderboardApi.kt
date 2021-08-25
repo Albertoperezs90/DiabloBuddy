@@ -1,4 +1,4 @@
-package com.aperezsi.feature_menu.data
+package com.aperezsi.diablobuddy.module.splash.data.api
 
 import com.aperezsi.feature_menu.data.model.SeasonIndexResponse
 import retrofit2.http.GET

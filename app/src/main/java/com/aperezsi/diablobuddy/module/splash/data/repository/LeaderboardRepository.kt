@@ -1,6 +1,6 @@
-package com.aperezsi.diablobuddy.module.splash.data
+package com.aperezsi.diablobuddy.module.splash.data.repository
 
-import com.aperezsi.feature_menu.data.LeaderboardApi
+import com.aperezsi.diablobuddy.module.splash.data.api.LeaderboardApi
 import javax.inject.Inject
 
 class LeaderboardRepository @Inject constructor(private val leaderboardApi: LeaderboardApi) {

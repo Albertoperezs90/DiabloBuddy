@@ -1,15 +1,22 @@
 package com.aperezsi.feature_menu.presentation
 
+import androidx.lifecycle.viewModelScope
 import com.aperezsi.core.framework.base.BaseViewModel
+import com.aperezsi.core.interfaces.logger.Logger
+import com.aperezsi.core.utilities.coroutines.DispatcherProvider
 import com.aperezsi.core.views.CircularItemConfig
 import com.aperezsi.core.views.CircularMenuConfig
+import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import com.aperezsi.feature_menu.R
+import com.aperezsi.feature_menu.presentation.state.MenuEvent
+import com.aperezsi.feature_menu.presentation.state.MenuViewState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MenuViewModel @Inject constructor(): BaseViewModel() {
+class MenuViewModel @Inject constructor(logger: Logger, private val sessionPreferences: SessionPreferences): BaseViewModel<MenuViewState, MenuEvent>(logger) {
 
-    val currentSeason = MutableStateFlow(0)
+    val currentSeason = MutableStateFlow(sessionPreferences.getSeasonIndex())
     val menuConfig: MutableStateFlow<CircularMenuConfig?> = MutableStateFlow(null)
 
     fun initialize() {
@@ -21,5 +28,9 @@ class MenuViewModel @Inject constructor(): BaseViewModel() {
                 CircularItemConfig(R.drawable.ic_follower, R.string.follower)
             )
         )
+    }
+
+    override fun onEvent(event: MenuEvent) {
+        // Do nothing
     }
 }

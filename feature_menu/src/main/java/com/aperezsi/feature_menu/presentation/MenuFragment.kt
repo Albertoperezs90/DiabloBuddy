@@ -6,8 +6,9 @@ import com.aperezsi.core.framework.provideViewModel
 import com.aperezsi.feature_menu.R
 import com.aperezsi.feature_menu.databinding.FragmentMenuBinding
 import com.aperezsi.feature_menu.inject
+import com.aperezsi.feature_menu.presentation.state.MenuViewState
 
-class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
+class MenuFragment: BaseFragment<FragmentMenuBinding, MenuViewModel, MenuViewState>() {
 
     override val viewModel: MenuViewModel by lazy { provideViewModel(MenuViewModel::class) }
 
@@ -25,5 +26,9 @@ class MenuFragment : BaseFragment<FragmentMenuBinding, MenuViewModel>() {
 
     override fun initialize() {
         viewModel.initialize()
+    }
+
+    override fun render(viewState: MenuViewState) {
+        // Do nothing
     }
 }

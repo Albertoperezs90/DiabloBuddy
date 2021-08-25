@@ -2,12 +2,17 @@ package com.aperezsi.core.framework.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.aperezsi.core.state.Renderable
+import com.aperezsi.core.state.ViewState
+import com.aperezsi.core.utilities.coroutines.DispatcherProvider
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-abstract class BaseActivity<V : ViewBinding, VM : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewState>: AppCompatActivity(), Renderable<VS> {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -22,7 +27,14 @@ abstract class BaseActivity<V : ViewBinding, VM : ViewModel> : AppCompatActivity
         binding = inflate()
         setContentView(binding.root)
         setUpView()
+        initializeViewState()
         initialize()
+    }
+
+    private fun initializeViewState() {
+        lifecycleScope.launch(DispatcherProvider.main()) {
+            viewModel.viewState.collect { render(it) }
+        }
     }
 
     abstract fun inflate(): V

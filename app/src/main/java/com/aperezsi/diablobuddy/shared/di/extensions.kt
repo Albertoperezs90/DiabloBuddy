@@ -5,10 +5,10 @@ import com.aperezsi.core.framework.base.BaseFragment
 import com.aperezsi.diablobuddy.DiabloBuddyApplication
 import com.aperezsi.diablobuddy.shared.di.application.AppComponent
 
-fun BaseActivity<*, *>.appComponent(): AppComponent {
+fun BaseActivity<*, *, *>.appComponent(): AppComponent {
     return (applicationContext as DiabloBuddyApplication).appComponent
 }
 
-fun BaseFragment<*, *>.appComponent(): AppComponent {
+fun BaseFragment<*, *, *>.appComponent(): AppComponent {
     return (context!!.applicationContext as DiabloBuddyApplication).appComponent
 }
