@@ -13,5 +13,4 @@ data class OauthResponse(
 ) {
 
     fun toDomain() = LoginData(accessToken, expiresIn)
-
 }

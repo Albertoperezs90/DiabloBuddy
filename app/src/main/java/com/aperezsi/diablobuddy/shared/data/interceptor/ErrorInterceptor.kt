@@ -4,6 +4,7 @@ import com.aperezsi.core.exception.NetworkException
 import com.aperezsi.core.exception.UnknownException
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.IOException
 import javax.inject.Inject
 
 class ErrorInterceptor @Inject constructor(): Interceptor {
@@ -18,7 +19,7 @@ class ErrorInterceptor @Inject constructor(): Interceptor {
             }
         } catch (networkException: NetworkException) {
             throw networkException
-        } catch (e: Exception) {
+        } catch (e: IOException) {
             throw UnknownException(e)
         }
     }

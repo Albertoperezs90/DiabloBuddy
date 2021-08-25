@@ -306,7 +306,7 @@ formatting:
     active: true
     autoCorrect: true
   NoMultipleSpaces:
-    active: true
+    active: false
     autoCorrect: true
   NoSemicolons:
     active: true
@@ -370,7 +370,7 @@ formatting:
     active: false
     autoCorrect: true
   StringTemplate:
-    active: true
+    active: false
     autoCorrect: true
 
 naming:
