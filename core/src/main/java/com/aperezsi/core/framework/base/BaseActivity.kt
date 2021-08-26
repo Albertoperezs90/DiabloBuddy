@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.aperezsi.core.state.Renderable
 import com.aperezsi.core.state.ViewState
-import com.aperezsi.core.utilities.coroutines.DispatcherProvider
+import com.aperezsi.core.utilities.coroutines.DispatcherProviderImpl
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,7 +32,7 @@ abstract class BaseActivity<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewSt
     }
 
     private fun initializeViewState() {
-        lifecycleScope.launch(DispatcherProvider.main()) {
+        lifecycleScope.launch(DispatcherProviderImpl().main) {
             viewModel.viewState.collect { render(it) }
         }
     }

@@ -6,14 +6,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.aperezsi.core.framework.base.BaseActivity
 import com.aperezsi.core.framework.base.BaseFragment
-import com.aperezsi.core.utilities.coroutines.DispatcherProvider
+import com.aperezsi.core.utilities.coroutines.DispatcherProviderImpl
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 fun <T> Fragment.collect(flow: StateFlow<T>, lambda: (T) -> Unit) {
-    lifecycleScope.launch(DispatcherProvider.main()) {
+    lifecycleScope.launch(DispatcherProviderImpl().main) {
         flow.collect { lambda(it) }
     }
 }

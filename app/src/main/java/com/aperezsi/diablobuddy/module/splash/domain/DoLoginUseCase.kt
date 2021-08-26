@@ -10,14 +10,15 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DoLoginUseCase @Inject constructor(
+    private val dispatcherProvider: DispatcherProvider,
     private val authRepository: AuthRepository,
     private val sessionPreferences: SessionPreferences,
     private val timeProvider: TimeProvider
 ) {
 
-    suspend fun invoke(): Flow<Unit> =
+    suspend operator fun invoke(): Flow<Unit> =
         authRepository.authenticate()
-            .flowOn(DispatcherProvider.io())
+            .flowOn(dispatcherProvider.io)
             .map { loginData ->
                 sessionPreferences.storeAccessToken(loginData.accessToken)
                 sessionPreferences.storeAccessTokenExpires(loginData.expiresIn, timeProvider.getSeconds(timeProvider.getCurrentTime()))

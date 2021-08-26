@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel<VS: ViewState, E: Event>(private val logger: Logger): ViewModel() {
+abstract class BaseViewModel<VS: ViewState, E: Event>(private val logger: Logger, private val dispatcherProvider: DispatcherProvider): ViewModel() {
 
     protected val jobs = mutableListOf<Job>()
 
@@ -24,13 +24,13 @@ abstract class BaseViewModel<VS: ViewState, E: Event>(private val logger: Logger
         get() = mutableViewState
 
     protected fun updateViewState(viewState: VS) {
-        viewModelScope.launch(DispatcherProvider.main()) {
+        viewModelScope.launch(dispatcherProvider.io) {
             mutableViewState.emit(viewState)
         }
     }
 
     protected fun <T> launchWithHandler(lambda: suspend () -> T): Job {
-        val job = viewModelScope.launch(DispatcherProvider.main() + errorHandler) { lambda() }
+        val job = viewModelScope.launch(dispatcherProvider.main + errorHandler) { lambda() }
         job.invokeOnCompletion { jobs.remove(job) }
         jobs.add(job)
         return job

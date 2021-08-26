@@ -9,14 +9,16 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetCurrentSeasonUseCase @Inject constructor(
+    private val dispatcherProvider: DispatcherProvider,
     private val leaderboardRepository: LeaderboardRepository,
     private val sessionPreferences: SessionPreferences
 ) {
 
-    suspend operator fun invoke(): Flow<Unit> =
+    suspend operator fun invoke(): Flow<Int> =
         leaderboardRepository.getSeasonIndex()
-            .flowOn(DispatcherProvider.io())
+            .flowOn(dispatcherProvider.io)
             .map {
                 sessionPreferences.setSeasonIndex(it)
+                it
             }
 }

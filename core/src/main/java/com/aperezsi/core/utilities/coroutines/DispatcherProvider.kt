@@ -1,10 +1,26 @@
 package com.aperezsi.core.utilities.coroutines
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 
-object DispatcherProvider {
+interface DispatcherProvider {
 
-    fun io() = Dispatchers.IO
-    fun main() = Dispatchers.Main
-    fun default() = Dispatchers.Default
+    val io: CoroutineDispatcher
+    val main: CoroutineDispatcher
+    val default: CoroutineDispatcher
+}
+
+class DispatcherProviderImpl @Inject constructor(): DispatcherProvider {
+
+    override val io = Dispatchers.IO
+    override val main = Dispatchers.Main
+    override val default = Dispatchers.Default
+}
+
+class DispatcherProviderFake @Inject constructor(): DispatcherProvider {
+
+    override val io = Dispatchers.Unconfined
+    override val main = Dispatchers.Unconfined
+    override val default = Dispatchers.Unconfined
 }

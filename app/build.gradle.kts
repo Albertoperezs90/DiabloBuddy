@@ -84,6 +84,7 @@ android {
 
 dependencies {
     implementation(project(ModuleConfig.core))
+    implementation(project(ModuleConfig.core_testing))
     implementation(Dependencies.playCore)
 
     api(Dependencies.retrofit)

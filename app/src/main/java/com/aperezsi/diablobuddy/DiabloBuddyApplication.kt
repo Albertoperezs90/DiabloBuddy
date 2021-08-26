@@ -6,7 +6,7 @@ import com.aperezsi.core.di.DaggerCoreComponent
 import com.aperezsi.diablobuddy.shared.di.application.AppComponent
 import com.aperezsi.diablobuddy.shared.di.application.DaggerAppComponent
 
-class DiabloBuddyApplication : Application() {
+open class DiabloBuddyApplication: Application() {
 
     private var _coreComponent: CoreComponent? = null
     val coreComponent: CoreComponent = _coreComponent ?: buildCoreComponent()
@@ -27,7 +27,7 @@ class DiabloBuddyApplication : Application() {
         return _appComponent!!
     }
 
-    private fun buildCoreComponent(): CoreComponent {
+    protected open fun buildCoreComponent(): CoreComponent {
         if (_coreComponent == null) {
             _coreComponent = DaggerCoreComponent.factory().create(this)
         }

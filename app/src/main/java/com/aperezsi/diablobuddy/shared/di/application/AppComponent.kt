@@ -4,6 +4,7 @@ import android.app.Application
 import com.aperezsi.core.di.CoreComponent
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.interfaces.tracker.EventTracker
+import com.aperezsi.core.utilities.coroutines.DispatcherProvider
 import com.aperezsi.diablobuddy.module.di.AppModuleComponent
 import com.aperezsi.diablobuddy.shared.di.logger.LoggerModule
 import com.aperezsi.diablobuddy.shared.di.network.NetworkModule
@@ -25,6 +26,7 @@ interface AppComponent {
     val sessionPreferences: SessionPreferences
     val logger: Logger
     val eventTracker: EventTracker
+    val dispatcherProvider: DispatcherProvider
 
     @get:Named("api")
     val retrofit: Retrofit
