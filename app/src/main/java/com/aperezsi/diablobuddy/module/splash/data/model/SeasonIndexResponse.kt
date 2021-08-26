@@ -1,4 +1,4 @@
-package com.aperezsi.feature_menu.data.model
+package com.aperezsi.diablobuddy.module.splash.data.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

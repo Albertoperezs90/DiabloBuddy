@@ -1,24 +1,30 @@
-apply(plugin = "jacoco")
-
 project.afterEvaluate {
     val kotlinClassesFolder = getKotlinClassesFolder() ?: return@afterEvaluate
     val jacocoExec = getJacocoExec() ?: return@afterEvaluate
+
     tasks.register("${project.name}JacocoTestReport", JacocoReport::class) {
         group = "coverage report"
         dependsOn("test")
+
+        jacocoClasspath = rootProject.configurations["jacocoAnt"]
 
         if (isAndroidModule(project)) {
             // dependsOn("createPlaygroundDebugCoverageReport")
         }
 
         reports {
+            xml.destination = file("${project.buildDir}/reports/jacoco/${project.name}JacocoTestReport/${project.name}JacocoTestReport.xml")
             xml.isEnabled = true
+            html.destination = file("${project.buildDir}/reports/jacoco/${project.name}JacocoTestReport/html/")
             html.isEnabled = true
         }
         val filterBuildFiles = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
         val filterDi = listOf("**/di/**")
         val filterBaseFiles = listOf("**/base/**")
-        val fileFilter = filterBuildFiles + filterDi + filterBaseFiles
+        val filterModels = listOf("**/**Response**")
+        val filterViews = listOf("**/views/**")
+        val filterNetwork = listOf("**/**Interceptor**")
+        val fileFilter = filterBuildFiles + filterDi + filterBaseFiles + filterModels + filterViews + filterNetwork
         val debugTree = fileTree(kotlinClassesFolder) { setExcludes(fileFilter) }
         val mainSrc = "${project.projectDir}/src/main/java"
 
