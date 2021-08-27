@@ -1,5 +1,3 @@
-import kotlin.script.experimental.jvm.util.classpathFromClasspathProperty
-
 apply(from = "jacocoFull.gradle.kts")
 apply(from = "config/version/version.gradle.kts")
 

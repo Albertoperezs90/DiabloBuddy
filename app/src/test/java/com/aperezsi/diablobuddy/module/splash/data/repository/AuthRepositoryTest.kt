@@ -13,6 +13,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import java.io.IOException
 
 class AuthRepositoryTest {
 
@@ -34,7 +35,7 @@ class AuthRepositoryTest {
 
     @Test
     fun `authenticate should return null if failed`() = runBlocking {
-        whenever(authApi.getToken(any())).thenAnswer { throw Exception() }
+        whenever(authApi.getToken(any())).thenAnswer { throw IOException() }
 
         var result: LoginData? = null
         authRepository.authenticate().catch { }.collect { result = it }
