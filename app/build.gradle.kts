@@ -1,3 +1,5 @@
+apply(plugin = "shot")
+
 plugins {
     id(GradlePlugin.androidApplication)
     id(GradlePlugin.kotlinAndroid)
@@ -17,7 +19,7 @@ android {
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
         multiDexEnabled = true
-        testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
         buildConfigField("String", "BASE_BATTLENET_URL", "\".battle.net\"")
         buildConfigField("String", "BASE_API_URL", "\".api.blizzard.com\"")
     }
@@ -77,9 +79,20 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    lintOptions {
+        isAbortOnError = false
+    }
+
     buildFeatures.viewBinding = true
 
     dynamicFeatures = ModuleConfig.getDynamicFeatureModules()
+
+    packagingOptions {
+        exclude("**/attach_hotspot_windows.dll")
+        exclude("META-INF/licenses/**")
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/LGPL2.1")
+    }
 }
 
 dependencies {
@@ -96,7 +109,7 @@ dependencies {
 
     testImplementation(Dependencies.junit)
     testImplementation(Dependencies.mockitoKotlin)
-    testImplementation(Dependencies.robolectric)
+    androidTestImplementation(Dependencies.robolectric)
     androidTestImplementation(Dependencies.extJUnit)
     androidTestImplementation(Dependencies.espressoCore)
 }

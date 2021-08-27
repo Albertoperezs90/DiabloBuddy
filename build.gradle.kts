@@ -22,6 +22,7 @@ buildscript {
         classpath("${BuildScriptPlugin.googleServices}:${BuildScriptPlugin.Versions.googleServices}")
         classpath("${BuildScriptPlugin.crashlytics}:${BuildScriptPlugin.Versions.crashlytics}")
         classpath("${BuildScriptPlugin.appDistribution}:${BuildScriptPlugin.Versions.appDistribution}")
+        classpath("com.karumi:shot:5.5.1")
     }
 }
 

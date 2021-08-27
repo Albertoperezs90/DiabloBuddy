@@ -1,3 +1,5 @@
+apply(plugin = "shot")
+
 plugins {
     id(GradlePlugin.androidLibrary)
     id(GradlePlugin.kotlinAndroid)
@@ -11,7 +13,8 @@ android {
         minSdkVersion(AppConfig.minSdk)
         targetSdkVersion(AppConfig.targetSdk)
 
-        testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        testApplicationId = "com.aperezsi.diablobuddy.test"
+        testInstrumentationRunner = "com.karumi.shot.ShotTestRunner"
     }
 
     buildFeatures.viewBinding = true
@@ -31,6 +34,8 @@ dependencies {
     api(Dependencies.junit)
     api(Dependencies.mockitoKotlin)
     api(Dependencies.robolectric)
+    api("androidx.test.espresso:espresso-core:3.4.0")
+    api("androidx.test.espresso:espresso-intents:3.4.0")
 
     kapt(Dependencies.daggerKapt)
 }
