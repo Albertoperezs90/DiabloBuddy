@@ -24,7 +24,7 @@ abstract class BaseViewModel<VS: ViewState, E: Event>(private val logger: Logger
         get() = mutableViewState
 
     protected fun updateViewState(viewState: VS) {
-        viewModelScope.launch(dispatcherProvider.io) {
+        viewModelScope.launch(dispatcherProvider.main) {
             mutableViewState.emit(viewState)
         }
     }

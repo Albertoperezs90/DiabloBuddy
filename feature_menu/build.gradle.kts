@@ -47,6 +47,7 @@ android {
 dependencies {
     implementation(project(ModuleConfig.app))
     implementation(project(ModuleConfig.core))
+    implementation(project(ModuleConfig.core_testing))
 
     kapt(Dependencies.moshiCodegen)
     kapt(Dependencies.daggerKapt)

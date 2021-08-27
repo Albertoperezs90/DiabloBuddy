@@ -19,10 +19,15 @@ class MenuViewModel @Inject constructor(
 ): BaseViewModel<MenuViewState, MenuEvent>(logger, dispatcherProvider) {
 
     val currentSeason = MutableStateFlow(sessionPreferences.getSeasonIndex())
-    val menuConfig: MutableStateFlow<CircularMenuConfig?> = MutableStateFlow(null)
 
-    fun initialize() {
-        menuConfig.value = CircularMenuConfig(
+    override fun onEvent(event: MenuEvent) {
+        when (event) {
+            is MenuEvent.Initialize -> configureMenu()
+        }
+    }
+
+    private fun configureMenu() {
+        val circularMenuConfig = CircularMenuConfig(
             R.drawable.ic_central_icon, listOf(
                 CircularItemConfig(R.drawable.ic_skills, R.string.skills),
                 CircularItemConfig(R.drawable.ic_gear, R.string.gear),
@@ -30,9 +35,6 @@ class MenuViewModel @Inject constructor(
                 CircularItemConfig(R.drawable.ic_follower, R.string.follower)
             )
         )
-    }
-
-    override fun onEvent(event: MenuEvent) {
-        // Do nothing
+        updateViewState(MenuViewState.DrawMenu(circularMenuConfig))
     }
 }
