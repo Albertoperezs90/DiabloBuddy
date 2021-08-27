@@ -16,7 +16,7 @@ class ApiModule {
     }
 
     @Provides
-    fun provideLeaderboardApi(@Named("api") retrofit: Retrofit): LeaderboardApi {
+    fun provideLeaderboardApi(retrofit: Retrofit): LeaderboardApi {
         return retrofit.create(LeaderboardApi::class.java)
     }
 }

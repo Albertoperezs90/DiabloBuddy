@@ -6,17 +6,18 @@ import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.interfaces.tracker.EventTracker
 import com.aperezsi.core.utilities.coroutines.DispatcherProvider
 import com.aperezsi.diablobuddy.module.di.AppModuleComponent
+import com.aperezsi.diablobuddy.shared.di.converter.ConverterModule
 import com.aperezsi.diablobuddy.shared.di.logger.LoggerModule
 import com.aperezsi.diablobuddy.shared.di.network.NetworkModule
+import com.aperezsi.diablobuddy.shared.di.storage.StorageModule
 import com.aperezsi.diablobuddy.shared.di.tracker.TrackerModule
 import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
 import dagger.BindsInstance
 import dagger.Component
 import retrofit2.Retrofit
-import javax.inject.Named
 
 @Component(
-    modules = [AppModule::class, NetworkModule::class, LoggerModule::class, TrackerModule::class],
+    modules = [ConverterModule::class, LoggerModule::class, NetworkModule::class, StorageModule::class, TrackerModule::class],
     dependencies = [CoreComponent::class]
 )
 interface AppComponent {
@@ -28,7 +29,6 @@ interface AppComponent {
     val eventTracker: EventTracker
     val dispatcherProvider: DispatcherProvider
 
-    @get:Named("api")
     val retrofit: Retrofit
 
     @Component.Factory

@@ -3,7 +3,6 @@ package com.aperezsi.diablobuddy.shared.di.network
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.diablobuddy.BuildConfig
 import com.aperezsi.diablobuddy.shared.data.converter.ConverterFactoryProvider
-import com.aperezsi.diablobuddy.shared.data.converter.MoshiProvider
 import com.aperezsi.diablobuddy.shared.data.interceptor.ApiInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.AuthInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.ErrorInterceptor
@@ -23,11 +22,6 @@ class NetworkModule {
     @Provides
     fun provideRegion(): String {
         return "eu"
-    }
-
-    @Provides
-    fun provideConverterFactory(): ConverterFactoryProvider {
-        return MoshiProvider()
     }
 
     @Named("logging")
@@ -66,7 +60,6 @@ class NetworkModule {
         return OkHttpClient.Builder().addInterceptor(apiInterceptor).addInterceptor(loggingInterceptor).addInterceptor(errorInterceptor).build()
     }
 
-    @Named("api")
     @Provides
     fun provideRetrofit(
         @Named("region") region: String,

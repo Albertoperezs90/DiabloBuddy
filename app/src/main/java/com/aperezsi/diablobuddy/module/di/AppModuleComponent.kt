@@ -7,7 +7,7 @@ import com.aperezsi.diablobuddy.shared.di.navigator.NavigatorModule
 import dagger.BindsInstance
 import dagger.Subcomponent
 
-@Subcomponent(modules = [ViewModelModule::class, ApiModule::class, NavigatorModule::class])
+@Subcomponent(modules = [ApiModule::class, NavigatorModule::class, ViewModelModule::class])
 interface AppModuleComponent {
 
     fun inject(splashActivity: SplashActivity)

@@ -26,11 +26,11 @@ class SplashViewModel @Inject constructor(
 
     override fun onEvent(event: SplashEvent) {
         when (event) {
-            is SplashEvent.Initialize -> setUpAppConfig()
+            is SplashEvent.Initialize -> setupSessionConfig()
         }
     }
 
-    private fun setUpAppConfig() {
+    private fun setupSessionConfig() {
         launchWithHandler {
             if (sessionPreferences.tokenExpiresOnLessThan(TimeValidator.MINUTES_5)) {
                 doLoginUseCase().onSuccessCompletion { getCurrentSeasonUseCase() }.collect { navigator.navigate(ContainerActivity::class.java, true) }

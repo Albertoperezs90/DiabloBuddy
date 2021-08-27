@@ -15,7 +15,7 @@ class MenuFragment: BaseFragment<FragmentMenuBinding, MenuViewModel, MenuViewSta
 
     override fun inflate() = FragmentMenuBinding.inflate(layoutInflater)
 
-    override fun setUpView() {
+    override fun injectDependencies() {
         inject()
         collect(viewModel.currentSeason) {
             binding.seasonTextView.text = getString(R.string.season_menu, it.toString())

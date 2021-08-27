@@ -10,7 +10,7 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Named
 
-@Component(modules = [ViewModelFactoryModule::class, SessionModule::class, CoroutineModule::class])
+@Component(modules = [CoroutineModule::class, SessionModule::class, ViewModelFactoryModule::class])
 interface CoreComponent {
 
     @get:Named("session")

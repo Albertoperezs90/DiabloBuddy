@@ -14,7 +14,7 @@ class ContainerActivity: BaseActivity<ActivityContainerBinding, ContainerViewMod
 
     override fun inflate(): ActivityContainerBinding = ActivityContainerBinding.inflate(layoutInflater)
 
-    override fun setUpView() {
+    override fun injectDependencies() {
         inject()
     }
 

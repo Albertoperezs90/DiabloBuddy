@@ -26,7 +26,7 @@ abstract class BaseActivity<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewSt
         super.onCreate(savedInstanceState)
         binding = inflate()
         setContentView(binding.root)
-        setUpView()
+        injectDependencies()
         initializeViewState()
         initialize()
     }
@@ -38,6 +38,6 @@ abstract class BaseActivity<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewSt
     }
 
     abstract fun inflate(): V
-    abstract fun setUpView()
+    abstract fun injectDependencies()
     abstract fun initialize()
 }

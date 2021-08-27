@@ -105,4 +105,4 @@ dependencies {
     androidTestImplementation(Dependencies.espressoCore)
 }
 
-apply(plugin = "com.google.gms.google-services")
+apply(plugin = GradlePlugin.googleServices)

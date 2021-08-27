@@ -12,6 +12,7 @@ object GradlePlugin {
     const val crashlytics = "com.google.firebase.crashlytics"
     const val appDistribution = "com.google.firebase.appdistribution"
     const val jacoco = "jacoco"
+    const val googleServices = "com.google.gms.google-services"
 
     object Versions {
         const val dependencyUpdate = "1.3.0"

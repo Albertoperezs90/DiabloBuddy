@@ -32,7 +32,7 @@ abstract class BaseFragment<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewSt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpView()
+        injectDependencies()
         initializeViewState()
         initialize()
     }
@@ -44,6 +44,6 @@ abstract class BaseFragment<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewSt
     }
 
     abstract fun inflate(): V
-    abstract fun setUpView()
+    abstract fun injectDependencies()
     abstract fun initialize()
 }

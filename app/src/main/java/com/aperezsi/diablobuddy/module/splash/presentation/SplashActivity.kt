@@ -15,7 +15,7 @@ class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel, Splas
 
     override fun inflate(): ActivitySplashBinding = ActivitySplashBinding.inflate(layoutInflater)
 
-    override fun setUpView() {
+    override fun injectDependencies() {
         inject()
     }
 
