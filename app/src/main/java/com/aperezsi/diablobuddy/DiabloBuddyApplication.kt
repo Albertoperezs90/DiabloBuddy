@@ -1,20 +1,19 @@
 package com.aperezsi.diablobuddy
 
 import android.app.Application
+import com.aperezsi.diablobuddy.shared.di.application.AppComponent
 
-class DiabloBuddyApplication : Application() {
+open class DiabloBuddyApplication: Application() {
+
+    private lateinit var appInjector: AppInjector
+
+    val appComponent: AppComponent by lazy {
+        appInjector.appComponent
+    }
 
     override fun onCreate() {
         super.onCreate()
-    }
-
-    fun setLocal() {
-        val test = "Test"
-        print(test)
-    }
-
-    fun setRemote() {
-        val test = "Test"
-        print(test)
+        appInjector = AppInjector(this)
+        appInjector.buildComponents()
     }
 }

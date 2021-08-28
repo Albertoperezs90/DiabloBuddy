@@ -1,28 +1,33 @@
-apply(plugin = "jacoco")
+apply(plugin = GradlePlugin.jacoco)
 
 project.afterEvaluate {
     val kotlinClassesFolder = getKotlinClassesFolder() ?: return@afterEvaluate
     val jacocoExec = getJacocoExec() ?: return@afterEvaluate
-    tasks.register("${project.name}JacocoTestReport",JacocoReport::class) {
+
+    tasks.register("${project.name}JacocoTestReport", JacocoReport::class) {
         group = "coverage report"
         dependsOn("test")
 
+        jacocoClasspath = rootProject.configurations["jacocoAnt"]
+
         if (isAndroidModule(project)) {
-            //dependsOn("createPlaygroundDebugCoverageReport")
+            // dependsOn("createPlaygroundDebugCoverageReport")
         }
 
         reports {
+            xml.destination = file("${project.buildDir}/reports/jacoco/${project.name}JacocoTestReport/${project.name}JacocoTestReport.xml")
             xml.isEnabled = true
+            html.destination = file("${project.buildDir}/reports/jacoco/${project.name}JacocoTestReport/html/")
             html.isEnabled = true
         }
-        val fileFilter = listOf("**/R.class","**/R$*.class","**/BuildConfig.*","**/Manifest*.*")
+        val fileFilter = buildFilters()
         val debugTree = fileTree(kotlinClassesFolder) { setExcludes(fileFilter) }
         val mainSrc = "${project.projectDir}/src/main/java"
 
         sourceDirectories.setFrom(files(mainSrc))
         classDirectories.setFrom(files(debugTree))
         executionData.setFrom(fileTree("$buildDir") {
-            setIncludes(listOf(jacocoExec,"outputs/code-coverage/connected/*coverage.ec"))
+            setIncludes(listOf(jacocoExec, "outputs/code-coverage/connected/*coverage.ec"))
         })
     }
 }
@@ -30,7 +35,7 @@ project.afterEvaluate {
 fun getKotlinClassesFolder(): String? {
     var kotlinFolder: String? = null
     fileTree("$buildDir/tmp/kotlin-classes").visit {
-        if (this.file.isDirectory && this.file.name.endsWith("debug",ignoreCase = true)) {
+        if (this.file.isDirectory && this.file.name.endsWith("debug", ignoreCase = true)) {
             kotlinFolder = this.file.path
             stopVisiting()
         }
@@ -53,4 +58,15 @@ fun isAndroidModule(project: Project): Boolean {
     val isAndroidLibrary = project.plugins.hasPlugin("com.android.library")
     val isAndroidApp = project.plugins.hasPlugin("com.android.application")
     return isAndroidLibrary || isAndroidApp
+}
+
+fun buildFilters(): List<String> {
+    val filterBuildFiles = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
+    val filterDi = listOf("**/di/**")
+    val filterBaseFiles = listOf("**/base/**")
+    val filterModels = listOf("**/**Response**")
+    val filterViews = listOf("**/views/**")
+    val filterNetwork = listOf("**/**Interceptor**")
+
+    return filterBuildFiles + filterDi + filterBaseFiles + filterModels + filterViews + filterNetwork
 }

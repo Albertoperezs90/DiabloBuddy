@@ -1,11 +1,10 @@
-import io.gitlab.arturbosch.detekt.Detekt
-
 apply(from = "jacocoFull.gradle.kts")
 apply(from = "config/version/version.gradle.kts")
 
 plugins {
-    id("name.remal.check-dependency-updates").version(Versions.dependencyUpdates)
-    id("io.gitlab.arturbosch.detekt").version(Versions.detekt)
+    id(GradlePlugin.dependencyUpdate) version GradlePlugin.Versions.dependencyUpdate
+    id(GradlePlugin.detekt) version GradlePlugin.Versions.detekt
+    id(GradlePlugin.jacoco)
 }
 
 buildscript {
@@ -16,16 +15,20 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:${Versions.gradle}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
-        classpath("com.google.gms:google-services:${Versions.googleServices}")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}")
-        classpath("com.google.firebase:firebase-appdistribution-gradle:${Versions.firebaseDistribution}")
+        classpath("${BuildScriptPlugin.androidGradle}:${BuildScriptPlugin.Versions.androidGradle}")
+        classpath("${BuildScriptPlugin.kotlinGradle}:${BuildScriptPlugin.Versions.kotlinGradle}")
+        classpath("${BuildScriptPlugin.googleServices}:${BuildScriptPlugin.Versions.googleServices}")
+        classpath("${BuildScriptPlugin.crashlytics}:${BuildScriptPlugin.Versions.crashlytics}")
+        classpath("${BuildScriptPlugin.appDistribution}:${BuildScriptPlugin.Versions.appDistribution}")
     }
 }
 
+jacoco {
+    toolVersion = GradlePlugin.Versions.jacocoToolsVersions
+}
+
 allprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = GradlePlugin.detekt)
     apply(from = "${rootProject.rootDir}/jacoco.gradle.kts")
 
     repositories {
@@ -35,18 +38,16 @@ allprojects {
     }
 
     dependencies {
-        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}")
-        detektPlugins("io.gitlab.arturbosch.detekt:detekt-cli:${Versions.detekt}")
+        detektPlugins("${DetektPlugin.formatting}:${GradlePlugin.Versions.detekt}")
+        detektPlugins("${DetektPlugin.cli}:${GradlePlugin.Versions.detekt}")
     }
 }
 
-tasks.register<Detekt>("detektAll") {
+tasks.register("detektAll", io.gitlab.arturbosch.detekt.Detekt::class) {
     val autoFix = project.hasProperty("detektAutoFix")
     val projectSource = file(projectDir)
     val configFile = files("$rootDir/config/detekt/detekt.yml")
-    val kotlinFiles = "**/*.kt"
     val resourceFiles = "**/resources/**"
-    val buildSrc = ""
     val buildFiles = "**/build/**"
 
     description = "Detekt task for all modules"
@@ -56,14 +57,36 @@ tasks.register<Detekt>("detektAll") {
     buildUponDefaultConfig = true
     setSource(projectSource)
     config.setFrom(configFile)
-    include(kotlinFiles)
-    exclude(buildSrc, resourceFiles, buildFiles)
+    exclude(resourceFiles, buildFiles)
+
+    description = "Detekt task for all modules"
+    parallel = true
+    ignoreFailures = false
+    autoCorrect = autoFix
+    buildUponDefaultConfig = true
+    setSource(projectSource)
+    config.setFrom(configFile)
     reports {
         html.enabled = true
         xml.enabled = true
         txt.enabled = false
         sarif.enabled = false
     }
+}
+
+tasks.register("detektBaselineAll", io.gitlab.arturbosch.detekt.DetektCreateBaselineTask::class) {
+    val projectSource = file(projectDir)
+    val configFile = files("$rootDir/config/detekt/detekt.yml")
+    val baselineFile = file("$rootDir/config/detekt/baseline.xml")
+
+    description = "Overrides current baseline file"
+    ignoreFailures.set(true)
+    parallel.set(true)
+    setSource(projectSource)
+    config.setFrom(configFile)
+    baseline.set(baselineFile)
+
+    include("**/*.kt")
 }
 
 tasks.register("clean", Delete::class) {

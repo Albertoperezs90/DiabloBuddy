@@ -2,8 +2,9 @@ import java.io.File
 import java.util.Properties
 
 object AppConfig {
+    const val applicationId = "com.aperezsi.diablobuddy"
     const val compileSdk = 30
-    const val minSdk = 19
+    const val minSdk = 21
     const val targetSdk = 30
     val versionCode = readVersionCode()
     val versionName = readVersionName()
@@ -11,6 +12,11 @@ object AppConfig {
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
     const val proguardRules = "proguard-rules.pro"
     const val dimension = "environment"
+
+    object Dimension {
+        const val production = "production"
+        const val playground = "playground"
+    }
 
     private fun readVersionName(): String {
         with(getVersionProperties()) {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="appTitleText" format="reference" />
+    <attr name="subtitleText" format="reference" />
+    <attr name="prominentRegularText" format="reference" />
+    <attr name="regularText" format="reference" />
+</resources>

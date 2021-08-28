@@ -31,7 +31,6 @@ val commitVersionProperties by tasks.creating {
         }
     }
 }
-
 val commitTagQA by tasks.creating {
     group = "versioning"
     doLast {
@@ -46,7 +45,6 @@ val commitTagQA by tasks.creating {
         }
     }
 }
-
 val commitTagProduction by tasks.creating {
     group = "versioning"
     doLast {

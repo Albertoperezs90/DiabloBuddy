@@ -266,7 +266,7 @@ formatting:
   Filename:
     active: true
   FinalNewline:
-    active: true
+    active: false
     autoCorrect: true
     insertFinalNewLine: true
   ImportOrdering:
@@ -280,7 +280,7 @@ formatting:
     continuationIndentSize: 4
   MaximumLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 240
   ModifierOrdering:
     active: true
     autoCorrect: true
@@ -306,7 +306,7 @@ formatting:
     active: true
     autoCorrect: true
   NoMultipleSpaces:
-    active: true
+    active: false
     autoCorrect: true
   NoSemicolons:
     active: true
@@ -324,7 +324,7 @@ formatting:
     active: true
     excludeImports: ['java.util.*', 'kotlinx.android.synthetic.*', 'org.mockito.kotlin.*']
   PackageName:
-    active: true
+    active: false
     autoCorrect: true
   ParameterListWrapping:
     active: true
@@ -334,7 +334,7 @@ formatting:
     active: false
     autoCorrect: true
   SpacingAroundColon:
-    active: true
+    active: false
     autoCorrect: true
   SpacingAroundComma:
     active: true
@@ -370,7 +370,7 @@ formatting:
     active: false
     autoCorrect: true
   StringTemplate:
-    active: true
+    active: false
     autoCorrect: true
 
 naming:
@@ -437,7 +437,7 @@ naming:
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '(_)?[A-Za-z][_A-Za-z0-9]*'
   PackageNaming:
-    active: true
+    active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     packagePattern: '[a-z]+(\.[a-z][A-Za-z0-9]*)*'
   TopLevelPropertyNaming:
@@ -624,7 +624,7 @@ style:
     active: false
   MaxLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 240
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false
