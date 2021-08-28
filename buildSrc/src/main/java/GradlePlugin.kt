@@ -17,5 +17,6 @@ object GradlePlugin {
     object Versions {
         const val dependencyUpdate = "1.3.0"
         const val detekt = "1.16.0"
+        const val jacocoToolsVersions = "0.8.7"
     }
 }

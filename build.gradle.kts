@@ -4,6 +4,7 @@ apply(from = "config/version/version.gradle.kts")
 plugins {
     id(GradlePlugin.dependencyUpdate) version GradlePlugin.Versions.dependencyUpdate
     id(GradlePlugin.detekt) version GradlePlugin.Versions.detekt
+    id(GradlePlugin.jacoco)
 }
 
 buildscript {
@@ -20,6 +21,10 @@ buildscript {
         classpath("${BuildScriptPlugin.crashlytics}:${BuildScriptPlugin.Versions.crashlytics}")
         classpath("${BuildScriptPlugin.appDistribution}:${BuildScriptPlugin.Versions.appDistribution}")
     }
+}
+
+jacoco {
+    toolVersion = GradlePlugin.Versions.jacocoToolsVersions
 }
 
 allprojects {
