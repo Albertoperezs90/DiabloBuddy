@@ -1,3 +1,5 @@
+apply(plugin = GradlePlugin.jacoco)
+
 project.afterEvaluate {
     val kotlinClassesFolder = getKotlinClassesFolder() ?: return@afterEvaluate
     val jacocoExec = getJacocoExec() ?: return@afterEvaluate

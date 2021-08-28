@@ -11,6 +11,7 @@ object GradlePlugin {
     const val hilt = "dagger.hilt.android.plugin"
     const val crashlytics = "com.google.firebase.crashlytics"
     const val appDistribution = "com.google.firebase.appdistribution"
+    const val jacoco = "jacoco"
 
     object Versions {
         const val dependencyUpdate = "1.3.0"
