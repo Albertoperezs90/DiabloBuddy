@@ -2,7 +2,6 @@ package com.aperezsi.diablobuddy.module.splash.presentation
 
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.utilities.coroutines.DispatcherProvider
-import com.aperezsi.core.utilities.time.TimeValidator
 import com.aperezsi.core_testing.base.ViewModelTest
 import com.aperezsi.core_testing.utilities.thenMockFlowResult
 import com.aperezsi.core_testing.utilities.thenMockThrowable
@@ -11,7 +10,7 @@ import com.aperezsi.diablobuddy.module.splash.domain.DoLoginUseCase
 import com.aperezsi.diablobuddy.module.splash.domain.GetCurrentSeasonUseCase
 import com.aperezsi.diablobuddy.module.splash.presentation.state.SplashEvent
 import com.aperezsi.diablobuddy.shared.navigator.Navigator
-import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
+import com.aperezsi.diablobuddy.shared.storage.AppPreferences
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -25,12 +24,12 @@ class SplashViewModelTest: ViewModelTest() {
 
     private val logger: Logger = mock()
     private val dispatcherProvider: DispatcherProvider = mock()
-    private val sessionPreferences: SessionPreferences = mock()
+    private val appPreferences: AppPreferences = mock()
     private val navigator: Navigator = mock()
     private val doLoginUseCase: DoLoginUseCase = mock()
     private val getCurrentSeasonUseCase: GetCurrentSeasonUseCase = mock()
 
-    private val splashViewModel = SplashViewModel(logger, dispatcherProvider, sessionPreferences, navigator, doLoginUseCase, getCurrentSeasonUseCase)
+    private val splashViewModel = SplashViewModel(logger, dispatcherProvider, appPreferences, navigator, doLoginUseCase, getCurrentSeasonUseCase)
 
     @Before
     fun setUp() {
@@ -41,11 +40,11 @@ class SplashViewModelTest: ViewModelTest() {
     fun `on Initialize Event should launch login and season use case and navigate if both success`() = runBlocking {
         whenever(doLoginUseCase.invoke()).thenMockFlowResult(Unit)
         whenever(getCurrentSeasonUseCase.invoke()).thenMockFlowResult(1)
-        whenever(sessionPreferences.tokenExpiresOnLessThan(TimeValidator.MINUTES_5)).thenReturn(true)
+        whenever(appPreferences.tokenExpiresOnLessThan(300)).thenReturn(true)
 
         splashViewModel.onEvent(SplashEvent.Initialize)
 
-        verify(sessionPreferences).tokenExpiresOnLessThan(TimeValidator.MINUTES_5)
+        verify(appPreferences).tokenExpiresOnLessThan(300)
         verify(doLoginUseCase).invoke()
         verify(getCurrentSeasonUseCase).invoke()
         verify(navigator).navigate(ContainerActivity::class.java, true)
@@ -54,11 +53,11 @@ class SplashViewModelTest: ViewModelTest() {
     @Test
     fun `On Initialize Event should launch only loginUseCase if fail`() = runBlocking {
         whenever(doLoginUseCase.invoke()).thenMockThrowable()
-        whenever(sessionPreferences.tokenExpiresOnLessThan(TimeValidator.MINUTES_5)).thenReturn(true)
+        whenever(appPreferences.tokenExpiresOnLessThan(300)).thenReturn(true)
 
         splashViewModel.onEvent(SplashEvent.Initialize)
 
-        verify(sessionPreferences).tokenExpiresOnLessThan(TimeValidator.MINUTES_5)
+        verify(appPreferences).tokenExpiresOnLessThan(300)
         verify(doLoginUseCase).invoke()
         verify(getCurrentSeasonUseCase, never()).invoke()
         verify(navigator, never()).navigate(any(), any())
@@ -68,11 +67,11 @@ class SplashViewModelTest: ViewModelTest() {
     fun `On Initialize Event shouldn't navigate if getSeasonUseCase fail`() = runBlocking {
         whenever(doLoginUseCase.invoke()).thenMockFlowResult(Unit)
         whenever(getCurrentSeasonUseCase.invoke()).thenMockThrowable()
-        whenever(sessionPreferences.tokenExpiresOnLessThan(TimeValidator.MINUTES_5)).thenReturn(true)
+        whenever(appPreferences.tokenExpiresOnLessThan(300)).thenReturn(true)
 
         splashViewModel.onEvent(SplashEvent.Initialize)
 
-        verify(sessionPreferences).tokenExpiresOnLessThan(TimeValidator.MINUTES_5)
+        verify(appPreferences).tokenExpiresOnLessThan(300)
         verify(doLoginUseCase).invoke()
         verify(getCurrentSeasonUseCase).invoke()
         verify(navigator, never()).navigate(any(), any())

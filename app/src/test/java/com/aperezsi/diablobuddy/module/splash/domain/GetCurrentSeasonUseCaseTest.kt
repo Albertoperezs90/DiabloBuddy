@@ -3,7 +3,7 @@ package com.aperezsi.diablobuddy.module.splash.domain
 import com.aperezsi.core.utilities.coroutines.DispatcherProvider
 import com.aperezsi.core_testing.utilities.thenMockFlowResult
 import com.aperezsi.diablobuddy.module.splash.data.repository.LeaderboardRepository
-import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
+import com.aperezsi.diablobuddy.shared.storage.AppPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
@@ -18,9 +18,9 @@ class GetCurrentSeasonUseCaseTest {
 
     private val dispatcherProvider: DispatcherProvider = mock()
     private val leaderboardRepository: LeaderboardRepository = mock()
-    private val sessionPreferences: SessionPreferences = mock()
+    private val appPreferences: AppPreferences = mock()
 
-    private val getCurrentSeasonUseCase = GetCurrentSeasonUseCase(dispatcherProvider, leaderboardRepository, sessionPreferences)
+    private val getCurrentSeasonUseCase = GetCurrentSeasonUseCase(dispatcherProvider, leaderboardRepository, appPreferences)
 
     @Before
     fun setUp() {
@@ -35,7 +35,7 @@ class GetCurrentSeasonUseCaseTest {
         getCurrentSeasonUseCase.invoke().collect { result = it }
 
         verify(leaderboardRepository).getSeasonIndex()
-        verify(sessionPreferences).setSeasonIndex(24)
+        verify(appPreferences).setSeasonIndex(24)
         assertEquals(24, result)
     }
 }

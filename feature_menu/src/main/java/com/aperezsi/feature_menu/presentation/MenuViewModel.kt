@@ -3,38 +3,36 @@ package com.aperezsi.feature_menu.presentation
 import com.aperezsi.core.framework.base.BaseViewModel
 import com.aperezsi.core.interfaces.logger.Logger
 import com.aperezsi.core.utilities.coroutines.DispatcherProvider
-import com.aperezsi.core.views.CircularItemConfig
-import com.aperezsi.core.views.CircularMenuConfig
-import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
-import com.aperezsi.feature_menu.R
+import com.aperezsi.diablobuddy.shared.storage.AppPreferences
 import com.aperezsi.feature_menu.presentation.state.MenuEvent
 import com.aperezsi.feature_menu.presentation.state.MenuViewState
-import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 class MenuViewModel @Inject constructor(
     logger: Logger,
     dispatcherProvider: DispatcherProvider,
-    sessionPreferences: SessionPreferences
+    private val appPreferences: AppPreferences,
+    private val menuBuilder: MenuBuilder
 ): BaseViewModel<MenuViewState, MenuEvent>(logger, dispatcherProvider) {
-
-    val currentSeason = MutableStateFlow(sessionPreferences.getSeasonIndex())
 
     override fun onEvent(event: MenuEvent) {
         when (event) {
-            is MenuEvent.Initialize -> configureMenu()
+            is MenuEvent.Initialize -> configureScreen()
         }
     }
 
+    private fun configureScreen() {
+        updateViewState(MenuViewState.DrawSeason(appPreferences.getSeasonIndex()))
+        configureMenu()
+    }
+
     private fun configureMenu() {
-        val circularMenuConfig = CircularMenuConfig(
-            R.drawable.ic_central_icon, listOf(
-                CircularItemConfig(R.drawable.ic_skills, R.string.skills),
-                CircularItemConfig(R.drawable.ic_gear, R.string.gear),
-                CircularItemConfig(R.drawable.ic_crafting, R.string.crafting),
-                CircularItemConfig(R.drawable.ic_follower, R.string.follower)
-            )
-        )
+        val circularMenuConfig = menuBuilder
+            .add(MenuItem.SKILLS)
+            .add(MenuItem.GEAR)
+            .add(MenuItem.CRAFTING)
+            .add(MenuItem.FOLLOWER)
+            .build()
         updateViewState(MenuViewState.DrawMenu(circularMenuConfig))
     }
 }

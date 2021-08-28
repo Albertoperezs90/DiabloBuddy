@@ -1,7 +1,6 @@
 package com.aperezsi.feature_menu.presentation
 
 import com.aperezsi.core.framework.base.BaseFragment
-import com.aperezsi.core.framework.collect
 import com.aperezsi.core.framework.provideViewModel
 import com.aperezsi.feature_menu.R
 import com.aperezsi.feature_menu.databinding.FragmentMenuBinding
@@ -17,9 +16,6 @@ class MenuFragment: BaseFragment<FragmentMenuBinding, MenuViewModel, MenuViewSta
 
     override fun injectDependencies() {
         inject()
-        collect(viewModel.currentSeason) {
-            binding.seasonTextView.text = getString(R.string.season_menu, it.toString())
-        }
     }
 
     override fun initialize() {
@@ -28,6 +24,7 @@ class MenuFragment: BaseFragment<FragmentMenuBinding, MenuViewModel, MenuViewSta
 
     override fun render(viewState: MenuViewState) {
         when (viewState) {
+            is MenuViewState.DrawSeason -> binding.seasonTextView.text = getString(R.string.season_menu, viewState.seasonIndex.toString())
             is MenuViewState.DrawMenu -> binding.circularMenu.setMenu(viewState.menuConfig)
         }
     }

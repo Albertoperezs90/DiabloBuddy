@@ -17,10 +17,3 @@ class DispatcherProviderImpl @Inject constructor(): DispatcherProvider {
     override val main = Dispatchers.Main
     override val default = Dispatchers.Default
 }
-
-class DispatcherProviderFake @Inject constructor(): DispatcherProvider {
-
-    override val io = Dispatchers.Unconfined
-    override val main = Dispatchers.Unconfined
-    override val default = Dispatchers.Unconfined
-}

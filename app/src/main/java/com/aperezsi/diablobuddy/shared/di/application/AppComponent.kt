@@ -11,7 +11,7 @@ import com.aperezsi.diablobuddy.shared.di.logger.LoggerModule
 import com.aperezsi.diablobuddy.shared.di.network.NetworkModule
 import com.aperezsi.diablobuddy.shared.di.storage.StorageModule
 import com.aperezsi.diablobuddy.shared.di.tracker.TrackerModule
-import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
+import com.aperezsi.diablobuddy.shared.storage.AppPreferences
 import dagger.BindsInstance
 import dagger.Component
 import retrofit2.Retrofit
@@ -24,7 +24,7 @@ interface AppComponent {
 
     val appModuleComponent: AppModuleComponent.Factory
 
-    val sessionPreferences: SessionPreferences
+    val appPreferences: AppPreferences
     val logger: Logger
     val eventTracker: EventTracker
     val dispatcherProvider: DispatcherProvider

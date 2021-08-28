@@ -7,7 +7,7 @@ import com.aperezsi.diablobuddy.shared.data.interceptor.ApiInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.AuthInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.ErrorInterceptor
 import com.aperezsi.diablobuddy.shared.data.interceptor.LoggingInterceptor
-import com.aperezsi.diablobuddy.shared.storage.SessionPreferences
+import com.aperezsi.diablobuddy.shared.storage.AppPreferences
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -44,8 +44,8 @@ class NetworkModule {
 
     @Named("api")
     @Provides
-    fun provideApiInterceptor(sessionPreferences: SessionPreferences): Interceptor {
-        return ApiInterceptor(sessionPreferences)
+    fun provideApiInterceptor(appPreferences: AppPreferences): Interceptor {
+        return ApiInterceptor(appPreferences)
     }
 
     @Named("authClient")

@@ -1,18 +1,16 @@
-package com.aperezsi.core.di.session
+package com.aperezsi.core.di.storage
 
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
 
 @Module
-class SessionModule {
+class PreferencesModule {
 
     @Provides
-    @Named("session")
     fun provideSharedSessionPreferences(application: Application): SharedPreferences {
-        return application.getSharedPreferences("session", Context.MODE_PRIVATE)
+        return application.getSharedPreferences("app", Context.MODE_PRIVATE)
     }
 }

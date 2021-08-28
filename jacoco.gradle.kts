@@ -20,13 +20,7 @@ project.afterEvaluate {
             html.destination = file("${project.buildDir}/reports/jacoco/${project.name}JacocoTestReport/html/")
             html.isEnabled = true
         }
-        val filterBuildFiles = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
-        val filterDi = listOf("**/di/**")
-        val filterBaseFiles = listOf("**/base/**")
-        val filterModels = listOf("**/**Response**")
-        val filterViews = listOf("**/views/**")
-        val filterNetwork = listOf("**/**Interceptor**")
-        val fileFilter = filterBuildFiles + filterDi + filterBaseFiles + filterModels + filterViews + filterNetwork
+        val fileFilter = buildFilters()
         val debugTree = fileTree(kotlinClassesFolder) { setExcludes(fileFilter) }
         val mainSrc = "${project.projectDir}/src/main/java"
 
@@ -64,4 +58,15 @@ fun isAndroidModule(project: Project): Boolean {
     val isAndroidLibrary = project.plugins.hasPlugin("com.android.library")
     val isAndroidApp = project.plugins.hasPlugin("com.android.application")
     return isAndroidLibrary || isAndroidApp
+}
+
+fun buildFilters(): List<String> {
+    val filterBuildFiles = listOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*")
+    val filterDi = listOf("**/di/**")
+    val filterBaseFiles = listOf("**/base/**")
+    val filterModels = listOf("**/**Response**")
+    val filterViews = listOf("**/views/**")
+    val filterNetwork = listOf("**/**Interceptor**")
+
+    return filterBuildFiles + filterDi + filterBaseFiles + filterModels + filterViews + filterNetwork
 }

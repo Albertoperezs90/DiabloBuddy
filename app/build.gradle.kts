@@ -98,9 +98,6 @@ dependencies {
     kapt(Dependencies.moshiCodegen)
     kapt(Dependencies.daggerKapt)
 
-    testImplementation(Dependencies.junit)
-    testImplementation(Dependencies.mockitoKotlin)
-    testImplementation(Dependencies.robolectric)
     androidTestImplementation(Dependencies.extJUnit)
     androidTestImplementation(Dependencies.espressoCore)
 }
