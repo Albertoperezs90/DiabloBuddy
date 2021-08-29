@@ -24,6 +24,7 @@ class CircularMenu @JvmOverloads constructor(context: Context, attributeSet: Att
     private lateinit var menuButtonAnimations: MutableList<CircularItemAnimationConfig>
 
     fun setMenu(config: CircularMenuConfig) {
+        removeAllViews()
         centralButton = configureCentralButton(config)
         centralButton.visibility = INVISIBLE
         centralButton.viewTreeObserver.addOnGlobalLayoutListener {
