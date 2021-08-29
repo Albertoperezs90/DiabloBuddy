@@ -18,13 +18,13 @@ val commitVersionProperties by tasks.creating {
     doLast {
         val versionCode = AppConfig.versionCode
         exec {
-            commandLine("cmd", "git", "add", "version.properties")
+            commandLine("git", "add", "version.properties")
         }
         exec {
-            commandLine("cmd", "git", "commit", "-a", "-m", "Upgrade versionCode to $versionCode [ci-skip]")
+            commandLine("git", "commit", "-a", "-m", "Upgrade versionCode to $versionCode [ci-skip]")
         }
         exec {
-            commandLine("cmd", "git", "push", "--no-verify")
+            commandLine("git", "push", "--no-verify")
         }
     }
 }
