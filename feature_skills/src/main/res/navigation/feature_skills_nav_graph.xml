@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/characterSelectFragment">
+    <fragment
+        android:id="@+id/characterSelectFragment"
+        android:name="com.diablobuddy.feature_skills.character_select.CharacterSelectFragment"
+        android:label="CharacterSelectFragment"
+        app:moduleName="feature_skills" />
+</navigation>

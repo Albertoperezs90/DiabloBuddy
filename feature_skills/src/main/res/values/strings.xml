@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="skills_runes_toolbar_title">Habilidades/Runas</string>
+    <string name="skills_runes_searchbox_hint">Escribe una habilidad o nombre de runa...</string>
+    <string name="wizard">Maga</string>
+    <string name="barbarian">Bárbaro</string>
+    <string name="crusader">Cruzado</string>
+    <string name="demonhunter">Cazadora de demonios</string>
+    <string name="monk">Monje</string>
+    <string name="necromancer">Nigromante</string>
+    <string name="witchdoctor">Médico brujo</string>
+</resources>
