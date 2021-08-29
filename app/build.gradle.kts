@@ -59,6 +59,7 @@ android {
             firebaseAppDistribution {
                 releaseNotes = "QA version to test with official API"
                 groups = "internal-qa"
+                artifactType = "AAB"
             }
         }
     }
