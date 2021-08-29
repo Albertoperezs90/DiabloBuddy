@@ -20,6 +20,12 @@ android {
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
         buildConfigField("String", "BASE_BATTLENET_URL", "\".battle.net\"")
         buildConfigField("String", "BASE_API_URL", "\".api.blizzard.com\"")
+
+        firebaseAppDistribution {
+            releaseNotes = "QA version to test with official API"
+            groups = "internal-qa"
+            artifactType = "AAB"
+        }
     }
 
     buildTypes {
@@ -43,11 +49,6 @@ android {
             dimension = AppConfig.dimension
             buildConfigField("String", "CLIENT_USERNAME", "\"${System.getenv("CLIENT_USERNAME")}\"")
             buildConfigField("String", "CLIENT_PASSWORD", "\"${System.getenv("CLIENT_PASSWORD")}\"")
-
-            firebaseAppDistribution {
-                releaseNotes = "QA version to test with official API"
-                groups = "internal-qa"
-            }
         }
 
         create(AppConfig.Dimension.playground) {
@@ -55,12 +56,6 @@ android {
             applicationIdSuffix = ".playground"
             buildConfigField("String", "CLIENT_USERNAME", "\"e37c42d4634f494f86b04bf237b16bc0\"")
             buildConfigField("String", "CLIENT_PASSWORD", "\"fKCcwtLotZvxw8zVOVuGH8Inl3hsPSGc\"")
-
-            firebaseAppDistribution {
-                releaseNotes = "QA version to test with official API"
-                groups = "internal-qa"
-                artifactType = "AAB"
-            }
         }
     }
 
