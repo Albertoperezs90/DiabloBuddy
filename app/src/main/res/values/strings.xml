@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DiabloBuddy</string>
-    <string name="feature_menu_title">Menú</string>
+    <string name="feature_menu_title">Menu</string>
+    <string name="feature_menu_skills">Skills</string>
 </resources>
