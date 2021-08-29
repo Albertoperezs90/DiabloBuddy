@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.whenStarted
 import androidx.viewbinding.ViewBinding
 import com.aperezsi.core.state.Renderable
 import com.aperezsi.core.state.ViewState
@@ -38,8 +41,10 @@ abstract class BaseFragment<V: ViewBinding, VM: BaseViewModel<VS, *>, VS: ViewSt
     }
 
     private fun initializeViewState() {
-        lifecycleScope.launch(DispatcherProviderImpl().main) {
-            viewModel.viewState.collect { render(it) }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.viewState.collect { render(it) }
+            }
         }
     }
 

@@ -40,6 +40,7 @@ dependencies {
     api(Dependencies.navigationUi)
     api(Dependencies.viewModel)
     api(Dependencies.lifecycleLivedata)
+    api(Dependencies.lifecycleRuntime)
     api(Dependencies.constraintLayout)
     api(Dependencies.material)
     api(platform(Dependencies.firebaseBom))

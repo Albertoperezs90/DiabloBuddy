@@ -10,11 +10,12 @@ object Dependencies {
     const val daggerKapt = "com.google.dagger:dagger-compiler:${daggerVersion}"
 
     // Android
-    private const val lifecyleVersion = "2.3.1"
+    private const val lifecyleVersion = "2.4.0-alpha03"
     const val playCore = "com.google.android.play:core:1.10.0"
     const val coreKtx = "androidx.core:core-ktx:1.3.2"
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecyleVersion"
     const val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:$lifecyleVersion"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecyleVersion"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
     const val material = "com.google.android.material:material:1.3.0"
 

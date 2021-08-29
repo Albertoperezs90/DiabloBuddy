@@ -15,7 +15,9 @@ class MenuBuilder @Inject constructor() {
     }
 
     fun build(): CircularMenuConfig {
-        return CircularMenuConfig(R.drawable.ic_central_icon, items.map { resolveItem(it) })
+        val circularItems = items.map { resolveItem(it) }
+        items.clear()
+        return CircularMenuConfig(R.drawable.ic_central_icon, circularItems)
     }
 
     private fun resolveItem(menuItem: MenuItem): CircularItemConfig {
