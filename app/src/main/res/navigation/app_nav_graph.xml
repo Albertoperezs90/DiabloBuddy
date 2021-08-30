@@ -9,4 +9,9 @@
         app:graphResName="feature_menu_nav_graph"
         app:moduleName="feature_menu" />
 
+    <include-dynamic
+        android:id="@+id/featureSkillsNavGraph"
+        app:graphResName="feature_skills_nav_graph"
+        app:moduleName="feature_skills" />
+
 </navigation>
