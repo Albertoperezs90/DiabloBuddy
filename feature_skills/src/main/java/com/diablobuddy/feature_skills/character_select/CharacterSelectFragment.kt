@@ -1,7 +1,7 @@
 package com.diablobuddy.feature_skills.character_select
 
-import com.aperezsi.core.framework.base.BaseFragment
-import com.aperezsi.core.framework.provideViewModel
+import com.diablobuddy.core.framework.base.BaseFragment
+import com.diablobuddy.core.framework.provideViewModel
 import com.diablobuddy.feature_skills.character_select.state.CharacterSelectViewState
 import com.diablobuddy.feature_skills.databinding.FragmentCharacterselectBinding
 import com.diablobuddy.feature_skills.inject
@@ -17,12 +17,10 @@ class CharacterSelectFragment: BaseFragment<FragmentCharacterselectBinding, Char
     }
 
     override fun initialize() {
-        TODO("Not yet implemented")
+        // Do nothing
     }
 
     override fun render(viewState: CharacterSelectViewState) {
-        when (viewState) {
-
-        }
+        // Do nothing
     }
 }

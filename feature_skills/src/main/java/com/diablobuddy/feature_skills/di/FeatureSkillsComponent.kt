@@ -1,6 +1,6 @@
 package com.diablobuddy.feature_skills.di
 
-import com.aperezsi.diablobuddy.shared.di.application.AppComponent
+import com.diablobuddy.app.shared.di.application.AppComponent
 import com.diablobuddy.feature_skills.character_select.CharacterSelectFragment
 import dagger.Component
 

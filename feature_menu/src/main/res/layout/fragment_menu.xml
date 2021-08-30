@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.aperezsi.core.views.CircularMenu
+    <com.diablobuddy.core.views.CircularMenu
         android:id="@+id/circularMenu"
         android:layout_width="0dp"
         android:layout_height="0dp"
