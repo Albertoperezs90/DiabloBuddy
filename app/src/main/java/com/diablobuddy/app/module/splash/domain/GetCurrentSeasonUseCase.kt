@@ -1,8 +1,8 @@
 package com.diablobuddy.app.module.splash.domain
 
-import com.diablobuddy.core.utilities.coroutines.DispatcherProvider
 import com.diablobuddy.app.module.splash.data.repository.LeaderboardRepository
 import com.diablobuddy.app.shared.storage.AppPreferences
+import com.diablobuddy.core.utilities.coroutines.DispatcherProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -17,8 +17,8 @@ class GetCurrentSeasonUseCase @Inject constructor(
     suspend operator fun invoke(): Flow<Int> =
         leaderboardRepository.getSeasonIndex()
             .flowOn(dispatcherProvider.io)
-            .map {
-                appPreferences.setSeasonIndex(it)
-                it
+            .map { seasonIndex ->
+                appPreferences.setSeasonIndex(seasonIndex)
+                seasonIndex
             }
 }

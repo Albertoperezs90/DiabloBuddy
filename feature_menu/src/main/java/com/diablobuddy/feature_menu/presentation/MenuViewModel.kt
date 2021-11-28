@@ -1,10 +1,10 @@
 package com.diablobuddy.feature_menu.presentation
 
+import com.diablobuddy.app.shared.navigator.Navigator
+import com.diablobuddy.app.shared.storage.AppPreferences
 import com.diablobuddy.core.framework.base.BaseViewModel
 import com.diablobuddy.core.interfaces.logger.Logger
 import com.diablobuddy.core.utilities.coroutines.DispatcherProvider
-import com.diablobuddy.app.shared.navigator.Navigator
-import com.diablobuddy.app.shared.storage.AppPreferences
 import com.diablobuddy.feature_menu.presentation.state.MenuEvent
 import com.diablobuddy.feature_menu.presentation.state.MenuViewState
 import javax.inject.Inject

@@ -17,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel<VS: ViewState, E: Event>(private val logger: Logger, private val dispatcherProvider: DispatcherProvider): ViewModel() {
 
-    protected val jobs = mutableListOf<Job>()
+    private val jobs = mutableListOf<Job>()
 
     private val mutableViewState = MutableSharedFlow<VS>()
     val viewState: SharedFlow<VS>

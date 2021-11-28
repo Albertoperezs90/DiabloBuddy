@@ -1,13 +1,13 @@
 package com.diablobuddy.feature_skills.di
 
 import com.diablobuddy.app.shared.di.application.AppComponent
-import com.diablobuddy.feature_skills.character_select.CharacterSelectFragment
+import com.diablobuddy.feature_skills.character_select.CharacterSkillsFragment
 import dagger.Component
 
-@Component(modules = [CharacterSelectModule::class], dependencies = [AppComponent::class])
+@Component(modules = [CharacterSkillsModule::class], dependencies = [AppComponent::class])
 interface FeatureSkillsComponent {
 
-    fun inject(characterSelectFragment: CharacterSelectFragment)
+    fun inject(characterSkillsFragment: CharacterSkillsFragment)
 
     @Component.Factory
     interface Factory {

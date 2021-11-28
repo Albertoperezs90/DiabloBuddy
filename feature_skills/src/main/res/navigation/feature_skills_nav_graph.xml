@@ -4,7 +4,7 @@
     app:startDestination="@id/characterSelectFragment">
     <fragment
         android:id="@+id/characterSelectFragment"
-        android:name="com.diablobuddy.feature_skills.character_select.CharacterSelectFragment"
+        android:name="com.diablobuddy.feature_skills.character_select.CharacterSkillsFragment"
         android:label="CharacterSelectFragment"
         app:moduleName="feature_skills">
         <deepLink app:uri="feature://skills" />
