@@ -3,7 +3,6 @@ package com.diablobuddy.feature_skills.character_select
 import androidx.appcompat.widget.SearchView
 import com.diablobuddy.core.framework.base.BaseFragment
 import com.diablobuddy.core.framework.provideViewModel
-import com.diablobuddy.core.utilities.clickhandler.setOnDebounceClickListener
 import com.diablobuddy.feature_skills.character_select.state.CharacterSkillsViewState
 import com.diablobuddy.feature_skills.databinding.FragmentCharacterskillsBinding
 import com.diablobuddy.feature_skills.inject
@@ -11,8 +10,6 @@ import com.diablobuddy.feature_skills.inject
 class CharacterSkillsFragment: BaseFragment<FragmentCharacterskillsBinding, CharacterSkillsViewModel, CharacterSkillsViewState>() {
 
     override val viewModel: CharacterSkillsViewModel by lazy { provideViewModel(CharacterSkillsViewModel::class) }
-
-    private var sceneState = 0
 
     override fun inflate(): FragmentCharacterskillsBinding = FragmentCharacterskillsBinding.inflate(layoutInflater)
 
